@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+ * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background: #eee;
+} 
+
+:root {
+  --background-gradient-main: linear-gradient(215deg, rgba(157,245,247,1) 17%, rgba(186,239,249,1) 43%, rgba(255,255,255,1) 74%);
+}
