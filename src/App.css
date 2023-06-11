@@ -2,13 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
- * {
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background: #eee;
 } 
+
+h1, h2, h3, h4, h5 {
+  font-family: Poppins;
+}
+p, span, input, label, li, a {
+  font-family: Roboto;
+}
 
 :root {
   --background-gradient-main: linear-gradient(215deg, rgba(157,245,247,1) 17%, rgba(186,239,249,1) 43%, rgba(255,255,255,1) 74%);
+  --color-main: #079E7A;
+  --color-secondary: #6BBFAB;
 }
