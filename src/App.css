@@ -15,6 +15,10 @@ p, span, input, label, li, a {
   font-family: Roboto;
 }
 
+select {
+  @apply border-black hover:border-teal-600 bg-white rounded-lg pl-2 drop-shadow-md shadow-gray-200 cursor-pointer outline-none focus:border-teal-600 h-[42px] w-[350px] mb-8 focus:outline-teal-200 focus:shadow-teal-200
+}
+
 :root {
   --background-gradient-main: linear-gradient(215deg, rgba(157,245,247,1) 17%, rgba(186,239,249,1) 43%, rgba(255,255,255,1) 74%);
   --color-main: #079E7A;

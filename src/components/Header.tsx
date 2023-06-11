@@ -8,7 +8,7 @@ const Header = () => {
         <header className='h-20 w-full flex items-center justify-between px-6 border-b-[0.1rem] border-teal-100'
                 style={{background: 'var(--background-gradient-main)'}}
                 >
-             <div className='block h-32- w-52'>
+             <div className='block h-32- w-48'>
                 <img src={logoHemo2} 
                      alt="logo-laboratório"
                      />

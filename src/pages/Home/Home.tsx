@@ -1,5 +1,6 @@
+//@ts-ignore
+import { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination} from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -12,7 +13,6 @@ import banner3 from '../../assets/images/banner03.png'
 
 const Home = () => {
     const slides = [banner1, banner2, banner3]
-
 
     return (
         <>
