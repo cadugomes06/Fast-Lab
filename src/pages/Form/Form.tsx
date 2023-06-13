@@ -1,8 +1,50 @@
+import { useState, useEffect } from "react";
 import Header from "../../components/Header"
 import Button from "../../utils/Button";
 import Input from '../../utils/Input';
 
 const Form = () => {
+  const [plan, setPlan ] = useState('');
+  const [cardNumber, setCardNumber ] = useState('');
+  const [name, setName ] = useState('');
+  const [socialName, setSocialName ] = useState('');
+  const [email, setEmail ] = useState('');
+  const [birth, setBirth ] = useState('');
+  const [CPF, setCPF ] = useState('');
+  const [sexo, setSexo] = useState('')
+  const [CEP, setCEP] = useState('')
+  const [street, setStreet] = useState('')
+  const [number, setNumber] = useState('')
+  const [neighborhood, setNeighborhood] = useState('')
+  const [unit, setUnit] = useState('')
+  const [file, setFile] = useState()
+
+  const [ planRule, setPlanRule ] = useState('')
+
+  useEffect(() => {
+    if(plan === 'unimed-inter') {
+      setPlanRule('00370003535656')
+    } else if (plan === 'mediservice') {
+      setPlanRule('774000000000')
+    } else if (plan === 'petrobras') {
+      setPlanRule('0102000000000')
+    } else if (plan === 'sulamerica') {
+      setPlanRule('8888804350000000')
+    } else if (plan === 'amil') {
+      setPlanRule('84853535')
+    } else if (plan === 'assim') {
+      setPlanRule('884455533322')
+    } else if (plan === 'gama') {
+      setPlanRule('0000444448888333')
+    }
+    console.log(name)
+  }, [plan])
+  
+  const handleSexoChange = (event) => {
+    console.log(event.target.value)
+    setSexo(event.target.check)
+  }
+
 
     return (
         <>
@@ -23,14 +65,12 @@ const Form = () => {
 
       
             <form action="">
-               <div className="w-[52rem] pb-12 max-h-max bg-gray-100 rounded-md shadow-sm shadow-gray-300"
+               <div className="w-[52rem] pb-12 mb-4 max-h-max bg-gray-100 rounded-md shadow-sm shadow-gray-300"
                 >     
                 <div className="text-center font-medium pt-8 mb-8"
                      style={{color: 'var(--color-main)'}}>
                   <h4>Dados do convênio</h4>
                 </div>
-
-                {/* <div className="flex flex-col px-12 justify-center items-center"> */}
 
                     <div className="flex items-center pl-12 w-[52rem] h-20">
                       <div>
@@ -44,6 +84,7 @@ const Form = () => {
                        name="" 
                        id="convenio"
                        defaultValue='convenio'
+                       onChange={(e) => setPlan(e.target.value)}
                        >
                       <option value="convenio" disabled>Convênio</option>
                       <option value="unimed-inter">Unimed intercambio
@@ -63,7 +104,15 @@ const Form = () => {
                            className='w-[350px] pb-1'>
                              Carteirinha                             
                     </label>
-                    <Input type="text" name='' id='cardnumber' width='350px' height="42px" placeholder="111222333444555"
+                    <Input 
+                       type="text" 
+                       name='' 
+                       id='cardnumber'
+                       width='350px' 
+                       height="42px" 
+                       placeholder={planRule}
+                       value={cardNumber}
+                       onChange={(e) => setCardNumber(e.target.value)}
                      />
                      </div>
                      </div>
@@ -87,6 +136,8 @@ const Form = () => {
                         placeholder="João Batista" 
                         width="350px"
                         height="42px"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                          />
                       </label>
 
@@ -102,6 +153,8 @@ const Form = () => {
                         placeholder="" 
                         width="350px"
                         height="42px"
+                        value={socialName}
+                        onChange={(e) => setSocialName(e.target.value)}
                          />
                      </label>
 
@@ -116,6 +169,8 @@ const Form = () => {
                         placeholder="exemplo@gmail.com" 
                         width="350px"
                         height="42px"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                          />
                       </label>
                       <div className="h-20 w-[350px] flex">
@@ -123,7 +178,7 @@ const Form = () => {
                           <label htmlFor="birth"
                             style={{color: 'var(--color-secondary)'}}
                             className='w-[350px] pb-1'>
-                            Nascimento
+                            Dt Nascimento
                           </label>
                           <Input 
                             type="date" 
@@ -132,6 +187,8 @@ const Form = () => {
                             placeholder="00/00/0000" 
                             height="42px"
                             width="130px"
+                            value={birth}
+                            onChange={(e) => setBirth(e.target.value)}
                             />
                         </div>
 
@@ -148,6 +205,8 @@ const Form = () => {
                             placeholder="000.000.000-00" 
                             height="42px"
                             width="200px"
+                            value={CPF}
+                            onChange={(e) => setCPF(e.target.value)}
                             />
                         </div>
                       </div>
@@ -158,14 +217,35 @@ const Form = () => {
                          </div>
 
                          <div className="flex w-[300px] items-center justify-evenly">
-                          <label htmlFor="man" className="text-sm" style={{color: 'var(--color-main)'}}>Masculino
-                          <input type="radio" name="sexo" id="man" className="ml-1" />
+                          <label htmlFor="man" className="text-sm cursor-pointer" style={{color: 'var(--color-main)'}}>Masculino
+                          <input 
+                             type="radio" 
+                             name="sexo"
+                             id="man" 
+                             className="ml-1 cursor-pointer"
+                             checked={unit === 'Masculino'}
+                             onChange={handleSexoChange} 
+                             />
                           </label>
-                          <label htmlFor="woman" className="text-sm" style={{color: 'var(--color-main)'}}>Feminino
-                          <input type="radio" name="sexo" id="woman" className="ml-1"/>
+                          <label htmlFor="woman" className="text-sm cursor-pointer" style={{color: 'var(--color-main)'}}>Feminino
+                          <input 
+                            type="radio"
+                            name="sexo" 
+                            id="woman"
+                            className="ml-1 cursor-pointer"
+                            checked={unit === 'Feminino'}
+                            onChange={handleSexoChange}
+                            />
                           </label>
-                          <label htmlFor="undefined" className="text-sm" style={{color: 'var(--color-main)'}}>Indefinido
-                          <input type="radio" name="sexo" id="undefined" className="ml-1" />
+                          <label htmlFor="undefined" className="text-sm cursor-pointer" style={{color: 'var(--color-main)'}}>Indefinido
+                          <input 
+                            type="radio" 
+                            name="sexo" 
+                            id="undefined" 
+                            className="ml-1 cursor-pointer" 
+                            checked={unit === 'Undefined'}
+                            onChange={handleSexoChange}
+                            />
                           </label>
                          </div>
                       </div>
@@ -192,6 +272,8 @@ const Form = () => {
                             placeholder="22333-444" 
                             height="42px"
                             width="100px"
+                            value={CEP}
+                            onChange={(e) => setCEP(e.target.value)}
                             />
                         </div>
 
@@ -208,6 +290,8 @@ const Form = () => {
                             placeholder="Recanto da Alvorada" 
                             height="42px"
                             width="240px"
+                            value={street}
+                            onChange={(e) => setStreet(e.target.value)}
                             />
                         </div>
                       </div>
@@ -227,6 +311,8 @@ const Form = () => {
                             placeholder="000" 
                             height="42px"
                             width="100px"
+                            value={number}
+                            onChange={(e) => setNumber(e.target.value)}
                             />
                         </div>
 
@@ -243,6 +329,8 @@ const Form = () => {
                             placeholder="Centro" 
                             height="42px"
                             width="240px"
+                            value={neighborhood}
+                            onChange={(e) => setNeighborhood(e.target.value)}
                             />
                         </div>
                        </div>
@@ -255,14 +343,21 @@ const Form = () => {
                       </div>
 
                      <div className="flex pl-12 gap-4 mb-4">
-                      <select defaultValue='unidade'>
+                      <select 
+                         defaultValue='unidade'
+                         onChange={(e) => setUnit(e.target.value)}>
                         <option value="unidade" disabled>Unidade de atendimento</option>
                         <option value="cavaleiros">Cavaleiro (Nossa Senhora da Glória)</option>
                         <option value="matriz">Matriz (Rua Conde de Araruama)</option>
                       </select>
 
                       <label htmlFor="document" className="mt-4"></label>
-                      <Input type="file" name="" id="document" placeholder="" />
+                      <Input 
+                        type="file" 
+                        name="" 
+                        id="document"
+                        placeholder="" 
+                       />
                       </div>
 
                       <div className="flex justify-center">
