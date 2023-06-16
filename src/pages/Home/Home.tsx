@@ -20,7 +20,7 @@ const Home = () => {
 
         <main className="w-full h-[calc(100vh-80px)] flex items-center justify-center overflow-hidden"
          >
-            <div className="w-[80rem] h-[32rem] bg-gray-100"
+            <div className="w-[78rem] xl:w-[70rem] lg:w-full max-w-max h-[32rem] bg-gray-100"
             >
              <Swiper 
                 className='h-full rounded-md bg-gray-100 shadow-md shadow-gray-400'
@@ -32,7 +32,7 @@ const Home = () => {
                 <SwiperSlide key={slide}>
                     <img src={slide} 
                          alt={slide}
-                         className='h-[32rem] w-full cursor-grab rounded-md' />
+                         className='h-[32rem] w-full cursor-grab rounded-md object-auto lg:object-cover' />
                 </SwiperSlide>
                )
                )}

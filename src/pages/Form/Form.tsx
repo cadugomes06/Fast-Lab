@@ -17,7 +17,7 @@ const Form = () => {
   const [number, setNumber] = useState('')
   const [neighborhood, setNeighborhood] = useState('')
   const [unit, setUnit] = useState('')
-  const [file, setFile] = useState()
+  const [file, setFile] = useState('')
 
   const [ planRule, setPlanRule ] = useState('')
 
@@ -37,12 +37,15 @@ const Form = () => {
     } else if (plan === 'gama') {
       setPlanRule('0000444448888333')
     }
-    console.log(name)
+    console.log()
   }, [plan])
   
-  const handleSexoChange = (event) => {
-    console.log(event.target.value)
-    setSexo(event.target.check)
+  const handleSexoChange = (event: any) => {
+    setSexo(event.target.value)
+  }
+
+  const handleFile = (e: any) => {
+    console.log(e.target.files[0])
   }
 
 
@@ -65,7 +68,7 @@ const Form = () => {
 
       
             <form action="">
-               <div className="w-[52rem] pb-12 mb-4 max-h-max bg-gray-100 rounded-md shadow-sm shadow-gray-300"
+               <div className="w-[52rem] pb-12 mb-4 max-h-max bg-gray-200 rounded-md shadow-sm shadow-gray-300"
                 >     
                 <div className="text-center font-medium pt-8 mb-8"
                      style={{color: 'var(--color-main)'}}>
@@ -223,7 +226,7 @@ const Form = () => {
                              name="sexo"
                              id="man" 
                              className="ml-1 cursor-pointer"
-                             checked={unit === 'Masculino'}
+                             value='masculino'
                              onChange={handleSexoChange} 
                              />
                           </label>
@@ -233,7 +236,7 @@ const Form = () => {
                             name="sexo" 
                             id="woman"
                             className="ml-1 cursor-pointer"
-                            checked={unit === 'Feminino'}
+                            value='feminino'
                             onChange={handleSexoChange}
                             />
                           </label>
@@ -243,7 +246,7 @@ const Form = () => {
                             name="sexo" 
                             id="undefined" 
                             className="ml-1 cursor-pointer" 
-                            checked={unit === 'Undefined'}
+                            value='indefinido'
                             onChange={handleSexoChange}
                             />
                           </label>
@@ -357,6 +360,7 @@ const Form = () => {
                         name="" 
                         id="document"
                         placeholder="" 
+                        onChange={(e) => handleFile(e)}
                        />
                       </div>
 
