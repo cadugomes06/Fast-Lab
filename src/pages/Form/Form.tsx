@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import Header from "../../components/Header"
 import Button from "../../utils/Button";
 import Input from '../../utils/Input';
+import { collection, getDocs, addDoc } from "firebase/firestore";
+import { db } from '../../services/firebaseConfig';
+
 
 const Form = () => {
   const [plan, setPlan ] = useState('');
@@ -17,9 +20,41 @@ const Form = () => {
   const [number, setNumber] = useState('')
   const [neighborhood, setNeighborhood] = useState('')
   const [unit, setUnit] = useState('')
-  const [file, setFile] = useState('')
-
   const [ planRule, setPlanRule ] = useState('')
+  const [ forms, setForms ] = useState([])
+
+
+  const formsCollectionRef = collection(db, 'formulario')
+
+  useEffect(() => {
+    const getForms = async () => {
+      const data = await getDocs(formsCollectionRef)
+      const a: any = data.docs.map((doc) => ({ ...doc.data(), id: doc.id}))
+      setForms(a)
+    }
+    getForms()
+  }, [])
+
+  const createRequest = async (e: any) => {
+    e.preventDefault()
+    await addDoc(formsCollectionRef, {
+      plan: plan,
+      cardnumber: cardNumber,
+      name: name,
+      socialname: socialName,
+      email: email,
+      sexo: sexo,
+      birth: birth,
+      cpf: CPF,
+      cep: CEP,
+      street: street,
+      num: number,
+      neighborhood: neighborhood,
+      unit: unit
+    })
+    console.log('form enviado!')
+  }
+
 
   useEffect(() => {
     if(plan === 'unimed-inter') {
@@ -65,7 +100,6 @@ const Form = () => {
                 Preencha todos os dados corretamente.
               </p>
             </div>
-
       
             <form action="">
                <div className="w-[52rem] pb-12 mb-4 max-h-max bg-gray-200 rounded-md shadow-sm shadow-gray-300"
@@ -370,7 +404,8 @@ const Form = () => {
                           width="350px"
                           height="42px"
                           marginTop="1rem"
-                          marginBottom="" />
+                          marginBottom=""
+                          onClick={createRequest} />
                       </div>
 
                 </div>              
