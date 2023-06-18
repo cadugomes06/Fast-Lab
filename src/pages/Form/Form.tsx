@@ -5,7 +5,6 @@ import Input from '../../utils/Input';
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import { db } from '../../services/firebaseConfig';
 
-
 const Form = () => {
   const [plan, setPlan ] = useState('');
   const [cardNumber, setCardNumber ] = useState('');
@@ -20,8 +19,12 @@ const Form = () => {
   const [number, setNumber] = useState('')
   const [neighborhood, setNeighborhood] = useState('')
   const [unit, setUnit] = useState('')
+
   const [ planRule, setPlanRule ] = useState('')
   const [ forms, setForms ] = useState([])
+
+  const [ cardnumberError, setCardnumberError ] = useState('')
+
 
 
   const formsCollectionRef = collection(db, 'formulario')
@@ -35,45 +38,109 @@ const Form = () => {
     getForms()
   }, [])
 
+
   const createRequest = async (e: any) => {
     e.preventDefault()
-    await addDoc(formsCollectionRef, {
-      plan: plan,
-      cardnumber: cardNumber,
-      name: name,
-      socialname: socialName,
-      email: email,
-      sexo: sexo,
-      birth: birth,
-      cpf: CPF,
-      cep: CEP,
-      street: street,
-      num: number,
-      neighborhood: neighborhood,
-      unit: unit
-    })
+    // const regexNocaracter = /[^a-zA-Z0-9]/g  //Remove tudo que não for letra ou número
+   
+    // if (plan === 'convenio' || cardNumber === '' || name === '' ||
+    //    email === '' || birth === '' || sexo === '' || 
+    //    CPF === '' || CEP === '' || street === '' ||
+    //    number === '' || neighborhood === '' || unit === '') 
+    //    {
+    //     alert('preencha todos os campos')
+    // } else 
+    if ((plan === 'unimed-inter' || plan === 'sulamerica') 
+       && cardNumber.length < 17) {
+      console.log('error unimed ou sul america')
+    } else if (plan === 'mediservice' && cardNumber.length < 15) {
+      console.log('error mediservice')
+      return;
+    } else if (plan === 'petrobras' && cardNumber.length < 11) {
+      console.log('error petrobras')
+      return;
+    } else if (plan === 'amil' && cardNumber.length < 9) {
+      console.log('error amil')
+      return;
+    } else if (plan === 'assim' && cardNumber.length < 18) {
+      console.log('error assim')
+      return;
+    } else if (plan === 'gama' && cardNumber.length < 7) {
+      console.log('error gama')
+      return;
+    } else {   
+    // await addDoc(formsCollectionRef, {
+    //   plan: plan,
+    //   cardnumber: cardNumber,
+    //   name: name,
+    //   socialname: socialName,
+    //   email: email,
+    //   sexo: sexo,
+    //   birth: birth,
+    //   cpf: CPF,
+    //   cep: CEP,
+    //   street: street,
+    //   num: number,
+    //   neighborhood: neighborhood,
+    //   unit: unit
+    // })
     console.log('form enviado!')
   }
+  }  
 
 
   useEffect(() => {
     if(plan === 'unimed-inter') {
-      setPlanRule('00370003535656')
+      setPlanRule('00371111112223334')
+      if (plan === 'unimed-inter' && cardNumber.length != 17) {
+      setCardnumberError('formato incorreto.')
+       } else {
+        setCardnumberError('')
+       }
     } else if (plan === 'mediservice') {
       setPlanRule('774000000000')
+      if (plan === 'mediservice' && cardNumber.length != 15) {
+        setCardnumberError('formato incorreto.')
+      } else {
+        setCardnumberError('')
+      }
     } else if (plan === 'petrobras') {
-      setPlanRule('0102000000000')
+      setPlanRule('01020000000')
+      if (plan === 'petrobras' && cardNumber.length != 11) {
+        setCardnumberError('formato incorreto.')
+      } else {
+        setCardnumberError('')
+      }
     } else if (plan === 'sulamerica') {
       setPlanRule('8888804350000000')
+      if (plan === 'sulamerica' && cardNumber.length != 17) {
+        setCardnumberError('formato incorreto.')
+      } else {
+        setCardnumberError('')
+      }
     } else if (plan === 'amil') {
-      setPlanRule('84853535')
+      setPlanRule('111222333')
+      if (plan === 'amil' && cardNumber.length != 9) {
+        setCardnumberError('formato incorreto.')
+      } else {
+        setCardnumberError('')
+      }
     } else if (plan === 'assim') {
-      setPlanRule('884455533322')
+      setPlanRule('000011112222333344')
+      if (plan === 'assim' && cardNumber.length != 18) {
+        setCardnumberError('formato incorreto.')
+      } else {
+        setCardnumberError('')
+      }
     } else if (plan === 'gama') {
-      setPlanRule('0000444448888333')
+      setPlanRule('0001112')
+      if (plan === 'gama' && cardNumber.length != 7) {
+        setCardnumberError('formato incorreto.')
+      } else {
+        setCardnumberError('')
+      }
     }
-    console.log()
-  }, [plan])
+  }, [plan, cardNumber])
   
   const handleSexoChange = (event: any) => {
     setSexo(event.target.value)
@@ -88,16 +155,18 @@ const Form = () => {
         <>
         <Header />
 
-        <section className="bg-white flex justify-center items-center flex-col h-max-h"
+        <section className="bg-white flex justify-center 
+                 items-center flex-col h-max-h"
          >
-           <div className="mb-16 mt-8 pl-8 w-full">
+           <div className="mb-12 mt-8 pl-8 w-full">
               <h1 className="text-[1.8rem] font-bold"
                   style={{color: 'var(--color-main)'}}>
                 Solicitação
               </h1>
               <p className="text-base font-normal"
                  style={{color: 'var(--color-secondary)'}}>
-                Preencha todos os dados corretamente.
+                Preencha todos os dados corretamente. <br />
+                Seu agendamento estará <strong>disponível em até 48 horas.</strong>
               </p>
             </div>
       
@@ -151,6 +220,7 @@ const Form = () => {
                        value={cardNumber}
                        onChange={(e) => setCardNumber(e.target.value)}
                      />
+                     {cardnumberError? <p className="absolute mt-[-14px] pl-2 text-red-500">{cardnumberError}</p> : ''}
                      </div>
                      </div>
                     
@@ -384,8 +454,8 @@ const Form = () => {
                          defaultValue='unidade'
                          onChange={(e) => setUnit(e.target.value)}>
                         <option value="unidade" disabled>Unidade de atendimento</option>
-                        <option value="cavaleiros">Cavaleiro (Nossa Senhora da Glória)</option>
-                        <option value="matriz">Matriz (Rua Conde de Araruama)</option>
+                        <option value="cavaleiros">Cavaleiros (Nossa Senhora da Glória)</option>
+                        <option value="matriz">Matriz (Rua Conde de Araruama - Centro)</option>
                       </select>
 
                       <label htmlFor="document" className="mt-4"></label>
@@ -393,7 +463,7 @@ const Form = () => {
                         type="file" 
                         name="" 
                         id="document"
-                        placeholder="" 
+                        placeholder=""
                         onChange={(e) => handleFile(e)}
                        />
                       </div>
