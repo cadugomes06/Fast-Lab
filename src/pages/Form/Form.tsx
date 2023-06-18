@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "../../components/Header"
 import Button from "../../utils/Button";
 import Input from '../../utils/Input';
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc} from "firebase/firestore";
 import { db } from '../../services/firebaseConfig';
 
 const Form = () => {
@@ -24,6 +24,7 @@ const Form = () => {
   const [ forms, setForms ] = useState([])
 
   const [ cardnumberError, setCardnumberError ] = useState('')
+  const [ cpfError, setCpfError ] = useState('')
 
 
 
@@ -38,52 +39,46 @@ const Form = () => {
     getForms()
   }, [])
 
+  const regexNocaracter = /[^a-zA-Z0-9]/g  //Remove tudo que não for letra ou número
 
   const createRequest = async (e: any) => {
     e.preventDefault()
-    // const regexNocaracter = /[^a-zA-Z0-9]/g  //Remove tudo que não for letra ou número
    
-    // if (plan === 'convenio' || cardNumber === '' || name === '' ||
-    //    email === '' || birth === '' || sexo === '' || 
-    //    CPF === '' || CEP === '' || street === '' ||
-    //    number === '' || neighborhood === '' || unit === '') 
-    //    {
-    //     alert('preencha todos os campos')
-    // } else 
-    if ((plan === 'unimed-inter' || plan === 'sulamerica') 
+    if (plan === 'convenio' || cardNumber === '' || name === '' ||
+       email === '' || birth === '' || sexo === '' || 
+       CPF === '' || CEP === '' || street === '' ||
+       number === '' || neighborhood === '' || unit === '') 
+       {
+        alert('preencha todos os campos corretamente.')
+    } else if ((plan === 'unimed-inter' || plan === 'sulamerica') 
        && cardNumber.length < 17) {
-      console.log('error unimed ou sul america')
+      alert('Numeração do convênio incorreta!')
     } else if (plan === 'mediservice' && cardNumber.length < 15) {
-      console.log('error mediservice')
-      return;
+      alert('Numeração do convênio incorreta!')
     } else if (plan === 'petrobras' && cardNumber.length < 11) {
-      console.log('error petrobras')
-      return;
+      alert('Numeração do convênio incorreta!')
     } else if (plan === 'amil' && cardNumber.length < 9) {
-      console.log('error amil')
-      return;
+      alert('Numeração do convênio incorreta!')
     } else if (plan === 'assim' && cardNumber.length < 18) {
-      console.log('error assim')
-      return;
+      alert('Numeração do convênio incorreta!')
     } else if (plan === 'gama' && cardNumber.length < 7) {
-      console.log('error gama')
-      return;
+      alert('Numeração do convênio incorreta!')
     } else {   
-    // await addDoc(formsCollectionRef, {
-    //   plan: plan,
-    //   cardnumber: cardNumber,
-    //   name: name,
-    //   socialname: socialName,
-    //   email: email,
-    //   sexo: sexo,
-    //   birth: birth,
-    //   cpf: CPF,
-    //   cep: CEP,
-    //   street: street,
-    //   num: number,
-    //   neighborhood: neighborhood,
-    //   unit: unit
-    // })
+    await addDoc(formsCollectionRef, {
+      plan: plan,
+      cardnumber: cardNumber,
+      name: name,
+      socialname: socialName,
+      email: email,
+      sexo: sexo,
+      birth: birth,
+      cpf: CPF,
+      cep: CEP,
+      street: street,
+      num: number,
+      neighborhood: neighborhood,
+      unit: unit
+    })
     console.log('form enviado!')
   }
   }  
@@ -92,60 +87,64 @@ const Form = () => {
   useEffect(() => {
     if(plan === 'unimed-inter') {
       setPlanRule('00371111112223334')
-      if (plan === 'unimed-inter' && cardNumber.length != 17) {
+      if (plan === 'unimed-inter' && cardNumber.length != 17 && cardNumber.length != 0) {
       setCardnumberError('formato incorreto.')
        } else {
         setCardnumberError('')
        }
     } else if (plan === 'mediservice') {
       setPlanRule('774000000000')
-      if (plan === 'mediservice' && cardNumber.length != 15) {
+      if (plan === 'mediservice' && cardNumber.length != 15 && cardNumber.length != 0) {
         setCardnumberError('formato incorreto.')
       } else {
         setCardnumberError('')
       }
     } else if (plan === 'petrobras') {
       setPlanRule('01020000000')
-      if (plan === 'petrobras' && cardNumber.length != 11) {
+      if (plan === 'petrobras' && cardNumber.length != 11 && cardNumber.length != 0) {
         setCardnumberError('formato incorreto.')
       } else {
         setCardnumberError('')
       }
     } else if (plan === 'sulamerica') {
       setPlanRule('8888804350000000')
-      if (plan === 'sulamerica' && cardNumber.length != 17) {
+      if (plan === 'sulamerica' && cardNumber.length != 17 && cardNumber.length != 0) {
         setCardnumberError('formato incorreto.')
       } else {
         setCardnumberError('')
       }
     } else if (plan === 'amil') {
       setPlanRule('111222333')
-      if (plan === 'amil' && cardNumber.length != 9) {
+      if (plan === 'amil' && cardNumber.length != 9 && cardNumber.length != 0) {
         setCardnumberError('formato incorreto.')
       } else {
         setCardnumberError('')
       }
     } else if (plan === 'assim') {
       setPlanRule('000011112222333344')
-      if (plan === 'assim' && cardNumber.length != 18) {
+      if (plan === 'assim' && cardNumber.length != 18 && cardNumber.length != 0) {
         setCardnumberError('formato incorreto.')
       } else {
         setCardnumberError('')
       }
     } else if (plan === 'gama') {
       setPlanRule('0001112')
-      if (plan === 'gama' && cardNumber.length != 7) {
+      if (plan === 'gama' && cardNumber.length != 7 && cardNumber.length != 0) {
         setCardnumberError('formato incorreto.')
       } else {
         setCardnumberError('')
       }
-    }
-  }, [plan, cardNumber])
+    } 
+      if (CPF && CPF.length != 11) {
+        setCpfError('CPF incorreto.')        
+      } else {
+        setCpfError('')
+    } 
+  }, [plan, cardNumber, CPF])
   
   const handleSexoChange = (event: any) => {
     setSexo(event.target.value)
   }
-
   const handleFile = (e: any) => {
     console.log(e.target.files[0])
   }
@@ -312,9 +311,10 @@ const Form = () => {
                             placeholder="000.000.000-00" 
                             height="42px"
                             width="200px"
-                            value={CPF}
+                            value={CPF.replace(regexNocaracter, '')}
                             onChange={(e) => setCPF(e.target.value)}
                             />
+                            {CPF? <p className="absolute text-red-500 mt-[-14px]">{cpfError}</p> : ''}
                         </div>
                       </div>
 
