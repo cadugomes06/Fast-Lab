@@ -24,7 +24,7 @@ const Input: React.FC<InputProps> = ({type, name, id, placeholder, width, height
        style={inputStyle}
        onChange={onChange}
        value={value}
-       className="border-gray-500 outline-none rounded-lg pl-2 shadow-md shadow-gray-200 cursor-pointer focus:outline-teal-200 focus:shadow-teal-200 text-teal-800 mb-4"
+       className="border-gray-500 outline-none rounded-lg pl-2 shadow-md shadow-gray-300 cursor-pointer focus:outline-teal-200 focus:shadow-teal-200 text-teal-800 mb-4"
         />
   )
 }
