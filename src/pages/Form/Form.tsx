@@ -1,10 +1,11 @@
+//@ts-ignore
 import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Button from "../../utils/Button";
 import Input from "../../utils/Input";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { db, storage } from "../../services/firebaseConfig";
-import { ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const Form = () => {
   const [plan, setPlan] = useState("");
@@ -22,10 +23,9 @@ const Form = () => {
   const [unit, setUnit] = useState("");
 
   const [fileUrl, setFileUrl] = useState([]) 
-  const [progress, setProgress] = useState(0) 
+  const [imageURL, setImageURL] = useState([]) 
 
   const [planRule, setPlanRule] = useState("");
-  const [forms, setForms] = useState([]);
 
   const [cardnumberError, setCardnumberError] = useState("");
   const [cpfError, setCpfError] = useState("");
@@ -33,27 +33,37 @@ const Form = () => {
   const formsCollectionRef = collection(db, "formulario");
 
   useEffect(() => {
-    const getForms = async () => {
-      const data = await getDocs(formsCollectionRef);
-      const a: any = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      setForms(a);
-    };
-    getForms();
-  }, []);
+    let img: any = fileUrl;
+    const urls: any = [];
+
+    if(fileUrl.length === 0) {
+      console.log('nenhuma imagem selecionada')
+    } else if (fileUrl.length > 5){
+      console.log("Máximo excedido, de 5 imagens!")
+    } else if (img.size > 1048576){
+      console.log("a imagem excede o limite de 1MB.")
+    } else {
+      for (let i = 0; i < fileUrl.length; i++) {
+        let file: any = fileUrl[i]
+
+        const docRef = ref(storage, `documentos/${file?.name}`) 
+        uploadBytes(docRef, file).then(() => {
+          return getDownloadURL(docRef)
+        })
+        .then((url) => {
+          urls.push(url)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      }
+      setImageURL({...imageURL, urls})
+  }    
+}, [fileUrl])
+
 
   const createRequest = async (e: any) => {
     e.preventDefault();
-
-    console.log(fileUrl)
-    let img: any = fileUrl
-    if(fileUrl == null) {
-      return;
-    } else {
-    const docRef = ref(storage, `documentos/${img?.name}`) 
-    uploadBytes(docRef, img).then(() => {
-      return;
-    })
-  }
 
     if (
       plan === "convenio" ||
@@ -89,15 +99,6 @@ const Form = () => {
     } else if (plan === "tlife" && cardNumber.length < 7) {
       alert("Numeração do convênio incorreta!");
     } else {
-    //   let img: any = fileUrl
-    //   if(fileUrl == null) {
-    //     return;
-    //   } else {
-    //   const docRef = ref(storage, `documentos/${img?.name}`) 
-    //   uploadBytes(docRef, img).then(() => {
-        
-    //   })
-    // }
       await addDoc(formsCollectionRef, {
         plan: plan,
         cardnumber: cardNumber,
@@ -112,6 +113,7 @@ const Form = () => {
         num: number,
         neighborhood: neighborhood,
         unit: unit,
+        imageUrl: imageURL?.urls
       });
       console.log("form enviado!");
     }
@@ -611,7 +613,8 @@ const Form = () => {
                 name=""
                 id="document"
                 placeholder=""
-                onChange={(e: any) => setFileUrl(e.target.files[0])}
+                onChange={(e: any) => setFileUrl(e.target.files)}
+                multiple
               /> 
             </div>
 
