@@ -7,21 +7,61 @@
   margin: 0;
   box-sizing: border-box;
   outline: none;
-} 
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  z-index: 10;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(126, 170, 170);
+  border-radius: 20px;
+  border: 3px solid #eee;
+  z-index: 10;
+}
+
 
 h1, h2, h3, h4, h5 {
-  font-family: Poppins;
+  font-family: Poppins, sans-serif, Arial, Helvetica, sans-serif;
 }
 p, span, input, label, li, a {
-  font-family: Roboto;
+  font-family: Roboto, sans-serif, Arial, Helvetica, sans-serif;
 }
 
 select {
   @apply border-black hover:border-teal-600 bg-white rounded-lg pl-2 drop-shadow-sm shadow-gray-200 cursor-pointer outline-none focus:border-teal-600 h-[42px] w-[350px] mb-4 focus:outline-teal-200 focus:shadow-teal-200
 }
 
+.textBase {
+  @apply text-gray-400 font-normal
+}
+.dataText {
+  @apply text-teal-500 font-bold text-lg pl-2
+}
+.detail h3 {
+  @apply border-b-[1px] 
+}
+.documentLink {
+  @apply text-teal-700 font-bold text-lg pt-1
+}
+
 :root {
   --background-gradient-main: linear-gradient(215deg, rgba(157,245,247,1) 17%, rgba(186,239,249,1) 43%, rgba(255,255,255,1) 74%);
   --color-main: #079E7A;
   --color-secondary: #6BBFAB;
+  --color-third: #b4ece0;
+}
+
+.animeLeft {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: animeLeft .5s forwards;
+}
+
+@keyframes animeLeft {
+  to {
+      opacity: 1;
+      transform: initial;
+  }
 }

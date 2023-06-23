@@ -1,4 +1,3 @@
-//@ts-ignore
 import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Button from "../../utils/Button";
@@ -22,8 +21,8 @@ const Form = () => {
   const [neighborhood, setNeighborhood] = useState("");
   const [unit, setUnit] = useState("");
 
-  const [fileUrl, setFileUrl] = useState([]) 
-  const [imageURL, setImageURL] = useState([]) 
+  const [fileUrl, setFileUrl] = useState([]);
+  const [imageURL, setImageURL] = useState<{ urls: object | string[] }>();
 
   const [planRule, setPlanRule] = useState("");
 
@@ -34,33 +33,34 @@ const Form = () => {
 
   useEffect(() => {
     let img: any = fileUrl;
-    const urls: any = [];
+    const urls: string[] = [];
 
-    if(fileUrl.length === 0) {
-      console.log('nenhuma imagem selecionada')
-    } else if (fileUrl.length > 5){
-      console.log("Máximo excedido, de 5 imagens!")
-    } else if (img.size > 1048576){
-      console.log("a imagem excede o limite de 1MB.")
+    if (fileUrl.length === 0) {
+      console.log("nenhuma imagem selecionada");
+    } else if (fileUrl.length > 5) {
+      console.log("Máximo excedido, de 5 imagens!");
+    } else if (img.size > 1048576) {
+      console.log("a imagem excede o limite de 1MB.");
     } else {
       for (let i = 0; i < fileUrl.length; i++) {
-        let file: any = fileUrl[i]
+        let file: any = fileUrl[i];
 
-        const docRef = ref(storage, `documentos/${file?.name}`) 
-        uploadBytes(docRef, file).then(() => {
-          return getDownloadURL(docRef)
-        })
-        .then((url) => {
-          urls.push(url)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+        const docRef = ref(storage, `documentos/${file?.name}`);
+        uploadBytes(docRef, file)
+          .then(() => {
+            return getDownloadURL(docRef);
+          })
+          .then((url) => {
+            urls.push(url);
+            console.log(urls, url)
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
-      setImageURL({...imageURL, urls})
-  }    
-}, [fileUrl])
-
+      setImageURL({ ...imageURL, urls });
+    }
+  }, [fileUrl]);
 
   const createRequest = async (e: any) => {
     e.preventDefault();
@@ -98,6 +98,8 @@ const Form = () => {
       alert("Numeração do convênio incorreta!");
     } else if (plan === "tlife" && cardNumber.length < 7) {
       alert("Numeração do convênio incorreta!");
+    } else if (CPF && CPF.length < 11) {
+      alert("CPF incorreto!");
     } else {
       await addDoc(formsCollectionRef, {
         plan: plan,
@@ -113,7 +115,7 @@ const Form = () => {
         num: number,
         neighborhood: neighborhood,
         unit: unit,
-        imageUrl: imageURL?.urls
+        imageUrl: imageURL?.urls,
       });
       console.log("form enviado!");
     }
@@ -211,7 +213,6 @@ const Form = () => {
   const handleSexoChange = (event: any) => {
     setSexo(event.target.value);
   };
-
 
   return (
     <>
@@ -615,7 +616,7 @@ const Form = () => {
                 placeholder=""
                 onChange={(e: any) => setFileUrl(e.target.files)}
                 multiple
-              /> 
+              />
             </div>
 
             <div className="flex justify-center">
