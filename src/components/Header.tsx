@@ -1,5 +1,6 @@
 import logoHemo2 from '../assets/images/logoHemolabes1.png'
 import userIcon from '../assets/icons/usericon.svg';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 
@@ -15,10 +16,12 @@ const Header = () => {
              </div> 
 
             <ul className='flex gap-2 sm:gap-1 items-center'>
+                <Link to='/userlogin'>
                 <li className='font-medium sm:text-sm	 py-1 px-4 border-2 border-teal-300 cursor-pointer text-[#079E7A] hover:bg-teal-500 hover:text-white ease-linear duration-200 hover:border-none rounded-sm hover:shadow-md hover:shadow-teal-400'
                 >
                   Login
                 </li>
+                </Link>
                 <li className='cursor-pointer text-[#6BBFAB] sm:text-sm hover:text-white ease-linear duration-200'
                     >
                   Registrar

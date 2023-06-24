@@ -21,7 +21,7 @@ const AdmHome = () => {
     num: string;
     neighborhood: string;
     unit: string;
-    imageUrl?: string[];
+    imageUrl: string[];
   }
 
   const formsCollectionRef = collection(db, "formulario");
@@ -96,7 +96,7 @@ const AdmHome = () => {
               <h3 className="textBase">nome: <span className="dataText">{forms[indexPac]?.name}</span></h3>
               <h3 className="textBase">nome social?: <span className="dataText">{forms[indexPac]?.socialname}</span></h3>
               <h3 className="textBase">email: <span className="dataText">{forms[indexPac]?.email}</span></h3>
-              <h3 className="textBase">Data de nascimento: <span className="dataText">{forms[indexPac]?.birth}</span></h3>
+              <h3 className="textBase">Dt nascimento: <span className="dataText">{forms[indexPac]?.birth}</span></h3>
               <h3 className="textBase">sexo: <span className="dataText">{forms[indexPac]?.sexo}</span></h3>
               <h3 className="textBase">CPF: <span className="dataText">{forms[indexPac]?.cpf}</span></h3>
               <h3 className="textBase">cep: <span className="dataText">{forms[indexPac]?.cep}</span></h3>

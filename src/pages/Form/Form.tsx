@@ -21,46 +21,52 @@ const Form = () => {
   const [neighborhood, setNeighborhood] = useState("");
   const [unit, setUnit] = useState("");
 
-  const [fileUrl, setFileUrl] = useState([]);
-  const [imageURL, setImageURL] = useState<{ urls: object | string[] }>();
+  const [fileUrl, setFileUrl] = useState<FileList[]>([]);
+  const [imageURL, setImageURL] = useState<{urls: string[]}>({urls: []});
 
   const [planRule, setPlanRule] = useState("");
 
   const [cardnumberError, setCardnumberError] = useState("");
   const [cpfError, setCpfError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const formsCollectionRef = collection(db, "formulario");
 
-  useEffect(() => {
-    let img: any = fileUrl;
-    const urls: string[] = [];
-
-    if (fileUrl.length === 0) {
-      console.log("nenhuma imagem selecionada");
-    } else if (fileUrl.length > 5) {
-      console.log("Máximo excedido, de 5 imagens!");
-    } else if (img.size > 1048576) {
-      console.log("a imagem excede o limite de 1MB.");
-    } else {
-      for (let i = 0; i < fileUrl.length; i++) {
-        let file: any = fileUrl[i];
-
-        const docRef = ref(storage, `documentos/${file?.name}`);
-        uploadBytes(docRef, file)
-          .then(() => {
-            return getDownloadURL(docRef);
-          })
-          .then((url) => {
-            urls.push(url);
-            console.log(urls, url)
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-      setImageURL({ ...imageURL, urls });
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+  
+    if (files) {
+      const fileArray: any = Array.from(files)
+      setFileUrl(fileArray);
     }
-  }, [fileUrl]);
+  };
+
+  useEffect(() => {
+    let imgs: any = fileUrl;
+    const urls: string[] = [];
+    setLoading(true)
+
+    const uploadPromises = imgs.map(async (file: any) => {
+      console.log(file)
+      const docRef = ref(storage, `documentos/${file?.name}`);
+      try {
+        await uploadBytes(docRef, file);
+        const url = await getDownloadURL(docRef);
+        return urls.push(url);
+      } catch (error) {
+        return alert(error);
+      }
+      });
+            
+      Promise.all(uploadPromises).then(() => {
+        setImageURL((prevImageURL) => ({
+          ...prevImageURL,
+          urls: prevImageURL.urls.concat(urls),
+        }));
+        setLoading(false)
+      })
+}, [fileUrl]);
+
 
   const createRequest = async (e: any) => {
     e.preventDefault();
@@ -77,8 +83,7 @@ const Form = () => {
       street === "" ||
       number === "" ||
       neighborhood === "" ||
-      unit === "" ||
-      fileUrl === null
+      unit === "" 
     ) {
       alert("preencha todos os campos corretamente.");
     } else if (
@@ -100,8 +105,10 @@ const Form = () => {
       alert("Numeração do convênio incorreta!");
     } else if (CPF && CPF.length < 11) {
       alert("CPF incorreto!");
-    } else {
-      await addDoc(formsCollectionRef, {
+   } else if (imageURL.urls.length === 0) {
+    alert("Selecione seu pedido médico primeiro!");
+   } else {
+       await addDoc(formsCollectionRef, {
         plan: plan,
         cardnumber: cardNumber,
         name: name,
@@ -115,10 +122,11 @@ const Form = () => {
         num: number,
         neighborhood: neighborhood,
         unit: unit,
-        imageUrl: imageURL?.urls,
-      });
-      console.log("form enviado!");
+        imageUrl: imageURL.urls,
+      }
+      )
     }
+    console.log('formulario enviado')
   };
 
   useEffect(() => {
@@ -614,21 +622,37 @@ const Form = () => {
                 name=""
                 id="document"
                 placeholder=""
-                onChange={(e: any) => setFileUrl(e.target.files)}
+                onChange={handleFileChange}
                 multiple
               />
             </div>
 
+          {loading ? (
+               <div className="flex justify-center">
+               <Button
+                 text="Carregando imagens..."
+                 width="350px"
+                 height="42px"
+                 marginTop="1rem"
+                 marginBottom=""
+                 disabled=''
+                 onClick={createRequest}
+               />
+             </div>
+          ) : (
             <div className="flex justify-center">
-              <Button
-                text="agendar"
-                width="350px"
-                height="42px"
-                marginTop="1rem"
-                marginBottom=""
-                onClick={createRequest}
-              />
-            </div>
+            <Button
+              text="agendar"
+              width="350px"
+              height="42px"
+              marginTop="1rem"
+              marginBottom=""
+              onClick={createRequest}
+            />
+          </div>
+          )}
+
+
           </div>
         </form>
       </section>

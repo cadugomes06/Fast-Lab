@@ -5,9 +5,10 @@ interface ButtonProps {
     marginTop?: string;
     marginBottom?: string;
     onClick?: (event: React.MouseEvent<HTMLButtonElement,MouseEvent>) => void;
+    disabled?: any
 }
 
-const Button: React.FC<ButtonProps> = ({text, width, height, onClick, marginTop, marginBottom}) => {
+const Button: React.FC<ButtonProps> = ({text, width, height, onClick, marginTop, marginBottom, disabled}) => {
     const buttonStyle: React.CSSProperties = {
         width,
         height,
@@ -19,6 +20,7 @@ return (
     <button
          style={buttonStyle}
          onClick={onClick}
+         disabled={disabled}
          className="bg-teal-600 rounded-lg text-white font-semibold uppercase
          text-sm cursor-pointer hover:bg-teal-700 ease-in duration-150 shadow-lg shadow-gray-300"
          >
