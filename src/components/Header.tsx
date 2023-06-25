@@ -22,10 +22,13 @@ const Header = () => {
                   Login
                 </li>
                 </Link>
+
+                <Link to='/userlogin/register'>
                 <li className='cursor-pointer text-[#6BBFAB] sm:text-sm hover:text-white ease-linear duration-200'
                     >
                   Registrar
                 </li>
+                </Link>
                 <img src={userIcon}
                      alt="icone-de-usuário"
                      className='w-6 h-6' />

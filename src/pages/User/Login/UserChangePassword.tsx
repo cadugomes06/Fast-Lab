@@ -4,10 +4,7 @@ import Input from "../../../utils/Input";
 import Button from "../../../utils/Button";
 import { Link } from "react-router-dom";
 
-
-const UserLogin = () => {    
-
- 
+const UserCrangePassword = () => {
 
     return (
         <>
@@ -32,14 +29,14 @@ const UserLogin = () => {
 
                    <div className="h-20 flex justify-start items-center relative">
                       <h2 className="text-[2rem] text-gray-400/70 font-normal">
-                         Realize seu 
-                         <span className="textGradient text-[2.4rem]"> Login</span>
+                         Alterar sua 
+                         <span className="textGradient text-[2.4rem]"> Senha</span>
                          <div className="detailAnimation"></div>
                      </h2>
                    </div>
 
                     <form>
-                     <div className="h-96 max-h-max flex flex-col justify-center items-start">
+                     <div className="h-96 max-h-max flex flex-col justify-start items-start pt-12">
 
                        <label htmlFor="email"
                               className="justify-start pl-1 w-[350px]"
@@ -53,38 +50,18 @@ const UserLogin = () => {
                            height="42px"
                             />
 
-                      <label htmlFor="password"
-                             className="justify-start pl-1 w-[350px]"
-                             style={{color: "var(--color-secondary)"}}>Senha</label>
-                        <Input
-                           type="password"
-                           name=''
-                           id='password'
-                           placeholder=''
-                           width="350px"
-                           height="42px"
-                            />
-
                            <div className="w-[350px] h-[42px] mt-2">
                             <Button 
-                              text="Logar"
+                              text="Solicitar"
                               width="350px"
                               height="42px"
                             />
                             </div>
-
-                            <div className="w-[350px] mt-12 text-sm">
-                            <Link to="changepassword"
-                               className="text-light underline"
-                               style={{color: "var(--color-secondary)"}}>
-                              Esqueceu sua senha?
-                            </Link>
-                            </div>
                         
-                            <div className="w-[350px] h-[42px] mt-10">
-                            <Link to='register'>  
+                            <div className="w-[350px] h-[42px] mt-14">
+                            <Link to='/userlogin'>
                             <Button 
-                              text="Registrar"
+                              text="Voltar"
                               width="150px"
                               height="42px"
                               background='white'
@@ -105,4 +82,4 @@ const UserLogin = () => {
 }
 
 
-export default UserLogin;
+export default UserCrangePassword;
