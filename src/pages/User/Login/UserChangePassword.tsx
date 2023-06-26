@@ -31,7 +31,6 @@ const UserCrangePassword = () => {
                       <h2 className="text-[2rem] text-gray-400/70 font-normal">
                          Alterar sua 
                          <span className="textGradient text-[2.4rem]"> Senha</span>
-                         <div className="detailAnimation"></div>
                      </h2>
                    </div>
 

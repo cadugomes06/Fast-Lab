@@ -30,11 +30,11 @@ const UserLogin = () => {
             <div className="flex items-center justify-center my-8 ml-24 animeLeft">
                 <div className="flex flex-col w-full h-[calc(100vh-200px)]">
 
-                   <div className="h-20 flex justify-start items-center relative">
+                   <div className="h-20 flex justify-start items-center relative z-10">
                       <h2 className="text-[2rem] text-gray-400/70 font-normal">
                          Realize seu 
                          <span className="textGradient text-[2.4rem]"> Login</span>
-                         <div className="detailAnimation"></div>
+                         <div className="detailAnimation z-0"></div>
                      </h2>
                    </div>
 

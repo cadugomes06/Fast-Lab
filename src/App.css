@@ -19,8 +19,6 @@
   border: 3px solid #eee;
   z-index: 10;
 }
-
-
 h1, h2, h3, h4, h5 {
   font-family: Poppins, sans-serif, Arial, Helvetica, sans-serif;
 }
@@ -76,12 +74,14 @@ select {
 
 .detailAnimation {
   width: 100px;
-  height: 2px;
+  height: 4px;
+  border-radius: 8px;
   background: var(--background-gradient-main);
   position: absolute;
-  left: 186px;
-  top: 58px;
-  animation: detailPass 5s infinite;
+  left: 182px;
+  top: 54px;
+  animation: detailPass 5s forwards ease-out;
+  z-index: -1;
 }
 @keyframes detailPass {
   from {

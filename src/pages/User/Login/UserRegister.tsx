@@ -32,7 +32,6 @@ const UserRegister = () => {
                       <h2 className="text-[2rem] text-gray-400/70 font-normal">
                          Criar minha 
                          <span className="textGradient text-[2.4rem]"> Conta</span>
-                         <div className="detailAnimation"></div>
                      </h2>
                    </div>
 
