@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Header from "../../../components/Header";
 import bannerlogin from '../../../assets/images/bannerlogin.png'
 import Input from "../../../utils/Input";
@@ -6,6 +7,9 @@ import { Link } from "react-router-dom";
 
 
 const UserLogin = () => {    
+  const [emailAtual, setEmailAtual] = useState('');
+  const [passwordAtual, setPasswordAtual] = useState('');
+   
 
  
 
@@ -51,6 +55,7 @@ const UserLogin = () => {
                            placeholder=''
                            width="350px"
                            height="42px"
+                           onChange={(e) => setEmailAtual(e.target.value)}
                             />
 
                       <label htmlFor="password"
@@ -63,6 +68,7 @@ const UserLogin = () => {
                            placeholder=''
                            width="350px"
                            height="42px"
+                           onChange={(e) => setPasswordAtual(e.target.value)}
                             />
 
                            <div className="w-[350px] h-[42px] mt-2">

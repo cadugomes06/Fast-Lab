@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import Header from "../../components/Header";
 import Button from "../../utils/Button";
 import Input from "../../utils/Input";
@@ -14,6 +14,7 @@ const Form = () => {
   const [email, setEmail] = useState("");
   const [birth, setBirth] = useState("");
   const [CPF, setCPF] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [sexo, setSexo] = useState("");
   const [CEP, setCEP] = useState("");
   const [street, setStreet] = useState("");
@@ -83,7 +84,8 @@ const Form = () => {
       street === "" ||
       number === "" ||
       neighborhood === "" ||
-      unit === "" 
+      unit === "" ||
+      phoneNumber === ''
     ) {
       alert("preencha todos os campos corretamente.");
     } else if (
@@ -116,6 +118,7 @@ const Form = () => {
         email: email,
         sexo: sexo,
         birth: birth,
+        phone: phoneNumber,
         cpf: CPF,
         cep: CEP,
         street: street,
@@ -426,7 +429,30 @@ const Form = () => {
                 </div>
               </div>
 
-              <div className="w-full max-h-max flex justify-start pl-12">
+              <div className="max-h-max w-full">
+                <div className="flex flex-col pl-12">
+                  <label
+                    htmlFor="phonenumber"
+                    style={{ color: "var(--color-secondary)" }}
+                    className="w-[350px] pb-1"
+                  >
+                    Contato
+                  </label>
+                  <Input
+                    type="text"
+                    name=""
+                    id="phonenumber"
+                    placeholder="(22)00000-0000"
+                    height="42px"
+                    width="180px"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                  />
+                </div>
+               </div>
+              
+
+              <div className="w-full max-h-max flex justify-start pl-12 ">
                 <div className="flex items-center">
                   <h2
                     style={{ color: "var(--color-main)" }}
@@ -487,7 +513,7 @@ const Form = () => {
             </div>
 
             <div
-              className="text-center font-medium py-2 mt-8 mb-8"
+              className="text-center font-medium py-2 mt-20 mb-8"
               style={{ color: "var(--color-main)" }}
             >
               <h4>Endereço do Paciente</h4>

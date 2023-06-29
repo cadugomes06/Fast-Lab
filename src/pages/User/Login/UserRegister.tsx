@@ -3,8 +3,20 @@ import bannerlogin from '../../../assets/images/bannerlogin.png'
 import Input from "../../../utils/Input";
 import Button from "../../../utils/Button";
 import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { UserContext } from "../../../context/UserContext";
 
 const UserRegister = () => {
+  const [emailAtual, setEmailAtual] = useState('');
+  const [passwordAtual, setPasswordAtual] = useState('');
+
+    const { setEmail, setPassword, handleCreateUser } = useContext(UserContext);
+  
+  const handleClickRegister = () => {
+    setEmail(emailAtual)
+    setPassword(setPasswordAtual)
+    handleCreateUser()
+  }
 
 
     return (
@@ -48,6 +60,7 @@ const UserRegister = () => {
                            placeholder='exemplo@email.com'
                            width="350px"
                            height="42px"
+                           onChange={(e) => setEmailAtual(e.target.value)}
                             />
 
                       <label htmlFor="password"
@@ -60,6 +73,7 @@ const UserRegister = () => {
                            placeholder='**********'
                            width="350px"
                            height="42px"
+                           onChange={(e) => setPasswordAtual(e.target.value)}
                             />
 
                            <div className="w-[350px] h-[42px] mt-2">
@@ -87,6 +101,7 @@ const UserRegister = () => {
                               background='white'
                               borderColor='teal'
                               color='teal'
+                              onClick={handleClickRegister} 
                             />
                             </Link>   
                             </div>

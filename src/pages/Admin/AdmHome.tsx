@@ -2,6 +2,15 @@ import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig";
+import usericon from '../../assets/icons/usericon.svg'
+import cardnumber from '../../assets/icons/cardnumber.svg'
+import email from '../../assets/icons/email.svg'
+import cpf from '../../assets/icons/cpf.svg'
+import sexo from '../../assets/icons/sexo.svg'
+import birth from '../../assets/icons/birth.svg'
+import location from '../../assets/icons/location.svg'
+import build from '../../assets/icons/build.svg'
+import phone from '../../assets/icons/phone.svg'
 
 const AdmHome = () => {
   const [forms, setForms] = useState<TypeUser[]>([]);
@@ -16,6 +25,7 @@ const AdmHome = () => {
     birth: string;
     sexo: string;
     cpf: string;
+    phone: string;
     cep: string;
     street: string;
     num: string;
@@ -90,20 +100,77 @@ const AdmHome = () => {
            </div>
 
           {forms ? (
-            <div className="pl-12 pt-4 flex flex-col gap-1 detail animeLeft">
-              <h3 className="textBase">convênio: <span className="dataText">{forms[indexPac]?.plan}</span> </h3>
-              <h3 className="textBase">carteirinha: <span className="dataText">{forms[indexPac]?.cardnumber}</span></h3>
-              <h3 className="textBase">nome: <span className="dataText">{forms[indexPac]?.name}</span></h3>
-              <h3 className="textBase">nome social?: <span className="dataText">{forms[indexPac]?.socialname}</span></h3>
-              <h3 className="textBase">email: <span className="dataText">{forms[indexPac]?.email}</span></h3>
-              <h3 className="textBase">Dt nascimento: <span className="dataText">{forms[indexPac]?.birth}</span></h3>
-              <h3 className="textBase">sexo: <span className="dataText">{forms[indexPac]?.sexo}</span></h3>
-              <h3 className="textBase">CPF: <span className="dataText">{forms[indexPac]?.cpf}</span></h3>
-              <h3 className="textBase">cep: <span className="dataText">{forms[indexPac]?.cep}</span></h3>
-              <h3 className="textBase">Rua: <span className="dataText">{forms[indexPac]?.street}</span></h3>
-              <h3 className="textBase">número: <span className="dataText">{forms[indexPac]?.num}</span></h3>
-              <h3 className="textBase">Bairro: <span className="dataText">{forms[indexPac]?.neighborhood}</span></h3>
-              <h3 className="textBase">unidade: <span className="dataText">{forms[indexPac]?.unit}</span></h3>
+            <div className="pl-12 pt-4 flex flex-col justify-center gap-1 detail animeLeft">
+              <h3 className="textBase flex items-center">
+                convênio: <span className="dataText">{forms[indexPac]?.plan}</span> 
+              </h3>
+
+              <h3 className="textBase flex items-center">
+                <img src={cardnumber} alt="" className="w-6 h-6 mr-4" />
+                carteirinha: <span className="dataText">{forms[indexPac]?.cardnumber}</span>
+              </h3>
+
+              <h3 className="textBase flex items-center">
+                <img src={usericon} alt="" className="w-6 h-6 mr-4" />
+                nome: <span className="dataText">{forms[indexPac]?.name}</span>
+              </h3>
+
+              <h3 className="textBase flex items-center">
+                <img src={usericon} alt="" className="w-6 h-6 mr-4" />
+                nome social?: <span className="dataText">{forms[indexPac]?.socialname}</span>
+              </h3>
+
+              <h3 className="textBase flex items-center">
+                <img src={email} alt="" className="w-5 h-5 mr-4" />
+                email: <span className="dataText">{forms[indexPac]?.email}</span>
+              </h3>
+
+              <h3 className="textBase flex items-center">
+                <img src={birth} alt="" className="w-5 h-5 mr-4" />
+                Dt nascimento: <span className="dataText">{forms[indexPac]?.birth}</span>
+              </h3>
+              <h3 className="textBase flex items-center">
+                <img src={sexo} alt="" className="w-6 h-6 mr-4" />
+                sexo: <span className="dataText">{forms[indexPac]?.sexo}</span>
+              </h3>
+
+
+              <h3 className="textBase flex items-center">
+                <img src={cpf} alt="" className="w-6 h-6 mr-4" />
+                CPF: <span className="dataText">{forms[indexPac]?.cpf}</span>
+              </h3>
+
+              
+              <h3 className="textBase flex items-center">
+                <img src={phone} alt="" className="w-5 h-5 mr-4" />
+                Telefone: <span className="dataText">{forms[indexPac]?.phone}</span>
+              </h3>
+
+              <h3 className="textBase flex items-center">
+                <img src={location} alt="" className="w-6 h-6 mr-4" />
+                cep: <span className="dataText">{forms[indexPac]?.cep}</span>
+              </h3>
+
+              <h3 className="textBase flex items-center">
+                <img src={location} alt="" className="w-6 h-6 mr-4" />
+                Rua: <span className="dataText">{forms[indexPac]?.street}</span>
+              </h3>
+
+              <h3 className="textBase flex items-center">
+                <img src={location} alt="" className="w-6 h-6 mr-4" />
+                número: <span className="dataText">{forms[indexPac]?.num}</span>
+              </h3>
+
+              <h3 className="textBase flex items-center">
+                <img src={location} alt="" className="w-6 h-6 mr-4" />
+                Bairro: <span className="dataText">{forms[indexPac]?.neighborhood}</span>
+              </h3>
+
+              <h3 className="textBase flex items-center">
+                <img src={build} alt="" className="w-6 h-6 mr-4" />
+                unidade: <span className="dataText">{forms[indexPac]?.unit}</span>
+              </h3>
+
                 {forms[indexPac]?.imageUrl?.map((url, index) => {
                   return (
                     <div key={index} className="documentLink">
