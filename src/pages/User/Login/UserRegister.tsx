@@ -10,33 +10,36 @@ import { auth } from '../../../services/firebaseConfig';
 const UserRegister = () => {
   const [emailAtual, setEmailAtual] = useState('');
   const [passwordAtual, setPasswordAtual] = useState('');
-  const [userAccLocal, setUserAccLocal] = useState('');
+  const [userAccount, setUserAccount] = useState('');
   const [errorRegister, setErrorRegister] = useState('');
   const [successRegister, setSuccessRegister] = useState('');
   
-  const [createUserWithEmailAndPassword, loading, error] =
+  const [createUserWithEmailAndPassword, loading] =
     useCreateUserWithEmailAndPassword(auth);
 
   const navigate = useNavigate()
-
 
   const handleClickRegister = async (event: any) => {
     event.preventDefault()
     setErrorRegister('')
     setSuccessRegister('')
     
-    if(emailAtual === '' || passwordAtual === '') {
+    if (emailAtual === '' || passwordAtual === '') {
       setErrorRegister('Preencha todos os campos corretamente.')
     } else if (passwordAtual.length < 8 ) {
       setErrorRegister('A senha deve conter no mínimo 8 caracteres!')
     } else {
       const res = await createUserWithEmailAndPassword(emailAtual, passwordAtual)
+
       if(res) {
         setSuccessRegister('Conta criada com sucesso!')
-        setUserAccLocal(res.user.uid)
+        setUserAccount(res.user.uid)
+        
         setTimeout(() => {
         navigate('../userlogin')        
       }, 2000)
+     } else {
+      return setErrorRegister('email já está em uso!')
      }
     }
   }
@@ -115,7 +118,6 @@ const UserRegister = () => {
                             </div>
                             
                             {errorRegister? <p className="text-red-500 pt-1">{errorRegister}</p> : ''}
-                            {error? <p className="text-red-500 pt-1">Email já está em uso!</p>  : ''}
                             {successRegister? <p className="text-teal-500 pt-1">{successRegister}</p>  : ''}
 
                             <div className="w-[350px] mt-12 text-sm">

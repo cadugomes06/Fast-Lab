@@ -1,3 +1,5 @@
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { auth } from '../../../services/firebaseConfig'
 import { useState } from "react";
 import Header from "../../../components/Header";
 import bannerlogin from '../../../assets/images/bannerlogin.png'
@@ -6,11 +8,48 @@ import Button from "../../../utils/Button";
 import { Link } from "react-router-dom";
 
 
+
 const UserLogin = () => {    
   const [emailAtual, setEmailAtual] = useState('');
   const [passwordAtual, setPasswordAtual] = useState('');
-   
 
+  const [errorRegister, setErrorRegister] = useState('');
+  const [successRegister, setSuccessRegister] = useState('');
+
+  const [
+    signInWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useSignInWithEmailAndPassword(auth);
+   
+  const handleLogin = async (e: any) => {
+    e.preventDefault()
+    setErrorRegister('')
+    setSuccessRegister('')
+
+    if (emailAtual === '' || passwordAtual === '') {
+      setErrorRegister("Preencha todos os campos corretamente!")
+    } else if (passwordAtual.length < 8) {
+      setErrorRegister("A senha deve ter no mínimo 8 caracteres!")
+    } else {
+
+      try {
+        const res = await signInWithEmailAndPassword(emailAtual, passwordAtual)
+        if (res) {
+          window.localStorage.setItem('user', res.user.uid)
+          setSuccessRegister("Login realizado com sucesso!")
+          setTimeout(() => {
+
+          }, 2000)
+        }
+
+      } catch (err: any) {
+        setErrorRegister(err)
+      }
+
+    }
+  }
  
 
     return (
@@ -42,7 +81,7 @@ const UserLogin = () => {
                      </h2>
                    </div>
 
-                    <form>
+                    <form onSubmit={handleLogin}>
                      <div className="h-96 max-h-max flex flex-col justify-center items-start">
 
                        <label htmlFor="email"
@@ -76,7 +115,10 @@ const UserLogin = () => {
                               text="Logar"
                               width="350px"
                               height="42px"
+                              onClick={handleLogin}
                             />
+                             {errorRegister? <p className="text-red-500 pt-1">{errorRegister}</p> : ''}
+                             {successRegister? <p className="text-teal-500 pt-1">{successRegister}</p>  : ''}
                             </div>
 
                             <div className="w-[350px] mt-12 text-sm">
