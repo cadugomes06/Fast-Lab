@@ -9,6 +9,7 @@ interface ButtonProps {
     background?: string | number;
     borderColor?: any;
     color?: any
+    type?: any
 }
 
 const Button: React.FC<ButtonProps> = ({text, width, height, onClick, marginTop, marginBottom, disabled, background, borderColor, color}) => {
@@ -24,6 +25,7 @@ const Button: React.FC<ButtonProps> = ({text, width, height, onClick, marginTop,
 
 return (
     <button
+         type="submit"
          style={buttonStyle}
          onClick={onClick}
          disabled={disabled}

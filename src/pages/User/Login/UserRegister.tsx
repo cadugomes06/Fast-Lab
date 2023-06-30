@@ -2,23 +2,45 @@ import Header from "../../../components/Header";
 import bannerlogin from '../../../assets/images/bannerlogin.png'
 import Input from "../../../utils/Input";
 import Button from "../../../utils/Button";
-import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
-import { UserContext } from "../../../context/UserContext";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { auth } from '../../../services/firebaseConfig';
 
 const UserRegister = () => {
   const [emailAtual, setEmailAtual] = useState('');
   const [passwordAtual, setPasswordAtual] = useState('');
-
-    const { setEmail, setPassword, handleCreateUser } = useContext(UserContext);
+  const [userAccLocal, setUserAccLocal] = useState('');
+  const [errorRegister, setErrorRegister] = useState('');
+  const [successRegister, setSuccessRegister] = useState('');
   
-  const handleClickRegister = () => {
-    setEmail(emailAtual)
-    setPassword(setPasswordAtual)
-    handleCreateUser()
+  const [createUserWithEmailAndPassword, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  const navigate = useNavigate()
+
+
+  const handleClickRegister = async (event: any) => {
+    event.preventDefault()
+    setErrorRegister('')
+    setSuccessRegister('')
+    
+    if(emailAtual === '' || passwordAtual === '') {
+      setErrorRegister('Preencha todos os campos corretamente.')
+    } else if (passwordAtual.length < 8 ) {
+      setErrorRegister('A senha deve conter no mínimo 8 caracteres!')
+    } else {
+      const res = await createUserWithEmailAndPassword(emailAtual, passwordAtual)
+      if(res) {
+        setSuccessRegister('Conta criada com sucesso!')
+        setUserAccLocal(res.user.uid)
+        setTimeout(() => {
+        navigate('../userlogin')        
+      }, 2000)
+     }
+    }
   }
-
-
+  
     return (
         <>
         <Header />  
@@ -47,7 +69,7 @@ const UserRegister = () => {
                      </h2>
                    </div>
 
-                    <form>
+                    <form onSubmit={handleClickRegister}>
                      <div className="h-96 max-h-max flex flex-col justify-center items-start">
 
                        <label htmlFor="email"
@@ -77,12 +99,24 @@ const UserRegister = () => {
                             />
 
                            <div className="w-[350px] h-[42px] mt-2">
+                            {loading? (
+                              <Button 
+                              text="Registrando..."
+                              width="350px"
+                              height="42px"
+                              disabled
+                            />
+                            ) : 
                             <Button 
                               text="Criar"
                               width="350px"
                               height="42px"
-                            />
+                            />}
                             </div>
+                            
+                            {errorRegister? <p className="text-red-500 pt-1">{errorRegister}</p> : ''}
+                            {error? <p className="text-red-500 pt-1">Email já está em uso!</p>  : ''}
+                            {successRegister? <p className="text-teal-500 pt-1">{successRegister}</p>  : ''}
 
                             <div className="w-[350px] mt-12 text-sm">
                             <p 
@@ -101,9 +135,9 @@ const UserRegister = () => {
                               background='white'
                               borderColor='teal'
                               color='teal'
-                              onClick={handleClickRegister} 
                             />
                             </Link>   
+                            
                             </div>
                      </div> 
                     </form>
