@@ -29,7 +29,6 @@ const Form = () => {
 
   const [planRule, setPlanRule] = useState("");
 
-  const [ userStatus, setUserStatus ] = useState(false)
   const [cardnumberError, setCardnumberError] = useState("");
   const [cpfError, setCpfError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -42,7 +41,6 @@ const Form = () => {
   const { state } = useContext(UserContext)
 
   useEffect(() => {
-      setUserStatus(state.userOn)
       if (state.userOn === false) {
           navigate('../userlogin')
           console.log(state.userOn)
