@@ -1,10 +1,12 @@
-import { useState, useEffect, ReactNode } from "react";
-import Header from "../../components/Header";
-import Button from "../../utils/Button";
-import Input from "../../utils/Input";
+import { useState, useEffect, useContext } from "react";
+import Header from "../../../components/Header";
+import Button from "../../../utils/Button";
+import Input from "../../../utils/Input";
 import { collection, addDoc } from "firebase/firestore";
-import { db, storage } from "../../services/firebaseConfig";
+import { db, storage } from "../../../services/firebaseConfig";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../context/UserContext";
 
 const Form = () => {
   const [plan, setPlan] = useState("");
@@ -27,11 +29,25 @@ const Form = () => {
 
   const [planRule, setPlanRule] = useState("");
 
+  const [ userStatus, setUserStatus ] = useState(false)
   const [cardnumberError, setCardnumberError] = useState("");
   const [cpfError, setCpfError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const formsCollectionRef = collection(db, "formulario");
+
+  
+  const navigate = useNavigate()
+
+  const { state } = useContext(UserContext)
+
+  useEffect(() => {
+      setUserStatus(state.userOn)
+      if (state.userOn === false) {
+          navigate('../userlogin')
+          console.log(state.userOn)
+      }
+  }, [state.userOn])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -233,7 +249,7 @@ const Form = () => {
         className="bg-white flex justify-center 
                  items-center flex-col h-max-h"
       >
-        <div className="mb-12 mt-8 pl-8 w-full">
+        <div className="mb-12 mt-8 pl-8 w-full animeLeft">
           <h1
             className="text-[1.8rem] font-bold"
             style={{ color: "var(--color-main)" }}
@@ -250,7 +266,7 @@ const Form = () => {
         </div>
 
         <form action="">
-          <div className="w-[52rem] pb-12 mb-4 max-h-max bg-gray-200 rounded-md shadow-sm shadow-gray-300">
+          <div className="animeLeft w-[52rem] pb-12 mb-4 max-h-max bg-gray-200 rounded-md shadow-sm shadow-gray-300">
             <div
               className="text-center font-medium pt-8 mb-8"
               style={{ color: "var(--color-main)" }}

@@ -1,13 +1,12 @@
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '../../../services/firebaseConfig'
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Header from "../../../components/Header";
 import bannerlogin from '../../../assets/images/bannerlogin.png'
 import Input from "../../../utils/Input";
 import Button from "../../../utils/Button";
-import { Link } from "react-router-dom";
-
-
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from '../../../context/UserContext';
 
 const UserLogin = () => {    
   const [emailAtual, setEmailAtual] = useState('');
@@ -16,12 +15,18 @@ const UserLogin = () => {
   const [errorRegister, setErrorRegister] = useState('');
   const [successRegister, setSuccessRegister] = useState('');
 
+  const { state } = useContext(UserContext)
+  
+  if (state.userOn === true) {
+    state.toggleUserLog()
+  }
+
   const [
     signInWithEmailAndPassword,
-    user,
     loading,
-    error,
   ] = useSignInWithEmailAndPassword(auth);
+
+  const navigate = useNavigate()
    
   const handleLogin = async (e: any) => {
     e.preventDefault()
@@ -36,15 +41,17 @@ const UserLogin = () => {
 
       try {
         const res = await signInWithEmailAndPassword(emailAtual, passwordAtual)
-        if (res) {
-          window.localStorage.setItem('user', res.user.uid)
-          setSuccessRegister("Login realizado com sucesso!")
-          setTimeout(() => {
 
+        if (res) {
+          setSuccessRegister("Login realizado com sucesso!")
+          window.localStorage.setItem('user', res.user.uid)
+          
+          setTimeout(() => {
+            navigate('/user/userhome')
+            state.toggleUserLog()
           }, 2000)
         }
-
-      } catch (err: any) {
+      }catch (err: any) {
         setErrorRegister(err)
       }
 
@@ -111,12 +118,22 @@ const UserLogin = () => {
                             />
 
                            <div className="w-[350px] h-[42px] mt-2">
-                            <Button 
+                             {loading? (
+                                <Button 
+                                text="Logando..."
+                                width="350px"
+                                height="42px"
+                                disabled
+                              />
+                             ) : (
+                              <Button 
                               text="Logar"
                               width="350px"
                               height="42px"
                               onClick={handleLogin}
-                            />
+                               />
+                             )}            
+
                              {errorRegister? <p className="text-red-500 pt-1">{errorRegister}</p> : ''}
                              {successRegister? <p className="text-teal-500 pt-1">{successRegister}</p>  : ''}
                             </div>

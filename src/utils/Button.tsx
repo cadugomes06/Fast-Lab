@@ -10,9 +10,10 @@ interface ButtonProps {
     borderColor?: any;
     color?: any
     type?: any
+    boxShadow?: any
 }
 
-const Button: React.FC<ButtonProps> = ({text, width, height, onClick, marginTop, marginBottom, disabled, background, borderColor, color}) => {
+const Button: React.FC<ButtonProps> = ({text, width, height, onClick, marginTop, marginBottom, disabled, background, borderColor, color, boxShadow}) => {
     const buttonStyle: React.CSSProperties = {
         width,
         height,
@@ -21,6 +22,7 @@ const Button: React.FC<ButtonProps> = ({text, width, height, onClick, marginTop,
         background,
         borderColor,
         color,
+        boxShadow,
     };
 
 return (

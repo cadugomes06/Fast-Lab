@@ -9,10 +9,20 @@ import Header from "../../components/Header"
 import banner1 from '../../assets/images/banner01.png'
 import banner2 from '../../assets/images/banner02.png'
 import banner3 from '../../assets/images/banner03.png'
-
+import { useContext, useEffect } from 'react';
+import { UserContext } from '../../context/UserContext';
 
 const Home = () => {
     const slides = [banner1, banner2, banner3]
+
+    const { state } = useContext(UserContext)
+
+    useEffect(() => {
+        if (state.userOn === true) {
+            state.toggleUserLog()
+        }
+    }, [state.userOn])
+
 
     return (
         <>

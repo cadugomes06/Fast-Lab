@@ -3,9 +3,10 @@ import bannerlogin from '../../../assets/images/bannerlogin.png'
 import Input from "../../../utils/Input";
 import Button from "../../../utils/Button";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from '../../../services/firebaseConfig';
+import { UserContext } from "../../../context/UserContext";
 
 const UserRegister = () => {
   const [emailAtual, setEmailAtual] = useState('');
@@ -13,6 +14,12 @@ const UserRegister = () => {
   const [userAccount, setUserAccount] = useState('');
   const [errorRegister, setErrorRegister] = useState('');
   const [successRegister, setSuccessRegister] = useState('');
+
+  const { state } = useContext(UserContext)
+  
+  if (state.userOn === true) {
+    state.toggleUserLog()
+  }
   
   const [createUserWithEmailAndPassword, loading] =
     useCreateUserWithEmailAndPassword(auth);

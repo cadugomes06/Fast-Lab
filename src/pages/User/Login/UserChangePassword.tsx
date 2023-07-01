@@ -3,8 +3,17 @@ import bannerlogin from '../../../assets/images/bannerlogin.png'
 import Input from "../../../utils/Input";
 import Button from "../../../utils/Button";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../../context/UserContext";
 
 const UserCrangePassword = () => {
+
+  const { state } = useContext(UserContext)
+  
+  if (state.userOn === true) {
+    state.toggleUserLog()
+  }
+
 
     return (
         <>

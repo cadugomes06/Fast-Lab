@@ -30,6 +30,13 @@ select {
   @apply border-black hover:border-teal-600 bg-white rounded-lg pl-2 drop-shadow-sm shadow-gray-200 cursor-pointer outline-none focus:border-teal-600 h-[42px] w-[350px] mb-4 focus:outline-teal-200 focus:shadow-teal-200
 }
 
+.sectionOffhome {
+  @apply h-80 w-52 bg-gray-100 rounded-md shadow-sm shadow-gray-300 border border-gray-200 flex flex-col items-center cursor-pointer hover:border-teal-300 duration-100
+  hover:shadow-lg hover:shadow-teal-100
+}
+.sectionOnhome {
+  @apply h-[28rem] w-96 bg-teal-400 rounded-md shadow-sm shadow-gray-300 flex flex-col items-center
+}
 .textBase {
   @apply text-gray-400 font-normal
 }

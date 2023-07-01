@@ -5,18 +5,25 @@ type UserStorageType = {
   children: React.ReactNode;
 };
 
-export const UserContext = React.createContext({});
+export const INITIAL_STATE = {
+  userOn: false,
+  toggleUserLog: () => INITIAL_STATE.userOn = !INITIAL_STATE.userOn
+}
 
-export const UserStorage = ({ children }: UserStorageType) => {
-  const [userAccount, setUserAccount] = useState("");
+export const UserContext = React.createContext({
+  state: INITIAL_STATE,
+});
+
+
+export const UserStorage = ({ children }: UserStorageType) => {  
 
   return (
     <UserContext.Provider
       value={{
-        userAccount,
-        setUserAccount,
+       state: INITIAL_STATE,
       }}
     >
+     
       {children}
     </UserContext.Provider>
   );
