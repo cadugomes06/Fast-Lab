@@ -3,7 +3,6 @@ import Header from "../../../components/Header";
 import { UserContext } from "../../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
-
 const Termos = () => {
     const { state } = useContext(UserContext)
 
@@ -14,7 +13,6 @@ const Termos = () => {
             navigate('../userlogin')
         }
     }, [state.userOn])
-
 
     return (
         <>

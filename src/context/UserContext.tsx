@@ -6,7 +6,7 @@ type UserStorageType = {
 };
 
 export const INITIAL_STATE = {
-  userOn: false,
+  userOn: true,
   toggleUserLog: () => INITIAL_STATE.userOn = !INITIAL_STATE.userOn
 }
 

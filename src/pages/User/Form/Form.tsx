@@ -85,6 +85,7 @@ const Form = () => {
 
   const createRequest = async (e: any) => {
     e.preventDefault();
+    const userID = window.localStorage.getItem('user')
 
     if (
       plan === "convenio" ||
@@ -140,8 +141,10 @@ const Form = () => {
         neighborhood: neighborhood,
         unit: unit,
         imageUrl: imageURL.urls,
+        userID: userID
       }
       )
+      navigate('/user/feedback')
     }
     console.log('formulario enviado')
   };

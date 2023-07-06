@@ -24,13 +24,16 @@ const Header = () => {
              </div> 
 
              {userStatus ? (
+              
               <ul className='flex gap-4 sm:gap-1 items-center'>
+
               <Link to='../user/userhome'>
               <li className='cursor-pointer text-[#079E7A] sm:text-sm hover:text-white hover:underline ease-linear duration-200'
               >
                 Home
               </li>
               </Link>
+
               <Link to='../user/solicitacao'>
               <li className='cursor-pointer text-[#079E7A] sm:text-sm hover:text-white hover:underline ease-linear duration-200'
               >
