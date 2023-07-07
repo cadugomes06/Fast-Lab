@@ -6,7 +6,13 @@ const FormConfirm = () => {
     return (
         <>
         <Header />
-        <h1>Solicitação realizada com sucesso!</h1>
+        <section >
+
+          <h1>Solicitação realizada com sucesso!</h1>
+
+
+
+        </section>
         </>
     )
 }
