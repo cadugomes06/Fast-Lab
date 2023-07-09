@@ -3,17 +3,45 @@ import bannerlogin from '../../../assets/images/bannerlogin.png'
 import Input from "../../../utils/Input";
 import Button from "../../../utils/Button";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../../context/UserContext";
 
+import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
+import { auth } from '../../../services/firebaseConfig'
+
 const UserCrangePassword = () => {
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+  const [messageError, setMessageError] = useState('')
 
   const { state } = useContext(UserContext)
+
+  const [sendPasswordResetEmail, sending, error] = useSendPasswordResetEmail(
+    auth
+  );
   
   if (state.userOn === true) {
     state.toggleUserLog()
   }
 
+  const handleChangePasssword = async (e: any) => {
+    e.preventDefault()
+    setMessage('')
+    setMessageError('')
+   
+    if (email === '') {
+      setMessageError('Preencha um e-mail.')
+    } else {
+      const success = await sendPasswordResetEmail(email)
+      if (success) {
+        setMessage('Solicitado com sucesso!')
+        console.log(success)
+      } else {
+        setMessage('Houve um error inesperado.')
+      }
+    }
+
+  }
 
     return (
         <>
@@ -43,7 +71,7 @@ const UserCrangePassword = () => {
                      </h2>
                    </div>
 
-                    <form>
+                    <form onSubmit={handleChangePasssword}>
                      <div className="h-96 max-h-max flex flex-col justify-start items-start pt-12">
 
                        <label htmlFor="email"
@@ -56,6 +84,7 @@ const UserCrangePassword = () => {
                            placeholder=''
                            width="350px"
                            height="42px"
+                           onChange={(e: any) => setEmail(e.target.value)}
                             />
 
                            <div className="w-[350px] h-[42px] mt-2">
@@ -63,7 +92,10 @@ const UserCrangePassword = () => {
                               text="Solicitar"
                               width="350px"
                               height="42px"
+                              onClick={handleChangePasssword}
                             />
+                            {messageError? <p className="text-red-500">{messageError}</p> : ''}
+                            {message? <p className="text-green-500">{message}</p> : ''}
                             </div>
                         
                             <div className="w-[350px] h-[42px] mt-14">

@@ -14,7 +14,6 @@ export const UserContext = React.createContext({
   state: INITIAL_STATE,
 });
 
-
 export const UserStorage = ({ children }: UserStorageType) => {  
 
   return (
@@ -22,8 +21,7 @@ export const UserStorage = ({ children }: UserStorageType) => {
       value={{
        state: INITIAL_STATE,
       }}
-    >
-     
+    >     
       {children}
     </UserContext.Provider>
   );

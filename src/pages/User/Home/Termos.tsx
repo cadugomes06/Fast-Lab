@@ -17,10 +17,10 @@ const Termos = () => {
     return (
         <>
         <Header />
-        <section className="grid grid-cols-6 w-full h-[calc(100vh-80px)] py-2 overflow-hidden">
+        <section className="grid grid-cols-6 w-full h-[calc(100vh-80px)] py-2">
           <div className="bg-white"></div>
 
-          <main className="col-span-4 bg-gray-100/50 shadow-md shadow-gray-300 animeLeft rounded-md overflow-y-auto">
+          <main className="col-span-4 bg-gray-100/50 shadow-md shadow-gray-300 animeLeft rounded-md">
             <div className="bg-gray-100 h-28 w-full flex justify-center items-center">
                 <h1 className="text-2xl font-bold uppercase" style={{color: 'var(--color-main)'}}>
                  Condições para o pré agendamento
