@@ -7,6 +7,7 @@ import { db, storage } from "../../../services/firebaseConfig";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
+import LoadingCup from "../../../components/LoadingCup";
 
 const Form = () => {
   const [plan, setPlan] = useState("");
@@ -34,7 +35,6 @@ const Form = () => {
   const [loading, setLoading] = useState(false);
 
   const formsCollectionRef = collection(db, "formulario");
-
   
   const navigate = useNavigate()
 
@@ -83,9 +83,11 @@ const Form = () => {
 }, [fileUrl]);
 
 
+
   const createRequest = async (e: any) => {
     e.preventDefault();
     const userID = window.localStorage.getItem('user')
+  
 
     if (
       plan === "convenio" ||
@@ -124,29 +126,32 @@ const Form = () => {
       alert("CPF incorreto!");
    } else if (imageURL.urls.length === 0) {
     alert("Selecione seu pedido médico primeiro!");
-   } else {
-       await addDoc(formsCollectionRef, {
-        plan: plan,
-        cardnumber: cardNumber,
-        name: name,
-        socialname: socialName,
-        email: email,
-        sexo: sexo,
-        birth: birth,
-        phone: phoneNumber,
-        cpf: CPF,
-        cep: CEP,
-        street: street,
-        num: number,
-        neighborhood: neighborhood,
-        unit: unit,
-        imageUrl: imageURL.urls,
-        userID: userID
-      }
-      )
-      navigate('/user/feedback')
+  } else {
+    setLoading(true)
+    await addDoc(formsCollectionRef, {
+            plan: plan,
+            cardnumber: cardNumber,
+            name: name,
+            socialname: socialName,
+            email: email,
+            sexo: sexo,
+            birth: birth,
+            phone: phoneNumber,
+            cpf: CPF,
+            cep: CEP,
+            street: street,
+            num: number,
+            neighborhood: neighborhood,
+            unit: unit,
+            imageUrl: imageURL.urls,
+            userID: userID
+          }
+          )
+        
+      setTimeout(() => {
+        navigate('/user/feedback')
+      }, 20000)
     }
-    console.log('formulario enviado')
   };
 
   useEffect(() => {
@@ -244,8 +249,8 @@ const Form = () => {
 
   return (
     <>
+    {loading ? <LoadingCup /> : ''}
       <Header />
-
       <section
         className="bg-white flex justify-center 
                  items-center flex-col h-max-h"

@@ -57,6 +57,7 @@ const UserLogin = () => {
 
   return (
     <>
+      {loading ? <LoadingCup /> : '' }
       <Header />
       <div className="w-full h-[calc(100vh-80px)]">
         <section className="grid grid-cols-2 bg-gray-100/20">
@@ -127,7 +128,12 @@ const UserLogin = () => {
 
                   <div className="w-[350px] h-[42px] mt-2">
                     {loading ? (
-                      <LoadingCup />
+                        <Button
+                         text="Logando..."
+                         width="350px"
+                         height="42px"
+                         disabled
+                       />
                     
                     ) : (
                       <Button

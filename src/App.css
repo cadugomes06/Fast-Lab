@@ -181,10 +181,7 @@ select {
 }
 
 .cup {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(0, 0);
   width: 50px;
   height: 200px;
   border: 6px solid #353535;
@@ -196,7 +193,6 @@ select {
   animation: animateLoading 10s linear infinite;
   box-shadow: 0 0 0 4px #fff, 0 20px 35px rgba(0,0,0,.6);
 }
-
 .cup::after {
   content: '';
   width: 80px;
@@ -208,7 +204,6 @@ select {
   border-radius: 12px 12px 6px 6px ;
   border: 1px solid rgba(255,255,255, 0.6);
 }
-
 .cup::before {
   content: 'Loading...';
   font-size: 0.8rem;
@@ -227,18 +222,18 @@ select {
 
 @keyframes animateLoading {
   0% {
-    background-position: 0px 20px;
+    background-position: -200px 160px;
   }
-    10% {
-    background-position: 0 30px;
+  10% {
+    background-position: -300px 140px;
   } 
   40% {
-    background-position: -500px 100px;
+    background-position: -400px 80px;
   }
   80% {
-    background-position: -300px 100px;
+    background-position: -500px 60px;
   }
   100% {
-    background-position: -100px 100px;
+    background-position: -650px 30px;
   } 
 }

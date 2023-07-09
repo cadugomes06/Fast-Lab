@@ -11,7 +11,6 @@ import banner2 from '../../assets/images/banner02.png'
 import banner3 from '../../assets/images/banner03.png'
 import { useContext, useEffect } from 'react';
 import { UserContext } from '../../context/UserContext';
-import LoadingCup from '../../components/LoadingCup';
 
 const Home = () => {
     const slides = [banner1, banner2, banner3]
@@ -27,8 +26,8 @@ const Home = () => {
 
     return (
         <>
+        
         <Header />
-
         <main className="w-full h-[calc(100vh-80px)] flex items-center justify-center overflow-hidden"
          >
             <div className="w-[78rem] xl:w-[70rem] lg:w-full max-w-max h-[32rem] bg-gray-100"
