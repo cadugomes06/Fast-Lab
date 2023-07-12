@@ -4,6 +4,9 @@ import { UserContext } from "../../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../utils/Button";
 
+import { getDocs, collection } from "firebase/firestore";
+import { db } from "../../../services/firebaseConfig";
+
 import infoIcon from "../../../assets/icons/info.svg";
 import infoGrayIcon from "../../../assets/icons/info-gray.svg";
 import calendarIcon from "../../../assets/icons/calendar.svg";
@@ -15,6 +18,7 @@ import checkGrayIcon from "../../../assets/icons/checkone-gray.svg";
 
 const UserHome = () => {
   const [cardSelect, setCardSelect] = useState(2);
+  const [form, setForm] = useState('');
 
   const { state } = useContext(UserContext);
   
@@ -36,6 +40,17 @@ const UserHome = () => {
     setCardSelect(3);
   };
 
+  const formsCollectionRef = collection(db, "UserData");
+  useEffect(() => {
+    const getForms = async () => {
+      const data = await getDocs(formsCollectionRef);
+      const a: any = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setForm(a)
+      console.log(a[0].id)
+    };
+    getForms();
+  }, []);
+
   return (
     <>
       <Header />
@@ -56,6 +71,7 @@ const UserHome = () => {
             <div className="w-full h-[6rem] flex justify-center items-center">
               <h2 className="">Agendamentos</h2>
             </div>
+            
             <div className="w-[28px] h-[28px] absolute left-1 top-1">
               <img
                 src={cardSelect === 1 ? calendarIcon : calendarGrayIcon}
@@ -69,13 +85,17 @@ const UserHome = () => {
             <span></span>
             <span></span>
 
-            <div className="w-full h-[8rem] flex justify-center items-center">
-              <h2>0</h2>
+            <div className="w-full h-[8rem] flex justify-center items-center px-6">
+              <p className={
+                  cardSelect === 1
+                    ? `text-[1rem] text-gray-200 leading-6`
+                    : `text-[0.8rem] text-gray-300`
+                }>Consulte suas solicitações de agendamento aqui.</p>
             </div>
 
             <div className="w-full flex justify-center items-center h-[6rem]">
               <Button
-                text="Agendar"
+                text="Consultar"
                 marginTop={cardSelect === 1 ? "60px" : "0px"}
                 height="42px"
                 width={cardSelect === 1 ? "200px" : "120px"}
@@ -192,7 +212,7 @@ const UserHome = () => {
 
             <div className="w-full h-[6rem] flex justify-center items-center">
               <Button
-                text="Saiba mais"
+                text="Agendar"
                 marginTop={cardSelect === 2 ? "60px" : ""}
                 height="42px"
                 disabled={cardSelect === 2 ? false : true}

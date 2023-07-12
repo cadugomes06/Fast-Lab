@@ -35,6 +35,7 @@ const AdmHome = () => {
   }
 
   const formsCollectionRef = collection(db, "formulario");
+  
   useEffect(() => {
     const getForms = async () => {
       const data = await getDocs(formsCollectionRef);

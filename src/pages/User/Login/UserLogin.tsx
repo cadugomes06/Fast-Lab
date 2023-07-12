@@ -47,6 +47,7 @@ const UserLogin = () => {
           setTimeout(() => {
             navigate("/user/userhome");
             state.toggleUserLog();
+            return user;
           }, 4000);
         }
       } catch (err: any) {
@@ -55,10 +56,13 @@ const UserLogin = () => {
     }
   };
 
+
   return (
     <>
       {loading ? <LoadingCup /> : '' }
+
       <Header />
+      
       <div className="w-full h-[calc(100vh-80px)]">
         <section className="grid grid-cols-2 bg-gray-100/20">
           <div className="h-[calc(100vh-80px)]">

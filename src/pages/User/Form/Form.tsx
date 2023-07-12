@@ -27,12 +27,10 @@ const Form = () => {
 
   const [fileUrl, setFileUrl] = useState<FileList[]>([]);
   const [imageURL, setImageURL] = useState<{urls: string[]}>({urls: []});
-
+  const [loading, setLoading] = useState(false);
   const [planRule, setPlanRule] = useState("");
-
   const [cardnumberError, setCardnumberError] = useState("");
   const [cpfError, setCpfError] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const formsCollectionRef = collection(db, "formulario");
   
@@ -43,7 +41,6 @@ const Form = () => {
   useEffect(() => {
       if (state.userOn === false) {
           navigate('../userlogin')
-          console.log(state.userOn)
       }
   }, [state.userOn])
 
@@ -62,7 +59,6 @@ const Form = () => {
     setLoading(true)
 
     const uploadPromises = imgs.map(async (file: any) => {
-      console.log(file)
       const docRef = ref(storage, `documentos/${file?.name}`);
       try {
         await uploadBytes(docRef, file);
@@ -83,12 +79,10 @@ const Form = () => {
 }, [fileUrl]);
 
 
-
   const createRequest = async (e: any) => {
     e.preventDefault();
     const userID = window.localStorage.getItem('user')
   
-
     if (
       plan === "convenio" ||
       cardNumber === "" ||
@@ -147,12 +141,20 @@ const Form = () => {
             userID: userID
           }
           )
-        
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          })
+          setLoading(true)
       setTimeout(() => {
+        document.documentElement.style.overflow = 'hidden';
+      }, 1000)
+      setTimeout(() => {
+        document.documentElement.style.overflow = 'auto';
         navigate('/user/feedback')
-      }, 20000)
-    }
-  };
+      }, 4000)
+    }  
+  }
 
   useEffect(() => {
     if (plan === "unimed-inter") {
@@ -249,7 +251,7 @@ const Form = () => {
 
   return (
     <>
-    {loading ? <LoadingCup /> : ''}
+    {loading && name.length > 0 ? <LoadingCup /> : ''}
       <Header />
       <section
         className="bg-white flex justify-center 
@@ -708,4 +710,5 @@ const Form = () => {
   );
 };
 
-export default Form;
+
+export default Form
