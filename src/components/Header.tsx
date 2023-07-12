@@ -12,7 +12,6 @@ const Header = () => {
 
   useEffect(() => {
     setUserStatus(state.userOn)
-
   }, [state.userOn])  
 
   const handleToggleMenu = () => {
