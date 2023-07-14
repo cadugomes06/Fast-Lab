@@ -28,6 +28,9 @@ const UserCrangePassword = () => {
     e.preventDefault()
     setMessage('')
     setMessageError('')
+    if(sending || error ){
+      console.log(sending, error)
+    }
    
     if (email === '') {
       setMessageError('Preencha um e-mail.')

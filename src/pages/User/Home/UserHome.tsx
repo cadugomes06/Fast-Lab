@@ -46,7 +46,7 @@ const UserHome = () => {
       const data = await getDocs(formsCollectionRef);
       const a: any = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       setForm(a)
-      console.log(a[0].id)
+      console.log(form)
     };
     getForms();
   }, []);
