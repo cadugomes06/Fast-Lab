@@ -9,6 +9,7 @@ import UserCrangePassword from './pages/User/Login/UserChangePassword';
 import UserHome from './pages/User/Home/UserHome';
 import Termos from './pages/User/Home/Termos';
 import FormConfirm from './pages/User/Form/FormConfirm';
+import UserRequest from './pages/User/Home/UserRequest';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route path='user/solicitacao' element={ <Form /> } />
         <Route path='user/termos' element={ <Termos /> } />
         <Route path='user/feedback' element={ <FormConfirm /> } />
+        <Route path='user/consulta' element={ <UserRequest /> } />
 
 
         <Route path='/admhome' element={ <AdmHome /> } />

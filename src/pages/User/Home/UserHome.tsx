@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Header from "../../../components/Header";
 import { UserContext } from "../../../context/UserContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../utils/Button";
 
 import { getDocs, collection } from "firebase/firestore";
@@ -94,6 +94,7 @@ const UserHome = () => {
             </div>
 
             <div className="w-full flex justify-center items-center h-[6rem]">
+              <Link to='../user/consulta'>
               <Button
                 text="Consultar"
                 marginTop={cardSelect === 1 ? "60px" : "0px"}
@@ -103,6 +104,7 @@ const UserHome = () => {
                 boxShadow={cardSelect === 1 ? "none" : ""}
                 disabled={cardSelect === 1 ? false : true}
               />
+              </Link>
             </div>
           </div>
 
@@ -211,6 +213,7 @@ const UserHome = () => {
             </div>
 
             <div className="w-full h-[6rem] flex justify-center items-center">
+              <Link to='../user/solicitacao'>
               <Button
                 text="Agendar"
                 marginTop={cardSelect === 2 ? "60px" : ""}
@@ -220,6 +223,7 @@ const UserHome = () => {
                 background={cardSelect === 2 ? "teal" : "gray"}
                 boxShadow={cardSelect === 2 ? "none" : ""}
               />
+              </Link>
             </div>
           </div>
 
@@ -261,6 +265,7 @@ const UserHome = () => {
               </p>
             </div>
             <div className="h-[7rem] w-full flex justify-center items-center">
+              <Link to='../user/termos'>
               <Button
                 text="Saiba Mais"
                 marginTop={cardSelect === 3 ? "60px" : ""}
@@ -270,6 +275,7 @@ const UserHome = () => {
                 background={cardSelect === 3 ? "teal" : "gray"}
                 boxShadow={cardSelect === 3 ? "none" : ""}
               />
+              </Link>
             </div>
           </div>
         </div>
