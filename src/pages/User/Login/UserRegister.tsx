@@ -43,7 +43,6 @@ const UserRegister = () => {
         setUserAccount(res.user.uid)
         
         setTimeout(() => {
-        window.localStorage.setItem('userUID', userAccount)
         navigate('../userlogin')        
       }, 2000)
      } else {

@@ -47,7 +47,7 @@ const FormConfirm = () => {
 
                 <hr></hr>
 
-                <li className="flex text-sm text-gray-600 pt-1"> Não será aceito documento com foto ou copia do documento sem justificativa jurídica.
+                <li className="flex text-sm text-gray-600 pt-1"> Não será aceito foto do documento ou copia do documento, sem justificativa jurídica.
                   <img className="w-[22px] h-[22px] pl-1" src={closeIcon} alt="" />
                 </li>
                

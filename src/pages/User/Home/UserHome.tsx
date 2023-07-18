@@ -66,10 +66,10 @@ const UserHome = () => {
                 ? "sectionOnhome relative"
                 : "sectionOffhome relative"
             }
-            onClick={handleClickCardOne}
+            onMouseEnter={handleClickCardOne}
           >
             <div className="w-full h-[6rem] flex justify-center items-center">
-              <h2 className="">Agendamentos</h2>
+              <h2 className="">Solicitações</h2>
             </div>
             
             <div className="w-[28px] h-[28px] absolute left-1 top-1">
@@ -85,12 +85,12 @@ const UserHome = () => {
             <span></span>
             <span></span>
 
-            <div className="w-full h-[8rem] flex justify-center items-center px-6">
+            <div className="w-full h-[8rem] flex justify-center items-center px-4">
               <p className={
                   cardSelect === 1
                     ? `text-[1rem] text-gray-200 leading-6`
                     : `text-[0.8rem] text-gray-300`
-                }>Consulte suas solicitações de agendamento aqui.</p>
+                }>Consulte os status das suas solicitações de atendimento aqui.</p>
             </div>
 
             <div className="w-full flex justify-center items-center h-[6rem]">
@@ -114,12 +114,12 @@ const UserHome = () => {
                 ? "sectionOnhome relative"
                 : "sectionOffhome relative"
             }
-            onClick={handleClickCardTwo}
+            onMouseEnter={handleClickCardTwo}
           >
             <div className="w-full h-[5rem] flex justify-center items-center text-center">
               <h2>
-                Disponibilidade <br />
-                para agendamento!
+                Disponíveis para<br />
+                pré cadastramento!
               </h2>
             </div>
             <div className="w-[26px] h-[26px] absolute left-1 top-1">
@@ -215,7 +215,7 @@ const UserHome = () => {
             <div className="w-full h-[6rem] flex justify-center items-center">
               <Link to='../user/solicitacao'>
               <Button
-                text="Agendar"
+                text="Solicitar"
                 marginTop={cardSelect === 2 ? "60px" : ""}
                 height="42px"
                 disabled={cardSelect === 2 ? false : true}
@@ -233,7 +233,7 @@ const UserHome = () => {
                 ? "sectionOnhome relative"
                 : "sectionOffhome relative"
             }
-            onClick={handleClickCardThree}
+            onMouseEnter={handleClickCardThree}
           >
             <div className="w-full h-[6rem] flex justify-center items-center">
               <h2>Informações</h2>
@@ -251,16 +251,16 @@ const UserHome = () => {
             <span></span>
             <span></span>
 
-            <div className="w-full h-[8rem] flex justify-center items-center px-4">
+            <div className="w-full h-[8rem] flex justify-center items-center px-2">
               <p
                 className={
                   cardSelect === 3
-                    ? `text-[1rem] text-gray-200 leading-6`
+                    ? `text-[1rem] text-gray-200 leading-6 px-2`
                     : `text-[0.8rem] text-gray-300`
                 }
               >
-                Ao agendar seus exames, será possível agilizar seu processo de
-                cadastramento em nossas unidade. Proporcionando uma experiência
+                Ao deixar sua visita pré cadastrada, será possível agilizar seu processo de
+                atendimento em nossas unidade. Proporcionando uma experiência
                 ainda melhor!
               </p>
             </div>

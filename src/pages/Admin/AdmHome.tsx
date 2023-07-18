@@ -59,8 +59,8 @@ const AdmHome = () => {
          overflow-y-auto shadow-md shadow-gray-400 flex flex-col relative"
         >
            <div className="w-[12.9rem] fixed rounded-md">
-            <h1 className="text-center font-semibold pt-6 pb-6 shadow-md shadow-bray-200 bg-white"
-              style={{color: "var(--color-main)"}}>
+            <h1 className="text-center font-semibold pt-6 pb-6 shadow-md shadow-bray-200 bg-white textGradient text-lg"
+              >
             Agendamentos
             </h1>
            </div>
@@ -91,11 +91,11 @@ const AdmHome = () => {
           </div>
         </aside>
 
-        <section className="w-[calc(100%-200px)] h-full max-h-max overflow-y-auto pb-6">
+        <section className="w-[calc(100%-200px)] h-full max-h-max overflow-y-auto pb-6 ">
 
-           <div className="w-full h-[4.8rem] flex items-center justify-center">
-             <h1 className="font-bold text-lg"
-                 style={{color: "var(--color-main)"}}>
+           <div className="w-full h-[4.6rem] bg-white flex items-center justify-center pt-16 pb-8">
+             <h1 className="font-bold text-2xl textGradient"
+                 >
                 Dados do paciente
              </h1>
            </div>

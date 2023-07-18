@@ -5,7 +5,7 @@ import Input from "../../../utils/Input";
 import { collection, addDoc } from "firebase/firestore";
 import { db, storage } from "../../../services/firebaseConfig";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
 import LoadingCup from "../../../components/LoadingCup";
 
@@ -82,7 +82,7 @@ const Form = () => {
   const createRequest = async (e: any) => {
     e.preventDefault();
     const userID = window.localStorage.getItem('user')
-  
+
     if (
       plan === "convenio" ||
       cardNumber === "" ||
@@ -97,7 +97,7 @@ const Form = () => {
       neighborhood === "" ||
       unit === "" ||
       phoneNumber === ''
-    ) {
+      ) {
       alert("preencha todos os campos corretamente.");
     } else if (
       (plan === "unimed-inter" || plan === "sulamerica") &&
@@ -121,7 +121,6 @@ const Form = () => {
    } else if (imageURL.urls.length === 0) {
     alert("Selecione seu pedido médico primeiro!");
   } else {
-    setLoading(true)
     await addDoc(formsCollectionRef, {
             plan: plan,
             cardnumber: cardNumber,
@@ -138,7 +137,8 @@ const Form = () => {
             neighborhood: neighborhood,
             unit: unit,
             imageUrl: imageURL.urls,
-            userID: userID
+            userID: userID,
+            status: 'solicitado'
           }
           )
           window.scrollTo({
@@ -250,17 +250,19 @@ const Form = () => {
   };
 
   return (
+
     <>
     {loading && name.length > 0 ? <LoadingCup /> : ''}
+
       <Header />
+
       <section
         className="bg-white flex justify-center 
                  items-center flex-col h-max-h"
       >
         <div className="mb-12 mt-8 pl-8 w-full animeLeft">
           <h1
-            className="text-[1.8rem] font-bold"
-            style={{ color: "var(--color-main)" }}
+            className="text-[1.8rem] font-bold textGradient"
           >
             Solicitação
           </h1>
@@ -269,7 +271,8 @@ const Form = () => {
             style={{ color: "var(--color-secondary)" }}
           >
             Preencha todos os dados corretamente. <br />
-            Seu agendamento estará <strong>disponível em até 48 horas.</strong>
+            Seu pré cadastramento estará <strong>disponível em até 48 horas úteis.</strong><br />
+            Verificar <strong className=" hover:text-teal-600 underline"><Link to="/user/termos"> convênios disponíveis.</Link></strong>
           </p>
         </div>
 
@@ -522,7 +525,7 @@ const Form = () => {
                     className="text-sm cursor-pointer"
                     style={{ color: "var(--color-main)" }}
                   >
-                    Indefinido
+                    Outros
                     <input
                       type="radio"
                       name="sexo"
@@ -692,7 +695,7 @@ const Form = () => {
           ) : (
             <div className="flex justify-center">
             <Button
-              text="agendar"
+              text="Enviar"
               width="350px"
               height="42px"
               marginTop="1rem"
@@ -709,6 +712,5 @@ const Form = () => {
     </>
   );
 };
-
 
 export default Form

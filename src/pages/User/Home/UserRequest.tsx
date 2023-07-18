@@ -4,10 +4,12 @@ import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../../services/firebaseConfig";
 
 import calendarIcon from '../../../assets/icons/calendar.svg'
+import notDocumentIcon from '../../../assets/images/notDocument.jpg'
 
 
 const UserRequest = () => {
     const [schedules, setSchedules] = useState<typeSchedule[]>([]);
+    const [ errorSchedule, setErrorSchedule] = useState(false)
 
     const formsCollectionRef = collection(db, "formulario");
     const userIDstorage = window.localStorage.getItem('user')
@@ -17,7 +19,12 @@ const UserRequest = () => {
         const data = await getDocs(formsCollectionRef);
         const a: any = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
         const userSchedules = a.filter((id: any) => id.userID == userIDstorage)
-        setSchedules(userSchedules)
+        
+        if(userSchedules) {
+          setSchedules(userSchedules)
+        } else {
+          setErrorSchedule(true)
+        }
       };
       getForms();
     }, []);
@@ -25,8 +32,8 @@ const UserRequest = () => {
     interface typeSchedule {
         plan: string;
         unit: string;
+        status: string
     }
-    
 
     return (
         <>
@@ -35,32 +42,40 @@ const UserRequest = () => {
         <section className="grid grid-cols-8 animeLeft">
          <div></div>
 
-         <div className="col-span-6 bg-gray-50 h-[calc(100vh-84px)] shadow-md shadow-gray-300 rounded-md mt-2">
+         <div className="col-span-6 bg-gray-50/50 h-[calc(100vh-100px)] shadow-md shadow-gray-300 rounded-md my-2">
             <div className="w-full h-28  flex justify-center items-center">
               <h1 className="text-2xl font-bold textGradient" >
-                Meus agendamentos
+                Minhas Solicitações
              </h1>
             </div>
 
             <div className="h-[24rem] w-full max-h-max pt-12 px-6">
-              {schedules ?
+              {schedules[0] && !errorSchedule ?
                schedules.map((schedule, index) => (
                 <div 
                    key={index} 
-                   className="flex justify-between w-full bg-white rounded-lg h-12 mb-2 items-center px-4 shadow-md shadow-gray-300 font-normal text-sm"
+                   className={`${schedule.status === 'solicitado' ? `bg-yellow-400/60` : `bg-teal-400/50`} flex justify-between w-full rounded-lg h-12 mb-2 items-center px-4 shadow-md shadow-gray-300 font-normal text-sm`}
                    style={{color: 'var(--color-main)'}}>
                     <img src={calendarIcon} alt="caléndario" className="w-[20px] h-[20px]" />
                     <p>{schedule?.plan}</p> 
                     <p>{schedule?.unit}</p>
-                    <p>Status: Indisponível</p>
+                    <p>Status: {schedule?.status}</p>
                 </div>
                )) 
-               : <h3>Não foram encontrado agendamentos ainda!</h3> }
+               : 
+                <div className="h-[24rem] w-full max-h-max px-4 flex flex-col">
+                  <h3 className="text-md font-semibold z-10" style={{color: 'var(--color-secondary)'}}>Você ainda não possui solicitações disponíveis no momento. Navegue até a sessão de solicitação.
+                  </h3> 
+
+                  <div className="w-[100%] max-h-max flex justify-center">
+                    <img src={notDocumentIcon} alt="nenhum-documento" className="object-contain w-[24rem] h-[20rem]" />
+                  </div>
+                  
+                </div>
+                }
             </div>
 
-
          </div>
-
 
          <div></div>
         </section>

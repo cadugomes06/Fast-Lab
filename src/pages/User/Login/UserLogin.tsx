@@ -59,7 +59,7 @@ const UserLogin = () => {
 
   return (
     <>
-      {loading ? <LoadingCup /> : '' }
+      {loading ? <LoadingCup /> : null }
 
       <Header />
       

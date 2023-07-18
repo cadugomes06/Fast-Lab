@@ -26,7 +26,7 @@ p, span, input, label, li, a {
   font-family: Roboto, sans-serif, Arial, Helvetica, sans-serif;
 }
 select {
-  @apply border-black hover:border-teal-600 bg-white rounded-lg pl-2 drop-shadow-sm shadow-gray-200 cursor-pointer outline-none focus:border-teal-600 h-[42px] w-[350px] mb-4 focus:outline-teal-200 focus:shadow-teal-200
+  @apply border-black hover:border-teal-600 bg-white rounded-lg pl-2 drop-shadow-sm shadow-gray-200 cursor-pointer outline-none focus:border-teal-600 h-[42px] w-[350px] mb-4 focus:outline-teal-200 focus:shadow-teal-200 
 }
 
 
@@ -222,18 +222,18 @@ select {
 
 @keyframes animateLoading {
   0% {
-    background-position: -200px 160px;
+    background-position: -100px 160px;
   }
   10% {
     background-position: -300px 140px;
   } 
   40% {
-    background-position: -400px 80px;
+    background-position: -500px 100px;
   }
   80% {
-    background-position: -500px 60px;
+    background-position: -700px 60px;
   }
   100% {
-    background-position: -650px 30px;
+    background-position: -900px 30px;
   } 
 }
