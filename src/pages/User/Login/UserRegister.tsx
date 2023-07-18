@@ -11,7 +11,7 @@ import { UserContext } from "../../../context/UserContext";
 const UserRegister = () => {
   const [emailAtual, setEmailAtual] = useState('');
   const [passwordAtual, setPasswordAtual] = useState('');
-  const [userAccount, setUserAccount] = useState('');
+  // const [userAccount, setUserAccount] = useState('');
   const [errorRegister, setErrorRegister] = useState('');
   const [successRegister, setSuccessRegister] = useState('');
 
@@ -40,7 +40,7 @@ const UserRegister = () => {
 
       if(res) {
         setSuccessRegister('Conta criada com sucesso!')
-        setUserAccount(res.user.uid)
+        // setUserAccount(res.user.uid)
         
         setTimeout(() => {
         navigate('../userlogin')        
