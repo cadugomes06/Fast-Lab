@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../../components/Header";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig";
 import usericon from '../../assets/icons/usericon.svg'
@@ -11,10 +10,13 @@ import birth from '../../assets/icons/birth.svg'
 import location from '../../assets/icons/location.svg'
 import build from '../../assets/icons/build.svg'
 import phone from '../../assets/icons/phone.svg'
+import planIcon from '../../assets/icons/plan.svg'
+import HeaderAdmin from "../../components/HeaderAdmin";
 
 const AdmHome = () => {
   const [forms, setForms] = useState<TypeUser[]>([]);
   const [indexPac, setIndexPac] = useState(0);
+  
 
   interface TypeUser {
     plan: string;
@@ -45,13 +47,15 @@ const AdmHome = () => {
     getForms();
   }, []);
 
+
   const handleShowPacient = (index: number) => {
     setIndexPac(index);
   };
 
+
   return (
     <div>
-      <Header />
+      <HeaderAdmin />
 
       <div className="h-[calc(100vh-80px)] overflow-hidden flex">
 
@@ -91,6 +95,7 @@ const AdmHome = () => {
           </div>
         </aside>
 
+
         <section className="w-[calc(100%-200px)] h-full max-h-max overflow-y-auto pb-6 ">
 
            <div className="w-full h-[4.6rem] bg-white flex items-center justify-center pt-16 pb-8">
@@ -103,12 +108,14 @@ const AdmHome = () => {
           {forms ? (
             <div className="pl-12 pt-4 flex flex-col justify-center gap-1 detail animeLeft">
               <h3 className="textBase flex items-center">
-                convênio: <span className="dataText">{forms[indexPac]?.plan}</span> 
+               <img src={planIcon} alt='icone-de-saude' className="w-6 h-6 mr-4" /> 
+               Convênio: <span className="dataText pl-6">{forms[indexPac]?.plan.toUpperCase()}</span> 
+
               </h3>
 
               <h3 className="textBase flex items-center">
                 <img src={cardnumber} alt="" className="w-6 h-6 mr-4" />
-                carteirinha: <span className="dataText">{forms[indexPac]?.cardnumber}</span>
+                carteirinha: <span className="dataText tracking-widest	">{forms[indexPac]?.cardnumber}</span>
               </h3>
 
               <h3 className="textBase flex items-center">
@@ -140,11 +147,10 @@ const AdmHome = () => {
                 <img src={cpf} alt="" className="w-6 h-6 mr-4" />
                 CPF: <span className="dataText">{forms[indexPac]?.cpf}</span>
               </h3>
-
               
               <h3 className="textBase flex items-center">
                 <img src={phone} alt="" className="w-5 h-5 mr-4" />
-                Telefone: <span className="dataText">{forms[indexPac]?.phone}</span>
+                Telefone: <span className="dataText tracking-wide	">{forms[indexPac]?.phone}</span>
               </h3>
 
               <h3 className="textBase flex items-center">

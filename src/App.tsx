@@ -10,8 +10,10 @@ import UserHome from './pages/User/Home/UserHome';
 import Termos from './pages/User/Home/Termos';
 import FormConfirm from './pages/User/Form/FormConfirm';
 import UserRequest from './pages/User/Home/UserRequest';
+import AdminLogin from './pages/Admin/AdminLogin';
 
 const App = () => {
+
   return (
     <BrowserRouter>
       <Routes>
@@ -28,7 +30,8 @@ const App = () => {
         <Route path='user/consulta' element={ <UserRequest /> } />
 
 
-        <Route path='/admhome' element={ <AdmHome /> } />
+        <Route path='admin/login' element={ <AdminLogin /> } />
+        <Route path='admin/home' element={ <AdmHome /> } />
 
       </Routes>    
     </BrowserRouter>
