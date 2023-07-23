@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Form from './pages/User/Form/Form'
-import AdmHome from './pages/Admin/AdmHome';
+import AdminHome from './pages/Admin/AdminHome';
 import UserLogin from './pages/User/Login/UserLogin';
 import UserRegister from './pages/User/Login/UserRegister';
 import UserCrangePassword from './pages/User/Login/UserChangePassword';
@@ -29,9 +29,8 @@ const App = () => {
         <Route path='user/feedback' element={ <FormConfirm /> } />
         <Route path='user/consulta' element={ <UserRequest /> } />
 
-
         <Route path='admin/login' element={ <AdminLogin /> } />
-        <Route path='admin/home' element={ <AdmHome /> } />
+        <Route path='admin/home' element={ <AdminHome /> } />
 
       </Routes>    
     </BrowserRouter>

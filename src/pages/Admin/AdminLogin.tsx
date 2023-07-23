@@ -2,14 +2,57 @@ import bannerGreen from "../../assets/images/bannerAdminGreen.png";
 import Input from "../../utils/Input";
 import Button from "../../utils/Button";
 import HeaderAdmin from "../../components/HeaderAdmin";
+import { useState } from "react";
+
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { auth } from "../../services/firebaseConfig";
+import LoadingCup from "../../components/LoadingCup";
+import { useNavigate } from "react-router-dom";
 
 
 const AdminLogin = () => {
-  
+  const [email, setEmail] = useState('')  
+  const [password, setPassword] = useState('')  
+  const [errorMessage, setErrorMessage] = useState('')
+  const [successMessage, setSuccessMessage] = useState('')
+
+  const [signInWithEmailAndPassword, loading, user, error] =
+  useSignInWithEmailAndPassword(auth);
+
+  const navigate = useNavigate()
+
+  const handleClickLogin = async (event: any) => {
+    event.preventDefault()
+    setErrorMessage('')
+
+    const globalEmail = import.meta.env.VITE_ACCESS_EMAIL_CAVALEIROS_FILIAL
+    const globalPassword = import.meta.env.VITE_ACCESS_PASSWORD_CAVALEIROS_SECRET
+    
+    if(email === '' || password === '') {
+      setErrorMessage("preencha todos os campos corretamento!")
+    } else if (email != globalEmail || password != globalPassword) {
+      setErrorMessage('Email ou senha inválido!')
+    } else if (error) {
+      setErrorMessage('Error!' + error)
+    } else {
+      const response = await signInWithEmailAndPassword(email, password)
+
+      if (response) {
+        setSuccessMessage('Bem-vindo ADM!')
+        window.localStorage.setItem("admin", 'on')
+       
+        setTimeout(() => {
+          navigate('../admin/home')
+          return user
+        }, 2000)
+      }
+    }
+  }
   
 
   return (
-    <>    
+    <> 
+    {loading? <LoadingCup /> : ''}   
       <HeaderAdmin />
       
       <div className="w-full h-[calc(100vh-80px)]">
@@ -17,6 +60,7 @@ const AdminLogin = () => {
           <div className="h-[calc(100vh-80px)]">
             <div
               className="h-[calc(100vh-80px)] flex justify-center items-center relative border-r-[1px] border-teal-100"
+              style={{background: 'var(--background-gradient-secondary)'}}
             >
               <img
                 src={bannerGreen}
@@ -36,7 +80,7 @@ const AdminLogin = () => {
 
                 </h2>
 
-              <form >
+              <form onSubmit={handleClickLogin}>
                 <div className="max-h-max flex flex-col justify-center items-start">
                   <label
                     htmlFor="email"
@@ -52,7 +96,7 @@ const AdminLogin = () => {
                     placeholder=""
                     width="350px"
                     height="42px"
-                    
+                    onChange={(e) => setEmail(e.target.value)}
                   />
 
                   <label
@@ -69,6 +113,7 @@ const AdminLogin = () => {
                     placeholder=""
                     width="350px"
                     height="42px"
+                    onChange={(e) => setPassword(e.target.value)}
                     
                   />
 
@@ -76,8 +121,11 @@ const AdminLogin = () => {
                       <Button
                         text="Logar"
                         width="350px"
-                        height="42px"                        
+                        height="42px"     
+                        onClick={handleClickLogin}                   
                       />
+                      {errorMessage? <p className="text-red-500">{errorMessage}</p> : ''}
+                      {successMessage? <p className="text-green-500 text-center">{successMessage}</p> : ''}
                   </div>
 
                 </div>

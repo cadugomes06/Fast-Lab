@@ -12,10 +12,22 @@ import build from '../../assets/icons/build.svg'
 import phone from '../../assets/icons/phone.svg'
 import planIcon from '../../assets/icons/plan.svg'
 import HeaderAdmin from "../../components/HeaderAdmin";
+import { useNavigate } from "react-router-dom";
+import Button from "../../utils/Button";
 
-const AdmHome = () => {
+
+const AdminHome = () => {
   const [forms, setForms] = useState<TypeUser[]>([]);
   const [indexPac, setIndexPac] = useState(0);
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const adminLogin = window.localStorage.getItem('admin')
+    if (adminLogin == '' || adminLogin != 'on') {
+      navigate("../admin/login")
+    }
+  }, [])
   
 
   interface TypeUser {
@@ -33,6 +45,7 @@ const AdmHome = () => {
     num: string;
     neighborhood: string;
     unit: string;
+    status: string;
     imageUrl: string[];
   }
 
@@ -41,17 +54,20 @@ const AdmHome = () => {
   useEffect(() => {
     const getForms = async () => {
       const data = await getDocs(formsCollectionRef);
-      const a: any = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      const a: any = data.docs.map((doc) => ({...doc.data(), id: doc.id }));
       setForms(a);
     };
     getForms();
   }, []);
 
 
-  const handleShowPacient = (index: number) => {
-    setIndexPac(index);
+  const handleShowPacient = async (index: number) => {
+    setIndexPac(index)
   };
-
+  
+  const updateConfirmStatus = () => {
+    console.log('click')
+  }
 
   return (
     <div>
@@ -82,13 +98,17 @@ const AdmHome = () => {
                   <span className="pl-1 font-semibold text-md"
                         style={{color: "var(--color-main)"}}>{form.name}</span>
                 </h3>
-                <p className="text-gray-500 text-sm">
+                <p className="text-gray-500 text-sm flex items-center">
                   convênio:
                   <span className="font-medium pl-1"
                         style={{color: "var(--color-secondary)"}}>
                     {form.plan}
                   </span>
                 </p>
+                {form.status == 'solicitado'? (
+                    <div className="rounded-[50%] w-2 h-2 bg-yellow-300"></div>
+                  ): ''}
+
               </div>
             );
           })}
@@ -103,6 +123,12 @@ const AdmHome = () => {
                  >
                 Dados do paciente
              </h1>
+
+             <div>
+              <ul>
+                <li></li>
+              </ul>
+             </div>
            </div>
 
           {forms ? (
@@ -173,7 +199,7 @@ const AdmHome = () => {
                 Bairro: <span className="dataText">{forms[indexPac]?.neighborhood}</span>
               </h3>
 
-              <h3 className="textBase flex items-center">
+              <h3 className="textBase flex items-center mb-2">
                 <img src={build} alt="" className="w-6 h-6 mr-4" />
                 unidade: <span className="dataText">{forms[indexPac]?.unit}</span>
               </h3>
@@ -190,7 +216,25 @@ const AdmHome = () => {
                     </div>
                   );
                 })}
-            </div>
+
+                <div className="flex w-full max-h-max mt-6 gap-8">
+                  <Button
+                    text='Finalizar'
+                    height="42px"
+                    width="120px"
+                    onClick={updateConfirmStatus}
+                     />
+
+                <Button
+                    text='Cancelar'
+                    height="42px"
+                    width="120px"
+                    background='tomato'
+                    onClick={updateConfirmStatus}
+                     />
+                </div>
+
+             </div>
           ) : (
             ""
           )}
@@ -200,4 +244,4 @@ const AdmHome = () => {
   );
 };
 
-export default AdmHome;
+export default AdminHome;
