@@ -29,6 +29,7 @@ const HeaderAdmin = () => {
         if(success) {
             window.localStorage.removeItem('admin')
             navigate('../admin/login')
+            return loading
         } else if(error) {
             alert('Error!' + error)
         }
