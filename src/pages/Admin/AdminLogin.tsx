@@ -2,10 +2,12 @@ import bannerGreen from "../../assets/images/bannerAdminGreen.png";
 import Input from "../../utils/Input";
 import Button from "../../utils/Button";
 import HeaderAdmin from "../../components/HeaderAdmin";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "../../services/firebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../services/firebaseConfig";
 import LoadingCup from "../../components/LoadingCup";
 import { useNavigate } from "react-router-dom";
 
@@ -13,24 +15,35 @@ import { useNavigate } from "react-router-dom";
 const AdminLogin = () => {
   const [email, setEmail] = useState('')  
   const [password, setPassword] = useState('')  
+  const [serverEmail, setServerEmail] = useState('')  
+  const [serverPassword, setServerPassword] = useState('')  
   const [errorMessage, setErrorMessage] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
 
   const [signInWithEmailAndPassword, loading, user, error] =
   useSignInWithEmailAndPassword(auth);
 
+  const adminbCollectionRef = collection(db, "admins");
+
+  useEffect(() => {
+    const getForms = async () => {
+      const data = await getDocs(adminbCollectionRef);
+      const a: any = data.docs.map((doc) => ({...doc.data(), id: doc.id }));
+      setServerEmail(a[0].email);
+      setServerPassword(a[0].password);
+    };
+    getForms();
+  }, []);
+
   const navigate = useNavigate()
 
   const handleClickLogin = async (event: any) => {
     event.preventDefault()
     setErrorMessage('')
-
-    const globalEmail = import.meta.env.VITE_ACCESS_EMAIL_CAVALEIROS_FILIAL
-    const globalPassword = import.meta.env.VITE_ACCESS_PASSWORD_CAVALEIROS_SECRET
     
     if(email === '' || password === '') {
       setErrorMessage("preencha todos os campos corretamento!")
-    } else if (email != globalEmail || password != globalPassword) {
+    } else if (email != serverEmail || password != serverPassword) {
       setErrorMessage('Email ou senha inválido!')
     } else if (error) {
       setErrorMessage('Error!' + error)

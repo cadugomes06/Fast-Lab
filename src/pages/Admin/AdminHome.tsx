@@ -56,6 +56,7 @@ const AdminHome = () => {
       const data = await getDocs(formsCollectionRef);
       const a: any = data.docs.map((doc) => ({...doc.data(), id: doc.id }));
       setForms(a);
+      console.log(formsCollectionRef)
     };
     getForms();
   }, []);
