@@ -14,7 +14,7 @@ import planIcon from '../../assets/icons/plan.svg'
 import HeaderAdmin from "../../components/HeaderAdmin";
 import { useNavigate } from "react-router-dom";
 import Button from "../../utils/Button";
-
+import { doc, updateDoc } from "firebase/firestore";
 
 const AdminHome = () => {
   const [forms, setForms] = useState<TypeUser[]>([]);
@@ -47,6 +47,7 @@ const AdminHome = () => {
     unit: string;
     status: string;
     imageUrl: string[];
+    id: string;
   }
 
   const formsCollectionRef = collection(db, "formulario");
@@ -56,19 +57,48 @@ const AdminHome = () => {
       const data = await getDocs(formsCollectionRef);
       const a: any = data.docs.map((doc) => ({...doc.data(), id: doc.id }));
       setForms(a);
-      console.log(formsCollectionRef)
     };
     getForms();
   }, []);
-
-
+  
+  
   const handleShowPacient = async (index: number) => {
     setIndexPac(index)
   };
   
-  const updateConfirmStatus = () => {
-    console.log('click')
+  const updateConfirmStatus = async () => {
+    const userId =  forms[indexPac].id
+
+    if (forms[indexPac].status == 'pronto') {
+      return alert('Essa solicitação já está pronta!')
+    } else {
+      const updateStatus = doc(db, 'formulario', userId)
+      await updateDoc(updateStatus, {
+        status: 'pronto'
+      })
+      alert('Parabéns! Você finalizou o cadastramento desse paciente!')
+      window.location.reload()
+      console.log(updateStatus)
+    }
   }
+
+  const updateStatusSolicitation = async () => {
+    const userId =  forms[indexPac].id
+
+    if (forms[indexPac].status == 'solicitado') {
+      return alert('O já está em estado "solicitado"!')
+    } else {
+      const updateStatus = doc(db, 'formulario', userId)
+      await updateDoc(updateStatus, {
+        status: 'solicitado'
+      })
+      alert('Pronto! O status foi alterado para "solicitado"!')
+      window.location.reload()
+      console.log(updateStatus)
+    }
+  }
+
+
 
   return (
     <div>
@@ -108,7 +138,7 @@ const AdminHome = () => {
                 </p>
                 {form.status == 'solicitado'? (
                     <div className="rounded-[50%] w-2 h-2 bg-yellow-300"></div>
-                  ): ''}
+                  ): <div className="rounded-[50%] w-2 h-2 bg-green-400"></div>}
 
               </div>
             );
@@ -220,18 +250,18 @@ const AdminHome = () => {
 
                 <div className="flex w-full max-h-max mt-6 gap-8">
                   <Button
-                    text='Finalizar'
+                    text='Pronto'
                     height="42px"
                     width="120px"
                     onClick={updateConfirmStatus}
                      />
 
                 <Button
-                    text='Cancelar'
+                    text='Solicitado'
                     height="42px"
                     width="120px"
-                    background='tomato'
-                    onClick={updateConfirmStatus}
+                    background='#a0a0a0'
+                    onClick={updateStatusSolicitation}
                      />
                 </div>
 

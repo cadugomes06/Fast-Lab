@@ -9,10 +9,14 @@ import Header from "../../components/Header"
 import banner1 from '../../assets/images/banner01.png'
 import banner2 from '../../assets/images/banner02.png'
 import banner3 from '../../assets/images/banner03.png'
-import { useContext, useEffect } from 'react';
+import mobileBanner from '../../assets/images/homeMobileBanner.png'
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context/UserContext';
 
 const Home = () => {
+
+    const[isMobile, setIsMobile] = useState(false)
+
     const slides = [banner1, banner2, banner3]
 
     const { state } = useContext(UserContext)
@@ -23,6 +27,13 @@ const Home = () => {
         }
     }, [state.userOn])
 
+    useEffect(() => {
+        const {innerWidth: width} = window
+        if(width < 600 ) {
+            setIsMobile(true)
+        }
+        console.log(width)
+    }, [])
 
     return (
         <>
@@ -30,9 +41,10 @@ const Home = () => {
         <Header />
         <main className="w-full h-[calc(100vh-80px)] flex items-center justify-center overflow-hidden"
          >
-            <div className="w-[78rem] xl:w-[70rem] lg:w-full max-w-max h-[32rem] bg-gray-100"
+            <div className="w-[78rem] xl:w-[60rem] lg:w-[50rem] md:w-[40rem] sm:w-[20rem] max-w-max h-[32rem] bg-gray-100"
             >
-             <Swiper 
+             {!isMobile ? (
+                <Swiper 
                 className='h-full rounded-md bg-gray-100 shadow-md shadow-gray-400'
                 modules={[Navigation, Pagination]}
                 navigation
@@ -42,11 +54,17 @@ const Home = () => {
                 <SwiperSlide key={slide}>
                     <img src={slide} 
                          alt={slide}
-                         className='h-[32rem] w-full cursor-grab rounded-md object-auto lg:object-cover' />
+                         className='h-[32rem] w-full sm:object-contain cursor-grab rounded-md object-auto' />
                 </SwiperSlide>
                )
                )}
              </Swiper>
+             ) : (
+                <div className="sm:w-[20rem] max-w-max sm:h-[28rem] bg-gray-100 rounded-md shadow-md shadow-gray-400"
+                >
+                    <img src={mobileBanner} alt="" className='h-[32rem] rounded-md' />
+                </div>    
+             )}
              
             </div>
         </main>

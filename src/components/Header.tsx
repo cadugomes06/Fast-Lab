@@ -9,6 +9,7 @@ import { auth } from '../services/firebaseConfig';
 
 const Header = () => {
   const [userStatus, setUserStatus ] = useState(false)
+  const [isMobile, setIsMobile ] = useState(false)
 
   const [signOut, loading, error] = useSignOut(auth);
 
@@ -33,13 +34,20 @@ const Header = () => {
     }
   }
 
+  useEffect(() => {
+    const {innerWidth: width} = window
+    if(width < 600 ) {
+        setIsMobile(true)
+    }
+}, [])
+
 
     return (
         <>
         {loading ? <LoadingCup /> : null}
 
         <header className='h-20 w-full flex items-center justify-between px-6 md:px-2 border-b-[0.1rem] border-teal-100'
-                style={{background: 'var(--background-gradient-main)'}}
+                style={isMobile ? {background: 'white'} : {background: 'var(--background-gradient-main)'}}
                 >
              <div className='block h-32- w-48 sm:w-28 '>
                 <img src={logoHemo2} 
@@ -94,12 +102,14 @@ const Header = () => {
                 </li>
                 </Link>
 
-                <Link to='/userlogin/register'>
-                <li className='cursor-pointer text-[#6BBFAB] sm:text-sm hover:text-white ease-linear duration-200'
-                    >
-                  Registrar
-                </li>
-                </Link>
+                {!isMobile ? (
+                  <Link to='/userlogin/register'>
+                  <li className='cursor-pointer text-[#6BBFAB] sm:text-sm hover:text-white ease-linear duration-200'
+                      >
+                    Registrar
+                  </li>
+                  </Link>
+                ) : ''}
 
                 <img src={userIcon}
                      alt="icone-de-usuário"
