@@ -34,19 +34,21 @@ const Header = () => {
     }
   }
 
+  const { innerWidth: width } = window
+
   useEffect(() => {
-    const {innerWidth: width} = window
+    console.log(width)
     if(width < 600 ) {
         setIsMobile(true)
     }
-}, [])
+}, [width])
 
 
     return (
         <>
         {loading ? <LoadingCup /> : null}
 
-        <header className='h-20 w-full flex items-center justify-between px-6 md:px-2 border-b-[0.1rem] border-teal-100'
+        <header className='h-20 w-full flex items-center justify-between px-6 md:px-2 sm:px-4 border-b-[0.1rem] border-teal-100'
                 style={isMobile ? {background: 'white'} : {background: 'var(--background-gradient-main)'}}
                 >
              <div className='block h-32- w-48 sm:w-28 '>
@@ -94,7 +96,7 @@ const Header = () => {
             </ul>
 
              ) : (
-              <ul className='flex gap-2 sm:gap-1 items-center'>
+              <ul className='flex gap-2 items-center'>
                 <Link to='/userlogin'>
                 <li className='font-medium sm:text-sm	 py-1 px-4 border-2 border-teal-300 cursor-pointer text-[#079E7A] hover:bg-teal-500 hover:text-white ease-linear duration-200 hover:border-none rounded-sm hover:shadow-md hover:shadow-teal-400'
                 >

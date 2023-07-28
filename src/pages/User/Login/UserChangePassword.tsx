@@ -3,7 +3,7 @@ import bannerlogin from '../../../assets/images/bannerlogin.png'
 import Input from "../../../utils/Input";
 import Button from "../../../utils/Button";
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../../context/UserContext";
 
 import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
@@ -13,6 +13,7 @@ const UserCrangePassword = () => {
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
   const [messageError, setMessageError] = useState('')
+  const [isMobile, setIsMobile] = useState(false)
 
   const { state } = useContext(UserContext)
 
@@ -43,17 +44,24 @@ const UserCrangePassword = () => {
         setMessage('Houve um error inesperado.')
       }
     }
-
   }
+
+  const {innerWidth: width} = window
+  useEffect(() => {
+    if (width < 600 ) {
+      setIsMobile(true)
+    }
+  }, [width])
 
     return (
         <>
         <Header />  
-         <div className="w-full h-[calc(100vh-80px)]">
-          <section className="grid grid-cols-2 bg-gray-100/20">
+         <div className="w-full h-[calc(100vh-80px)] sm:flex sm:justify-center">
+          <section className="grid grid-cols-2 bg-gray-100/20 md:grid-cols-1 ">
 
-            <div className="h-[calc(100vh-80px)]">
-                <div className="h-[calc(100vh-80px)] flex justify-center items-center relative border-r-[1px] border-teal-100"
+            <div className="h-[calc(100vh-80px)] md:hidden">
+
+                <div className="flex justify-center items-center relative border-r-[1px] border-teal-100"
                      style={{background: "var(--background-gradient-secondary)"}}>
                     <img src={bannerlogin} 
                          alt="imagem-laboratório-clinico"
@@ -64,10 +72,10 @@ const UserCrangePassword = () => {
                 </div>
             </div>
 
-            <div className="flex items-center justify-center my-8 ml-24 animeLeft">
-                <div className="flex flex-col w-full h-[calc(100vh-200px)]">
+            <div className="flex items-center justify-center my-8 ml-24 md:ml-8 sm:ml-0 animeLeft">
+                <div className="flex flex-col w-full h-[calc(100vh-200px)] md:justify-center md:items-center">
 
-                   <div className="h-20 flex justify-start items-center relative">
+                   <div className="h-20 flex justify-start items-center relative md:w-[300px]">
                       <h2 className="text-[2rem] text-gray-400/70 font-normal">
                          Alterar sua 
                          <span className="textGradient text-[2.4rem]"> Senha</span>
@@ -75,25 +83,25 @@ const UserCrangePassword = () => {
                    </div>
 
                     <form onSubmit={handleChangePasssword}>
-                     <div className="h-96 max-h-max flex flex-col justify-start items-start pt-12">
+                     <div className="h-96 max-h-max flex flex-col justify-start items-start pt-12 md:items-center">
 
                        <label htmlFor="email"
-                              className="justify-start pl-1 w-[350px]"
+                              className="justify-start pl-1 w-[350px] sm:w-[300px]"
                               style={{color: "var(--color-secondary)"}}>Email</label>
                         <Input
                            type="email"
                            name=''
                            id='email'
                            placeholder=''
-                           width="350px"
+                           width={isMobile? '300px' : "350px"}
                            height="42px"
                            onChange={(e: any) => setEmail(e.target.value)}
                             />
 
-                           <div className="w-[350px] h-[42px] mt-2">
+                           <div className="w-[350px] sm:w-[300px] h-[42px] mt-2">
                             <Button 
                               text="Solicitar"
-                              width="350px"
+                              width={isMobile? '300px' : "350px"}
                               height="42px"
                               onClick={handleChangePasssword}
                             />
@@ -101,7 +109,7 @@ const UserCrangePassword = () => {
                             {message? <p className="text-green-500">{message}</p> : ''}
                             </div>
                         
-                            <div className="w-[350px] h-[42px] mt-14">
+                            <div className="w-[350px] sm:w-[300px] h-[42px] mt-14">
                             <Link to='/userlogin'>
                             <Button 
                               text="Voltar"
