@@ -8,6 +8,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
 import LoadingCup from "../../../components/LoadingCup";
+import MenuMobile from "../../../components/MenuMobile";
 
 const Form = () => {
   const [plan, setPlan] = useState("");
@@ -31,6 +32,7 @@ const Form = () => {
   const [planRule, setPlanRule] = useState("");
   const [cardnumberError, setCardnumberError] = useState("");
   const [cpfError, setCpfError] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
 
   const formsCollectionRef = collection(db, "formulario");
   
@@ -249,12 +251,19 @@ const Form = () => {
     setSexo(event.target.value);
   };
 
+  const {innerWidth: width} = window
+  useEffect(() => {
+    if(width < 600 ) {
+      setIsMobile(true)
+    }
+  }, [width])
+  
   return (
 
     <>
     {loading && name.length > 0 ? <LoadingCup /> : ''}
 
-      <Header />
+    {isMobile? <MenuMobile /> : <Header />}
 
       <section
         className="bg-white flex justify-center 

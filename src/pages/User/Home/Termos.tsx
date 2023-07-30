@@ -1,9 +1,11 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import Header from "../../../components/Header";
 import { UserContext } from "../../../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import MenuMobile from "../../../components/MenuMobile";
 
 const Termos = () => {
+    const [isMobile, setIsMobile] = useState(false)
     const { state } = useContext(UserContext)
 
     const navigate = useNavigate()
@@ -14,9 +16,16 @@ const Termos = () => {
         }
     }, [state.userOn])
 
+    const {innerWidth: width} = window
+    useEffect(() => {
+      if(width < 600 ) {
+        setIsMobile(true)
+      }
+    }, [width])
+
     return (
         <>
-        <Header />
+        {isMobile? <MenuMobile /> : <Header />}
 
         <section className="grid grid-cols-6 w-full h-[calc(100vh-80px)] py-2 rounded-md">
           <div className="bg-white"></div>

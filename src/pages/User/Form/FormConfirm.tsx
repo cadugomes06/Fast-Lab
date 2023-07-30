@@ -1,12 +1,23 @@
 import Header from "../../../components/Header";
 import checkOneIcon from '../../../assets/icons/checkone.svg'
 import closeIcon from '../../../assets/icons/close.svg'
+import {useState, useEffect } from 'react';
+import MenuMobile from "../../../components/MenuMobile";
 
 const FormConfirm = () => {
+  const [isMobile, setIsMobile] = useState(false)
+
+  const {innerWidth: width} = window
+  useEffect(() => {
+    if(width < 600 ) {
+      setIsMobile(true)
+    }
+  }, [width])
 
     return (
         <>
-        <Header />
+        {isMobile? <MenuMobile /> : <Header />}
+        
         <section className="grid grid-cols-6 w-full h-[calc(100vh-80px)]">
           <div className="bg-white"></div>
 

@@ -5,11 +5,13 @@ import { db } from "../../../services/firebaseConfig";
 
 import calendarIcon from '../../../assets/icons/calendar.svg'
 import notDocumentIcon from '../../../assets/images/notDocument.jpg'
+import MenuMobile from "../../../components/MenuMobile";
 
 
 const UserRequest = () => {
     const [schedules, setSchedules] = useState<typeSchedule[]>([]);
     const [ errorSchedule, setErrorSchedule] = useState(false)
+    const [ isMobile, setIsMobile] = useState(false)
 
     const formsCollectionRef = collection(db, "formulario");
     const userIDstorage = window.localStorage.getItem('user')
@@ -35,9 +37,16 @@ const UserRequest = () => {
         status: string
     }
 
+    const {innerWidth: width} = window
+    useEffect(() => {
+      if(width < 600 ) {
+        setIsMobile(true)
+      }
+    }, [width])
+
     return (
         <>
-        <Header />
+        {isMobile? <MenuMobile /> : <Header />}
 
         <section className="grid grid-cols-8 animeLeft">
          <div></div>

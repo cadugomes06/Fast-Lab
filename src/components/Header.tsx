@@ -35,7 +35,6 @@ const Header = () => {
   }
 
   const { innerWidth: width } = window
-
   useEffect(() => {
     console.log(width)
     if(width < 600 ) {
@@ -57,8 +56,8 @@ const Header = () => {
                      />
              </div> 
 
-             {userStatus ? (
-              
+             {userStatus?             
+
               <ul className='flex gap-4 sm:gap-1 items-center'>
 
               <Link to='../user/userhome'>
@@ -92,10 +91,9 @@ const Header = () => {
                    alt="icone-de-usuário"
                    className='w-6 h-6' 
                    />
-
             </ul>
 
-             ) : (
+              : (
               <ul className='flex gap-2 items-center'>
                 <Link to='/userlogin'>
                 <li className='font-medium sm:text-sm	 py-1 px-4 border-2 border-teal-300 cursor-pointer text-[#079E7A] hover:bg-teal-500 hover:text-white ease-linear duration-200 hover:border-none rounded-sm hover:shadow-md hover:shadow-teal-400'

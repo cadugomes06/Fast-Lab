@@ -15,6 +15,7 @@ import checkallIcon from "../../../assets/icons/checkall.svg";
 import checkallGrayIcon from "../../../assets/icons/checkall-gray.svg";
 import checkIcon from "../../../assets/icons/checkone.svg";
 import checkGrayIcon from "../../../assets/icons/checkone-gray.svg";
+import MenuMobile from "../../../components/MenuMobile";
 
 const UserHome = () => {
   const [cardSelect, setCardSelect] = useState(2);
@@ -61,7 +62,7 @@ const UserHome = () => {
 
   return (
     <>
-      <Header />
+      {isMobile? <MenuMobile />  : <Header />}
 
       <section className="w-full h-[calc(100vh-80px)] sm:h-[42rem] flex justify-center items-center">
         <div
