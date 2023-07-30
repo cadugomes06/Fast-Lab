@@ -19,6 +19,7 @@ import checkGrayIcon from "../../../assets/icons/checkone-gray.svg";
 const UserHome = () => {
   const [cardSelect, setCardSelect] = useState(2);
   const [form, setForm] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
 
   const { state } = useContext(UserContext);
   
@@ -50,6 +51,13 @@ const UserHome = () => {
     };
     getForms();
   }, []);
+
+  const {innerWidth: width} = window
+  useEffect(() => {
+    if (width < 600 ) {
+      setIsMobile(true)
+    }
+  }, [])
 
   return (
     <>
@@ -138,8 +146,8 @@ const UserHome = () => {
             <div
               className={
                 cardSelect === 2
-                  ? `pt-8 flex text-cente justify-between h-[10rem] w-full text-sm text-gray-200 gap-2 px-6  sm:h-[6rem] sm:pt-0 sm:mt-4 sm:gap-0 sm:text-[0.7rem] sm:overflow-auto`
-                  : "flex text-cente justify-between h-[10rem] w-full text-sm text-gray-200 gap-2 px-4 sm:h-[2.5rem] sm:pt-0 sm:mt-2 sm:gap-0 sm:text-[0.7rem] sm:overflow-hidden"
+                  ? `pt-8 flex text-cente justify-between h-[10rem] w-full text-sm text-gray-200 gap-2 px-6  sm:h-[6rem] sm:pt-0 sm:mt-4 sm:gap-0 sm:text-[0.7rem] sm:overflow-auto sm:mb-6`
+                  : "flex text-cente justify-between h-[10rem] w-full text-sm text-gray-200 gap-2 px-4 sm:h-[1.5rem] sm:pt-0 sm:mt-2 sm:gap-0 sm:text-[0.7rem] sm:overflow-hidden"
               }
             >
               <ul className="flex flex-col items-start">
@@ -216,7 +224,7 @@ const UserHome = () => {
               <Link to='../user/solicitacao'>
               <Button
                 text="Solicitar"
-                marginTop={cardSelect === 2 ? "60px" : ""}
+                marginTop={cardSelect === 2 && !isMobile ? "60px" : ""}
                 height="42px"
                 disabled={cardSelect === 2 ? false : true}
                 width={cardSelect === 2 ? "200px" : "120px"}
@@ -224,7 +232,7 @@ const UserHome = () => {
                 boxShadow={cardSelect === 2 ? "none" : ""}
               />
               </Link>
-            </div>
+            </div>            
           </div>
 
           <div
