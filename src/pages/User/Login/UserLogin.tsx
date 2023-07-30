@@ -32,7 +32,9 @@ const UserLogin = () => {
     setErrorRegister("");
     setSuccessRegister("");
 
-    if (emailAtual === "" || passwordAtual === "") {
+    if (emailAtual === "" ||
+        passwordAtual === "" ||
+        emailAtual === "cavaleiros@hemolabes.com") {
       setErrorRegister("Preencha todos os campos corretamente!");
     } else if (passwordAtual.length < 8) {
       setErrorRegister("A senha deve ter no mínimo 8 caracteres!");

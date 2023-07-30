@@ -39,7 +39,6 @@ const UserCrangePassword = () => {
       const success = await sendPasswordResetEmail(email)
       if (success) {
         setMessage('Solicitado com sucesso!')
-        console.log(success)
       } else {
         setMessage('Houve um error inesperado.')
       }
@@ -56,12 +55,12 @@ const UserCrangePassword = () => {
     return (
         <>
         <Header />  
+
          <div className="w-full h-[calc(100vh-80px)] sm:flex sm:justify-center">
           <section className="grid grid-cols-2 bg-gray-100/20 md:grid-cols-1 ">
 
             <div className="h-[calc(100vh-80px)] md:hidden">
-
-                <div className="flex justify-center items-center relative border-r-[1px] border-teal-100"
+                <div className="h-[calc(100vh-80px)] flex justify-center items-center relative border-r-[1px] border-teal-100"
                      style={{background: "var(--background-gradient-secondary)"}}>
                     <img src={bannerlogin} 
                          alt="imagem-laboratório-clinico"
@@ -76,14 +75,16 @@ const UserCrangePassword = () => {
                 <div className="flex flex-col w-full h-[calc(100vh-200px)] md:justify-center md:items-center">
 
                    <div className="h-20 flex justify-start items-center relative md:w-[300px]">
-                      <h2 className="text-[2rem] text-gray-400/70 font-normal">
-                         Alterar sua 
-                         <span className="textGradient text-[2.4rem]"> Senha</span>
-                     </h2>
+                      
                    </div>
 
                     <form onSubmit={handleChangePasssword}>
-                     <div className="h-96 max-h-max flex flex-col justify-start items-start pt-12 md:items-center">
+                     <div className="h-96 max-h-max flex flex-col justify-start items-start md:items-center">
+
+                     <h2 className="text-[2rem] text-gray-400/70 font-normal pb-8">
+                         Alterar sua 
+                         <span className="textGradient text-[2.4rem]"> Senha</span>
+                     </h2>
 
                        <label htmlFor="email"
                               className="justify-start pl-1 w-[350px] sm:w-[300px]"

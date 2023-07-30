@@ -34,10 +34,10 @@ select {
 .sectionOffhome {
   @apply h-80 w-52 bg-gray-100 rounded-md shadow-sm shadow-gray-300 border border-gray-200 flex flex-col items-center cursor-pointer hover:border-teal-300 duration-200
   hover:shadow-lg hover:shadow-teal-100  text-gray-400 
-  ease-linear
+  ease-linear sm:h-40 sm:w-[16rem]
 }
 .sectionOnhome {
-  @apply h-[24rem] w-[18rem] bg-teal-500 rounded-md shadow-lg shadow-gray-400/80 flex flex-col items-center ease-linear duration-200 text-white text-xl font-semibold overflow-hidden 
+  @apply h-[24rem] w-[18rem] bg-teal-500 rounded-md shadow-lg shadow-gray-400/80 flex flex-col items-center ease-linear duration-200 text-white text-xl font-semibold overflow-hidden  sm:h-[16rem] sm:w-[16rem]
 }
 
 .textBase {

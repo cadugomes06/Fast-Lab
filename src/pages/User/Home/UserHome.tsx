@@ -46,7 +46,6 @@ const UserHome = () => {
       const data = await getDocs(formsCollectionRef);
       const a: any = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       setForm(a)
-      console.log(form)
     };
     getForms();
   }, []);
@@ -55,9 +54,9 @@ const UserHome = () => {
     <>
       <Header />
 
-      <section className="w-full h-[calc(100vh-80px)] flex justify-center items-center">
+      <section className="w-full h-[calc(100vh-80px)] sm:h-[42rem] flex justify-center items-center">
         <div
-          className="w-[62rem] h-[30rem] flex justify-evenly items-center animeLeft"
+          className="w-[62rem] h-[30rem] flex justify-evenly items-center animeLeft flex-wrap lg:gap-4 md:max-h-max sm:h-[40rem] sm:overflow-hidden"
           id="agendamentos"
         >
           <div
@@ -68,15 +67,15 @@ const UserHome = () => {
             }
             onMouseEnter={handleClickCardOne}
           >
-            <div className="w-full h-[6rem] flex justify-center items-center">
-              <h2 className="">Solicitações</h2>
+            <div className="w-full h-[6rem] flex justify-center items-center sm:h-[4rem]">
+              <h2 className="sm:text-[1rem]">Solicitações</h2>
             </div>
             
-            <div className="w-[28px] h-[28px] absolute left-1 top-1">
+            <div className="w-[28px] h-[28px] absolute left-1 top-1 sm:h-[24px] sm:2-[24px]">
               <img
                 src={cardSelect === 1 ? calendarIcon : calendarGrayIcon}
                 alt=""
-                className="w-[28px] h-[28px]"
+                className="w-[28px] h-[28px] sm:h-[24px] sm:2-[24px]"
               />
             </div>
 
@@ -85,11 +84,11 @@ const UserHome = () => {
             <span></span>
             <span></span>
 
-            <div className="w-full h-[8rem] flex justify-center items-center px-4">
+            <div className="w-full h-[8rem] flex justify-center items-center px-4 sm:px-2 sm:h-[4rem]">
               <p className={
                   cardSelect === 1
-                    ? `text-[1rem] text-gray-200 leading-6`
-                    : `text-[0.8rem] text-gray-300`
+                    ? `text-[1rem] text-gray-200 leading-6 sm:text-[0.8rem]`
+                    : `text-[0.8rem] text-gray-300 sm:text-[0.6rem]`
                 }>Consulte os status das suas solicitações de atendimento aqui.</p>
             </div>
 
@@ -116,17 +115,17 @@ const UserHome = () => {
             }
             onMouseEnter={handleClickCardTwo}
           >
-            <div className="w-full h-[5rem] flex justify-center items-center text-center">
-              <h2>
+            <div className="w-full h-[5rem] flex justify-center items-center text-center sm:h-[4rem]">
+              <h2 className="sm:text-[1rem] sm:pt-2">
                 Disponíveis para<br />
                 pré cadastramento!
               </h2>
             </div>
-            <div className="w-[26px] h-[26px] absolute left-1 top-1">
+            <div className="w-[26px] h-[26px] absolute left-1 top-1 sm:h-[24px] sm:2-[24px]">
               <img
                 src={cardSelect === 2 ? checkallIcon : checkallGrayIcon}
                 alt=""
-                className="w-[26px] h-[26px]"
+                className="w-[26px] h-[26px] sm:h-[24px] sm:2-[24px]"
               />
             </div>
 
@@ -138,8 +137,8 @@ const UserHome = () => {
             <div
               className={
                 cardSelect === 2
-                  ? `pt-8 flex text-cente justify-between h-[10rem] w-full text-sm text-gray-200 gap-2 px-6`
-                  : "flex text-cente justify-between h-[10rem] w-full text-sm text-gray-200 gap-2 px-4"
+                  ? `pt-8 flex text-cente justify-between h-[10rem] w-full text-sm text-gray-200 gap-2 px-6  sm:h-[6rem] sm:pt-0 sm:mt-4 sm:gap-0 sm:text-[0.7rem] sm:overflow-auto`
+                  : "flex text-cente justify-between h-[10rem] w-full text-sm text-gray-200 gap-2 px-4 sm:h-[2.5rem] sm:pt-0 sm:mt-2 sm:gap-0 sm:text-[0.7rem] sm:overflow-hidden"
               }
             >
               <ul className="flex flex-col items-start">
@@ -166,44 +165,44 @@ const UserHome = () => {
                 </li>
               </ul>
 
-              <div className="flex flex-col justify-center h-[9.5rem]">
-                <div className="w-[20px] h-[20px]">
+              <div className="flex flex-col justify-center sm:justify-start sm:gap-1 h-[9.5rem]">
+                <div className="w-[20px] h-[20px] sm:w-[18px] sm:h-[18px]">
                   <img
                     src={cardSelect === 2 ? checkIcon : checkGrayIcon}
                     alt=""
                   />
                 </div>
-                <div className="w-[20px] h-[20px]">
+                <div className="w-[20px] h-[20px] sm:w-[18px] sm:h-[18px]">
                   <img
                     src={cardSelect === 2 ? checkIcon : checkGrayIcon}
                     alt=""
                   />
                 </div>
-                <div className="w-[20px] h-[20px]">
+                <div className="w-[20px] h-[20px] sm:w-[18px] sm:h-[18px]">
                   <img
                     src={cardSelect === 2 ? checkIcon : checkGrayIcon}
                     alt=""
                   />
                 </div>
-                <div className="w-[20px] h-[20px]">
+                <div className="w-[20px] h-[20px] sm:w-[18px] sm:h-[18px]">
                   <img
                     src={cardSelect === 2 ? checkIcon : checkGrayIcon}
                     alt=""
                   />
                 </div>
-                <div className="w-[20px] h-[20px]">
+                <div className="w-[20px] h-[20px] sm:w-[18px] sm:h-[18px]">
                   <img
                     src={cardSelect === 2 ? checkIcon : checkGrayIcon}
                     alt=""
                   />
                 </div>
-                <div className="w-[20px] h-[20px]">
+                <div className="w-[20px] h-[20px] sm:w-[18px] sm:h-[18px]">
                   <img
                     src={cardSelect === 2 ? checkIcon : checkGrayIcon}
                     alt=""
                   />
                 </div>
-                <div className="w-[20px] h-[20px]">
+                <div className="w-[20px] h-[20px] sm:w-[18px] sm:h-[18px]">
                   <img
                     src={cardSelect === 2 ? checkIcon : checkGrayIcon}
                     alt=""
@@ -212,7 +211,7 @@ const UserHome = () => {
               </div>
             </div>
 
-            <div className="w-full h-[6rem] flex justify-center items-center">
+            <div className="w-full h-[6rem] sm:h-[2rem] flex justify-center items-center">
               <Link to='../user/solicitacao'>
               <Button
                 text="Solicitar"
@@ -235,8 +234,8 @@ const UserHome = () => {
             }
             onMouseEnter={handleClickCardThree}
           >
-            <div className="w-full h-[6rem] flex justify-center items-center">
-              <h2>Informações</h2>
+            <div className="w-full h-[6rem] sm:pt-2 flex justify-center items-center">
+              <h2 className="sm:text-[1rem] pt-2">Informações</h2>
             </div>
             <div className="w-[20px] h-[20px] absolute left-1 top-1">
               <img
@@ -255,8 +254,8 @@ const UserHome = () => {
               <p
                 className={
                   cardSelect === 3
-                    ? `text-[1rem] text-gray-200 leading-6 px-2`
-                    : `text-[0.8rem] text-gray-300`
+                    ? `text-[1rem] text-gray-200 leading-6 px-2 sm:text-[0.8rem] sm:mt-8`
+                    : `sm:hidden text-[0.8rem] text-gray-300`
                 }
               >
                 Ao deixar sua visita pré cadastrada, será possível agilizar seu processo de
@@ -264,7 +263,8 @@ const UserHome = () => {
                 ainda melhor!
               </p>
             </div>
-            <div className="h-[7rem] w-full flex justify-center items-center">
+
+            <div className="h-[7rem] w-full flex justify-center items-center sm:mt-[-30px] sm:mb-[1rem]">
               <Link to='../user/termos'>
               <Button
                 text="Saiba Mais"
@@ -277,6 +277,7 @@ const UserHome = () => {
               />
               </Link>
             </div>
+
           </div>
         </div>
       </section>
