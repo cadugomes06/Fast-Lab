@@ -82,6 +82,7 @@ const Form = () => {
   const createRequest = async (e: any) => {
     e.preventDefault();
     const userID = window.localStorage.getItem('user')
+    console.log(imageURL)
 
     if (
       plan === "convenio" ||
@@ -700,7 +701,8 @@ const Form = () => {
             </div>
 
             <div className="flex justify-center">
-            <Button
+           {imageURL.urls.length > 0 ? (
+              <Button
               text="Enviar"
               width={isMobile? '250px' : '350px'}
               height="42px"
@@ -708,6 +710,16 @@ const Form = () => {
               marginBottom=""
               onClick={createRequest}
             />
+           ) : (
+            <Button
+            text="Aguardando arquivo..."
+            width={isMobile? '250px' : '350px'}
+            height="42px"
+            marginTop="1rem"
+            marginBottom=""
+            disabled
+          />
+           ) }        
           </div>
 
 

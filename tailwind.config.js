@@ -21,6 +21,7 @@ export default {
 
       'sm': {'max': '600px'},
       // => @media (max-width: 639px) { ... }
+      'ssm': {'max': '400px'},
     }
   },
   plugins: [],
