@@ -258,8 +258,9 @@ const Form = () => {
     }
   }, [width])
   
-  return (
 
+
+  return (
     <>
     {loading && name.length > 0 ? <LoadingCup /> : ''}
 
@@ -269,14 +270,14 @@ const Form = () => {
         className="bg-white flex justify-center 
                  items-center flex-col h-max-h"
       >
-        <div className="mb-12 mt-8 pl-8 w-full animeLeft">
+        <div className="mb-12 mt-8 pl-8 w-full animeLeft sm:pl-4 sm:mt-6 sm:pr-16">
           <h1
-            className="text-[1.8rem] font-bold textGradient"
+            className="text-[1.8rem] font-bold textGradient sm:text-[1.5rem] sm:mb-2"
           >
             Solicitação
           </h1>
           <p
-            className="text-base font-normal"
+            className="text-base font-normal sm:text-sm"
             style={{ color: "var(--color-secondary)" }}
           >
             Preencha todos os dados corretamente. <br />
@@ -286,7 +287,7 @@ const Form = () => {
         </div>
 
         <form action="">
-          <div className="animeLeft w-[52rem] pb-12 mb-4 max-h-max bg-gray-200 rounded-md shadow-md shadow-gray-400">
+          <div className="animeLeft w-[52rem] pb-12 mb-4 max-h-max bg-gray-200 rounded-md shadow-md shadow-gray-400 md:w-[40rem] sm:w-[20rem]">
             <div
               className="text-center font-medium pt-8 mb-8"
               style={{ color: "var(--color-main)" }}
@@ -294,12 +295,12 @@ const Form = () => {
               <h4>Dados do convênio</h4>
             </div>
 
-            <div className="flex items-center pl-12 w-[52rem] h-20">
-              <div>
+            <div className="flex items-center pl-12 w-[52rem] h-20 md:flex-col md:h-[11rem] md:w-full md:pl-0">
+              <div className="md:flex md:flex-col">
                 <label
                   htmlFor="convenio"
                   style={{ color: "var(--color-secondary)" }}
-                  className="w-[350px] pb-1"
+                  className="w-[350px] sm:w-[300px] pb-1"
                 >
                   Convênio
                 </label>
@@ -322,11 +323,12 @@ const Form = () => {
                   <option value="gama">Gama Saúde</option>
                 </select>
               </div>
-              <div>
+
+              <div className="md:flex md:flex-col">
                 <label
                   htmlFor="cardnumber"
                   style={{ color: "var(--color-secondary)" }}
-                  className="w-[350px] pb-1"
+                  className="w-[350px] sm:w-[300px] pb-1"
                 >
                   Carteirinha
                 </label>
@@ -334,7 +336,7 @@ const Form = () => {
                   type="text"
                   name=""
                   id="cardnumber"
-                  width="350px"
+                  width={isMobile? '300px' : '350px'}
                   height="42px"
                   placeholder={planRule}
                   value={cardNumber}
@@ -351,18 +353,18 @@ const Form = () => {
             </div>
 
             <div
-              className="text-center font-medium py-2 mt-8 mb-8"
+              className="text-center font-medium py-2 mt-8 mb-8 md:mt-6 md:mb-2"
               style={{ color: "var(--color-main)" }}
             >
               <h4>Dados do Paciente</h4>
               <hr></hr>
             </div>
 
-            <div className="flex w-full h-60 flex-wrap items-center justify-center">
+            <div className="flex w-full h-60 flex-wrap items-center justify-center md:h-[34rem]">
               <label
                 htmlFor="name"
                 style={{ color: "var(--color-secondary)" }}
-                className="w-[350px] pb-1 mr-8"
+                className="w-[350px] sm:w-[300px] pb-1 mr-8 md:mr-0"
               >
                 Nome civil
                 <Input
@@ -370,7 +372,7 @@ const Form = () => {
                   name=""
                   id="name"
                   placeholder="João Batista"
-                  width="350px"
+                  width={isMobile? '300px' : '350px'}
                   height="42px"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -380,7 +382,7 @@ const Form = () => {
               <label
                 htmlFor="socialname"
                 style={{ color: "var(--color-secondary)" }}
-                className="w-[350px] pb-1"
+                className="w-[350px] sm:w-[300px] pb-1"
               >
                 Nome social
                 <Input
@@ -388,7 +390,7 @@ const Form = () => {
                   name=""
                   id="socialname"
                   placeholder="(opcional)"
-                  width="350px"
+                  width={isMobile? '300px' : '350px'}
                   height="42px"
                   value={socialName}
                   onChange={(e) => setSocialName(e.target.value)}
@@ -398,7 +400,7 @@ const Form = () => {
               <label
                 htmlFor="email"
                 style={{ color: "var(--color-secondary)" }}
-                className="w-[350px] pb-1 mr-8"
+                className="w-[350px] sm:w-[300px] pb-1 mr-8 md:mr-0"
               >
                 E-mail
                 <Input
@@ -406,18 +408,18 @@ const Form = () => {
                   name=""
                   id="email"
                   placeholder="exemplo@gmail.com"
-                  width="350px"
+                  width={isMobile? '300px' : '350px'}
                   height="42px"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </label>
-              <div className="h-20 w-[350px] flex">
+              <div className="h-20 w-[350px] sm:w-[300px] flex">
                 <div>
                   <label
                     htmlFor="birth"
                     style={{ color: "var(--color-secondary)" }}
-                    className="w-[350px] pb-1"
+                    className="w-[350px] sm:w-[300px] pb-1"
                   >
                     Dt Nascimento
                   </label>
@@ -427,7 +429,7 @@ const Form = () => {
                     id="birth"
                     placeholder="00/00/0000"
                     height="42px"
-                    width="130px"
+                    width='130px'
                     value={birth}
                     onChange={(e) => setBirth(e.target.value)}
                   />
@@ -437,7 +439,7 @@ const Form = () => {
                   <label
                     htmlFor="birth"
                     style={{ color: "var(--color-secondary)" }}
-                    className="w-[350px] pb-1"
+                    className="w-[350px] sm:w-[300px] pb-1"
                   >
                     CPF
                   </label>
@@ -447,7 +449,7 @@ const Form = () => {
                     id="birth"
                     placeholder="000.000.000-00"
                     height="42px"
-                    width="200px"
+                    width={isMobile? '150px' : '200px'}
                     value={CPF}
                     onChange={(e) => {
                       const input = e.target.value;
@@ -465,12 +467,12 @@ const Form = () => {
                 </div>
               </div>
 
-              <div className="max-h-max w-full">
-                <div className="flex flex-col pl-12">
+              <div className="max-h-max w-full md:w-[350px]">
+                <div className="flex flex-col pl-12 md:pl-0 sm:pl-6">
                   <label
                     htmlFor="phonenumber"
                     style={{ color: "var(--color-secondary)" }}
-                    className="w-[350px] pb-1"
+                    className="w-[350px] sm:w-[300px] pb-1"
                   >
                     Contato
                   </label>
@@ -480,7 +482,7 @@ const Form = () => {
                     id="phonenumber"
                     placeholder="(22)00000-0000"
                     height="42px"
-                    width="180px"
+                    width={isMobile? '160px' : '180px'}
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                   />
@@ -488,8 +490,8 @@ const Form = () => {
                </div>
               
 
-              <div className="w-full max-h-max flex justify-start pl-12 ">
-                <div className="flex items-center">
+              <div className="w-full max-h-max flex justify-start pl-12 md:pl-0 md:justify-center sm:flex-col sm:pl-6">
+                <div className="flex items-center sm:mb-1">
                   <h2
                     style={{ color: "var(--color-main)" }}
                     className="font-semibold"
@@ -498,7 +500,7 @@ const Form = () => {
                   </h2>
                 </div>
 
-                <div className="flex w-[300px] items-center justify-evenly">
+                <div className="flex w-[300px] items-center justify-evenly sm:flex-col sm:items-start sm:gap-1">
                   <label
                     htmlFor="man"
                     className="text-sm cursor-pointer"
@@ -524,7 +526,7 @@ const Form = () => {
                       type="radio"
                       name="sexo"
                       id="woman"
-                      className="ml-1 cursor-pointer"
+                      className="ml-1 cursor-pointer sm:ml-[11px]"
                       value="feminino"
                       onChange={handleSexoChange}
                     />
@@ -539,7 +541,7 @@ const Form = () => {
                       type="radio"
                       name="sexo"
                       id="undefined"
-                      className="ml-1 cursor-pointer"
+                      className="ml-1 cursor-pointer sm:ml-[27px]"
                       value="indefinido"
                       onChange={handleSexoChange}
                     />
@@ -549,20 +551,21 @@ const Form = () => {
             </div>
 
             <div
-              className="text-center font-medium py-2 mt-20 mb-8"
+              className="text-center font-medium py-2 mt-20 mb-8 md:mt-14 md:mb-4"
               style={{ color: "var(--color-main)" }}
             >
               <h4>Endereço do Paciente</h4>
               <hr></hr>
             </div>
 
-            <div className="flex flex-wrap gap-8 pl-12 mb-8">
-              <div className="h-20 w-[350px] flex mb-2">
-                <div>
+            <div className="flex flex-wrap gap-8 pl-12 mb-8 md:pl-0 md:justify-center md:gap-4">
+
+              <div className="h-24 w-[350px] flex mb-2 md:mb-0 sm:gap-2 sm:justify-center">
+                <div className="sm:flex sm:flex-col">
                   <label
                     htmlFor="cep"
                     style={{ color: "var(--color-secondary)" }}
-                    className="w-[350px] pb-1"
+                    className="w-[350px] sm:w-[100px] pb-1"
                   >
                     CEP
                   </label>
@@ -572,7 +575,7 @@ const Form = () => {
                     id="cep"
                     placeholder="22333-444"
                     height="42px"
-                    width="100px"
+                    width='100px'
                     value={CEP}
                     onChange={(e) => {
                       const input = e.target.value;
@@ -590,11 +593,11 @@ const Form = () => {
                   />
                 </div>
 
-                <div>
+                <div className="sm:flex sm:flex-col">
                   <label
                     htmlFor="street"
-                    style={{ color: "var(--color-secondary)" }}
-                    className="w-[350px] pb-1"
+                    style={{ color: "var(--color-secondary)"}}
+                    className="w-[350px] sm:w-[190px] pb-1"
                   >
                     Rua
                   </label>
@@ -604,19 +607,19 @@ const Form = () => {
                     id="street"
                     placeholder="Recanto da Alvorada"
                     height="42px"
-                    width="240px"
+                    width={isMobile? '190px' : '240px'}
                     value={street}
                     onChange={(e) => setStreet(e.target.value)}
                   />
                 </div>
               </div>
 
-              <div className="h-20 w-[350px] flex ">
-                <div className="pr-[10px]">
+              <div className="h-20 w-[350px] flex sm:w-[300px] sm:gap-2">
+                <div className="pr-[10px] sm:pr-0">
                   <label
                     htmlFor="num"
                     style={{ color: "var(--color-secondary)" }}
-                    className="w-[350px] pb-1"
+                    className="w-[350px] sm:w-[100px] pb-1"
                   >
                     N°
                   </label>
@@ -636,7 +639,7 @@ const Form = () => {
                   <label
                     htmlFor="neighborhood"
                     style={{ color: "var(--color-secondary)" }}
-                    className="w-[350px] pb-1"
+                    className="w-[350px] sm:w-[190px] pb-1"
                   >
                     Bairro
                   </label>
@@ -646,24 +649,25 @@ const Form = () => {
                     id="neighborhood"
                     placeholder="Centro"
                     height="42px"
-                    width="240px"
+                    width={isMobile? '190px' : '240px'}
                     value={neighborhood}
                     onChange={(e) => setNeighborhood(e.target.value)}
                   />
                 </div>
               </div>
-            </div>
 
+            </div>
             <div
-              className="text-center font-medium py-2 mt-4 mb-8"
+              className="text-center font-medium py-2 mt-4 mb-8 sm:mt-8 sm:mb-2"
               style={{ color: "var(--color-main)" }}
             >
               <h4>Escolha sua unidade e Anexe seu pedido</h4>
-              <hr></hr>
             </div>
 
-            <div className="flex pl-12 gap-4 mb-4 relative">
-              <select
+            <div className="flex pl-12 gap-4 mb-4 relative md:gap-2 md:h-[10rem] md:pl-0 md:justify-center md:flex-col md:items-center">
+
+              <div>
+               <select
                 defaultValue="unidade"
                 onChange={(e) => setUnit(e.target.value)}
               >
@@ -676,24 +680,32 @@ const Form = () => {
                 <option value="matriz">
                   Matriz (Rua Conde de Araruama - Centro)
                 </option>
-              </select>
+               </select>
+              </div>
 
-              <label htmlFor="document" className="mt-4"></label>
+              <div className="md:flex md:flex-col sm:w-full sm:justify-center sm:items-center">
+              <label htmlFor="document"
+                     style={{ color: "var(--color-secondary)" }}
+                     className="w-[350px] sm:w-[300px] pb-1" >
+                Pedido médico
+              </label>
               <Input
                 type="file"
                 name=""
                 id="document"
                 placeholder=""
+                width={isMobile? '300px' : '350px'}
                 onChange={handleFileChange}
                 multiple
               />
+              </div>
             </div>
 
           {loading ? (
                <div className="flex justify-center">
                <Button
                  text="Carregando imagens..."
-                 width="350px"
+                 width={isMobile? '300px' : '350px'}
                  height="42px"
                  marginTop="1rem"
                  marginBottom=""
@@ -705,7 +717,7 @@ const Form = () => {
             <div className="flex justify-center">
             <Button
               text="Enviar"
-              width="350px"
+              width={isMobile? '250px' : '350px'}
               height="42px"
               marginTop="1rem"
               marginBottom=""
