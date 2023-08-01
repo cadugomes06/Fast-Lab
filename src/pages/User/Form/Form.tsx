@@ -58,7 +58,6 @@ const Form = () => {
   useEffect(() => {
     let imgs: any = fileUrl;
     const urls: string[] = [];
-    setLoading(true)
 
     const uploadPromises = imgs.map(async (file: any) => {
       const docRef = ref(storage, `documentos/${file?.name}`);
@@ -76,7 +75,6 @@ const Form = () => {
           ...prevImageURL,
           urls: prevImageURL.urls.concat(urls),
         }));
-        setLoading(false)
       })
 }, [fileUrl]);
 
@@ -343,7 +341,7 @@ const Form = () => {
                   onChange={(e) => setCardNumber(e.target.value)}
                 />
                 {cardnumberError ? (
-                  <p className="absolute mt-[-14px] pl-2 text-red-500">
+                  <p className="absolute mt-[-14px] pl-2 text-red-500 sm:pl-0 sm:mt-[4.5rem]">
                     {cardnumberError}
                   </p>
                 ) : (
@@ -468,7 +466,7 @@ const Form = () => {
               </div>
 
               <div className="max-h-max w-full md:w-[350px]">
-                <div className="flex flex-col pl-12 md:pl-0 sm:pl-6">
+                <div className="flex flex-col pl-12 md:pl-0 sm:pl-2">
                   <label
                     htmlFor="phonenumber"
                     style={{ color: "var(--color-secondary)" }}
@@ -490,7 +488,7 @@ const Form = () => {
                </div>
               
 
-              <div className="w-full max-h-max flex justify-start pl-12 md:pl-0 md:justify-center sm:flex-col sm:pl-6">
+              <div className="w-full max-h-max flex justify-start pl-12 md:pl-0 md:justify-center sm:flex-col sm:pl-2">
                 <div className="flex items-center sm:mb-1">
                   <h2
                     style={{ color: "var(--color-main)" }}
@@ -686,8 +684,8 @@ const Form = () => {
               <div className="md:flex md:flex-col sm:w-full sm:justify-center sm:items-center">
               <label htmlFor="document"
                      style={{ color: "var(--color-secondary)" }}
-                     className="w-[350px] sm:w-[300px] pb-1" >
-                Pedido médico
+                     className="w-[350px] sm:w-[300px] pb-1 sm:pl-2" >
+                Pedido médico (máximo 5)
               </label>
               <Input
                 type="file"
@@ -701,19 +699,6 @@ const Form = () => {
               </div>
             </div>
 
-          {loading ? (
-               <div className="flex justify-center">
-               <Button
-                 text="Carregando imagens..."
-                 width={isMobile? '300px' : '350px'}
-                 height="42px"
-                 marginTop="1rem"
-                 marginBottom=""
-                 disabled=''
-                 onClick={createRequest}
-               />
-             </div>
-          ) : (
             <div className="flex justify-center">
             <Button
               text="Enviar"
@@ -724,7 +709,6 @@ const Form = () => {
               onClick={createRequest}
             />
           </div>
-          )}
 
 
           </div>
