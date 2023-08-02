@@ -286,7 +286,7 @@ const Form = () => {
         </div>
 
         <form action="">
-          <div className="animeLeft w-[52rem] pb-12 mb-4 max-h-max bg-gray-200 rounded-md shadow-md shadow-gray-400 md:w-[40rem] sm:w-[20rem]">
+          <div className="animeLeft w-[52rem] pb-12 mb-4 max-h-max bg-gray-200 rounded-md shadow-md shadow-gray-400 md:w-[40rem] sm:w-[22rem]">
             <div
               className="text-center font-medium pt-8 mb-8"
               style={{ color: "var(--color-main)" }}

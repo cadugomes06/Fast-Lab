@@ -48,17 +48,17 @@ const UserRequest = () => {
         <>
         {isMobile? <MenuMobile /> : <Header />}
 
-        <section className="grid grid-cols-8 animeLeft">
+        <section className="grid grid-cols-8 animeLeft sm:grid-cols-12">
          <div></div>
 
-         <div className="col-span-6 bg-gray-50/50 h-[calc(100vh-100px)] shadow-md shadow-gray-300 rounded-md my-2">
+         <div className="col-span-6 md:col-span-10 bg-gray-50/50 h-[calc(100vh-100px)] shadow-md shadow-gray-300 rounded-md my-2">
             <div className="w-full h-28  flex justify-center items-center">
               <h1 className="text-2xl font-bold textGradient" >
                 Minhas Solicitações
              </h1>
             </div>
 
-            <div className="h-[24rem] w-full max-h-max pt-12 px-6">
+            <div className="h-[24rem] w-full max-h-max pt-12 px-6 sm:px-2">
               {schedules[0] && !errorSchedule ?
                schedules.map((schedule, index) => (
                 <div 
@@ -66,7 +66,7 @@ const UserRequest = () => {
                    className={`${schedule.status === 'solicitado' ? `bg-yellow-400/60` : `bg-teal-400/50`} flex justify-between w-full rounded-lg h-12 mb-2 items-center px-4 shadow-md shadow-gray-300 font-normal text-sm`}
                    style={{color: 'var(--color-main)'}}>
                     <img src={calendarIcon} alt="caléndario" className="w-[20px] h-[20px]" />
-                    <p>{schedule?.plan}</p> 
+                    <p className="ssm:hidden">{schedule?.plan}</p> 
                     <p>{schedule?.unit}</p>
                     <p>Status: {schedule?.status}</p>
                 </div>
