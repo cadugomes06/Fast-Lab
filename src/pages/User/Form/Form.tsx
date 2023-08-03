@@ -82,7 +82,6 @@ const Form = () => {
   const createRequest = async (e: any) => {
     e.preventDefault();
     const userID = window.localStorage.getItem('user')
-    console.log(imageURL)
 
     if (
       plan === "convenio" ||
@@ -239,7 +238,7 @@ const Form = () => {
         setCardnumberError("");
       }
     }
-    if (CPF && CPF.length != 11) {
+    if (CPF && CPF.length != 14) {
       setCpfError("CPF incorreto.");
     } else {
       setCpfError("");
@@ -286,7 +285,7 @@ const Form = () => {
         </div>
 
         <form action="">
-          <div className="animeLeft w-[52rem] pb-12 mb-4 max-h-max bg-gray-200 rounded-md shadow-md shadow-gray-400 md:w-[40rem] sm:w-[22rem]">
+          <div className="animeLeft w-[52rem] pb-12 mb-4 max-h-max bg-gray-200 rounded-md shadow-md shadow-gray-400 md:w-[40rem] sm:w-[20rem]">
             <div
               className="text-center font-medium pt-8 mb-8"
               style={{ color: "var(--color-main)" }}
@@ -339,7 +338,12 @@ const Form = () => {
                   height="42px"
                   placeholder={planRule}
                   value={cardNumber}
-                  onChange={(e) => setCardNumber(e.target.value)}
+                  onChange={(e) => {
+                    const targetValue = e.target.value
+                    const formatValue = targetValue.replace(/\D/g, '')
+
+                    setCardNumber(formatValue)
+                  }}
                 />
                 {cardnumberError ? (
                   <p className="absolute mt-[-14px] pl-2 text-red-500 sm:pl-0 sm:mt-[4.5rem]">
@@ -423,14 +427,21 @@ const Form = () => {
                     Dt Nascimento
                   </label>
                   <Input
-                    type="date"
+                    type="text"
                     name=""
                     id="birth"
                     placeholder="00/00/0000"
                     height="42px"
                     width='130px'
                     value={birth}
-                    onChange={(e) => setBirth(e.target.value)}
+                    onChange={(e) => {
+                      const targetValue = e.target.value
+                      const targetValueNumber = targetValue.replace(/\D/g, '')
+
+                      const newFormatValue =
+                       targetValueNumber.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3")
+                      setBirth(newFormatValue)
+                    }}
                   />
                 </div>
 
@@ -452,8 +463,10 @@ const Form = () => {
                     value={CPF}
                     onChange={(e) => {
                       const input = e.target.value;
-                      const numericInput = input.replace(/\D/g, "");
-                      setCPF(numericInput);
+                      const formatInputValue = input.replace(/\D/g, "");
+
+                      const finalFormat = formatInputValue.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")
+                      setCPF(finalFormat);
                     }}
                   />
                   {CPF ? (
@@ -483,7 +496,17 @@ const Form = () => {
                     height="42px"
                     width={isMobile? '160px' : '180px'}
                     value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    onChange={(e) => {
+                      ///(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"
+                      const targetValue = e.target.value
+                      const targetValueNumber = targetValue.replace(/\D/g, '')
+
+                      const newFormatValue =
+                       targetValueNumber.replace(/(\d{2})(\d{5})(\d{4})/, "($1)$2-$3")
+
+                      console.log(newFormatValue)
+                      setPhoneNumber(newFormatValue)
+                    }}
                   />
                 </div>
                </div>
@@ -535,7 +558,7 @@ const Form = () => {
                     className="text-sm cursor-pointer"
                     style={{ color: "var(--color-main)" }}
                   >
-                    Outros
+                    Outro
                     <input
                       type="radio"
                       name="sexo"
@@ -606,7 +629,7 @@ const Form = () => {
                     id="street"
                     placeholder="Recanto da Alvorada"
                     height="42px"
-                    width={isMobile? '190px' : '240px'}
+                    width={isMobile? '180px' : '240px'}
                     value={street}
                     onChange={(e) => setStreet(e.target.value)}
                   />
@@ -630,7 +653,12 @@ const Form = () => {
                     height="42px"
                     width="100px"
                     value={number}
-                    onChange={(e) => setNumber(e.target.value)}
+                    onChange={(e) => {
+                      const targetValue = e.target.value
+                      const numbetTargetValue = targetValue.replace(/\D/g, '')
+
+                      setNumber(numbetTargetValue)
+                    }}
                   />
                 </div>
 
@@ -648,7 +676,7 @@ const Form = () => {
                     id="neighborhood"
                     placeholder="Centro"
                     height="42px"
-                    width={isMobile? '190px' : '240px'}
+                    width={isMobile? '180px' : '240px'}
                     value={neighborhood}
                     onChange={(e) => setNeighborhood(e.target.value)}
                   />
@@ -663,9 +691,14 @@ const Form = () => {
               <h4>Escolha sua unidade e Anexe seu pedido</h4>
             </div>
 
-            <div className="flex pl-12 gap-4 mb-4 relative md:gap-2 md:h-[10rem] md:pl-0 md:justify-center md:flex-col md:items-center">
+            <div className="flex justify-center pl-12 mb-4 relative md:gap-2 md:h-[10rem] md:pl-0 md:justify-center md:flex-col md:items-center sm:mt-6">
 
-              <div>
+              <div className="md:flex md:flex-col">
+              <label htmlFor="document"
+                     style={{ color: "var(--color-secondary)" }}
+                     className="w-[350px] sm:w-[280px] pl-2 pb-1 sm:pl-2" >
+                Unidade de atendimento
+              </label>
                <select
                 defaultValue="unidade"
                 onChange={(e) => setUnit(e.target.value)}
@@ -682,10 +715,10 @@ const Form = () => {
                </select>
               </div>
 
-              <div className="md:flex md:flex-col sm:w-full sm:justify-center sm:items-center">
+              <div className="w-[550px] flex items-center md:flex md:flex-col sm:w-full sm:justify-center sm:items-center">
               <label htmlFor="document"
                      style={{ color: "var(--color-secondary)" }}
-                     className="w-[350px] sm:w-[300px] pb-1 sm:pl-2" >
+                     className="w-[350px] sm:w-[300px] flex justify-center items-center rounded-md py-[12px] sm:py-[8px] sm:text-sm bg-white shadow-md shadow-gray-300 cursor-pointer uppercase hover:bg-gray-600 transition duration-50 sm:pl-2" >
                 Pedido médico (máximo 5)
               </label>
               <Input
@@ -693,7 +726,7 @@ const Form = () => {
                 name=""
                 id="document"
                 placeholder=""
-                width={isMobile? '300px' : '350px'}
+                width={isMobile? '280px' : '350px'}
                 onChange={handleFileChange}
                 multiple
               />

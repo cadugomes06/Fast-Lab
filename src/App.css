@@ -29,6 +29,10 @@ select {
   @apply border-black hover:border-teal-600 bg-white rounded-lg pl-2 drop-shadow-sm shadow-gray-200 cursor-pointer outline-none focus:border-teal-600 h-[42px] w-[350px] mb-4 focus:outline-teal-200 focus:shadow-teal-200 sm:w-[300px]
 }
 
+input[type='file'] {
+  display: none;
+}
+
 
 /* Classes dinamicas*/ 
 .sectionOffhome {
