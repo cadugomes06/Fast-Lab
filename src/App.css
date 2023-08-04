@@ -175,6 +175,13 @@ input[type='file'] {
   animation: detailPass 5s forwards ease-out;
   z-index: -1;
 }
+@media (max-width: 600px) {
+    .detailAnimation {
+      left: 110px;
+    }
+}
+
+
 @keyframes detailPass {
   from {
     width: 0;

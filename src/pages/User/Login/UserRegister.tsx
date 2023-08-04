@@ -63,7 +63,7 @@ const UserRegister = () => {
         <>
         <Header />  
          <div className="w-full h-[calc(100vh-80px)]">
-          <section className="grid grid-cols-2 bg-gray-100/20 md:grid-cols-1 h-[calc(100vh-80px)]">
+          <section className="grid grid-cols-2 bg-gray-100/30 md:grid-cols-1 h-[calc(100vh-80px)]">
 
             <div className="h-[calc(100vh-80px)] md:hidden">
                 <div className="h-[calc(100vh-80px)] flex justify-center items-center relative border-r-[1px] border-teal-100"
@@ -81,9 +81,9 @@ const UserRegister = () => {
                 <div className="flex flex-col w-full h-[calc(100vh-200px)] md:justify-center md:items-center">
 
                    <div className="h-20 flex justify-start items-center relative sm:max-w-max">
-                      <h2 className="text-[2rem] text-gray-400/70 font-normal">
+                      <h2 className="text-[2rem] sm:text-[1.5rem] text-gray-400/70 font-normal sm:w-[300px]">
                          Criar minha 
-                         <span className="textGradient text-[2.4rem]"> Conta</span>
+                         <span className="textGradient text-[2.4rem] sm:text-[1.8rem]"> Conta</span>
                      </h2>
                    </div>
 

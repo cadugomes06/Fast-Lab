@@ -147,8 +147,8 @@ const UserHome = () => {
             <div
               className={
                 cardSelect === 2
-                  ? `pt-8 flex text-cente justify-between h-[10rem] w-full text-sm text-gray-200 gap-2 px-6  sm:h-[6rem] sm:pt-0 sm:mt-4 sm:gap-0 sm:text-[0.7rem] sm:overflow-auto sm:mb-6`
-                  : "flex text-cente justify-between h-[10rem] w-full text-sm text-gray-200 gap-2 px-4 sm:h-[1.5rem] sm:pt-0 sm:mt-2 sm:gap-0 sm:text-[0.7rem] sm:overflow-hidden"
+                  ? `mt-4 flex text-cente justify-between h-[16rem] w-full text-sm text-gray-200 gap-2 px-6 sm:h-[6rem] sm:pt-0 sm:mt-4 sm:gap-0 sm:text-[0.7rem] sm:overflow-auto sm:mb-6`
+                  : "flex text-cente justify-between h-[10rem] w-full text-sm overflow-hidden text-gray-200 gap-2 px-4 sm:h-[1.5rem] sm:pt-0 sm:mt-2 sm:gap-0 sm:text-[0.7rem] sm:overflow-hidden"
               }
             >
               <ul className="flex flex-col items-start">
@@ -173,9 +173,36 @@ const UserHome = () => {
                 <li className="border-b-[1px] w-[100%] border-gray-100/40">
                   Gama Saúde
                 </li>
+                <li className="border-b-[1px] w-[100%] border-gray-100/40">
+                  Caberj 
+                </li>
+                <li className="border-b-[1px] w-[100%] border-gray-100/40">
+                  Integral Saúde
+                </li>
+                <li className="border-b-[1px] w-[100%] border-gray-100/40">
+                  Cedae Saúde
+                </li>
               </ul>
 
-              <div className="flex flex-col justify-center sm:justify-start sm:gap-1 h-[9.5rem]">
+              <div className="flex flex-col justify-center sm:justify-start sm:gap-1 h-[13.2rem]">
+                <div className="w-[20px] h-[20px] sm:w-[18px] sm:h-[18px]">
+                  <img
+                    src={cardSelect === 2 ? checkIcon : checkGrayIcon}
+                    alt=""
+                  />
+                </div>
+                <div className="w-[20px] h-[20px] sm:w-[18px] sm:h-[18px]">
+                  <img
+                    src={cardSelect === 2 ? checkIcon : checkGrayIcon}
+                    alt=""
+                  />
+                </div>
+                <div className="w-[20px] h-[20px] sm:w-[18px] sm:h-[18px]">
+                  <img
+                    src={cardSelect === 2 ? checkIcon : checkGrayIcon}
+                    alt=""
+                  />
+                </div>
                 <div className="w-[20px] h-[20px] sm:w-[18px] sm:h-[18px]">
                   <img
                     src={cardSelect === 2 ? checkIcon : checkGrayIcon}
@@ -225,7 +252,7 @@ const UserHome = () => {
               <Link to='../user/solicitacao'>
               <Button
                 text="Solicitar"
-                marginTop={cardSelect === 2 && !isMobile ? "60px" : ""}
+                marginTop={cardSelect === 2 && !isMobile ? "-10px" : ""}
                 height="42px"
                 disabled={cardSelect === 2 ? false : true}
                 width={cardSelect === 2 ? "200px" : "120px"}
@@ -269,8 +296,8 @@ const UserHome = () => {
                 }
               >
                 Ao deixar sua visita pré cadastrada, será possível agilizar seu processo de
-                atendimento em nossas unidade. Proporcionando uma experiência
-                ainda melhor!
+                atendimento em nossas unidades. Proporcionando uma experiência
+                ainda melhor na sua visita!
               </p>
             </div>
 

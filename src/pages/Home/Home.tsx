@@ -32,7 +32,6 @@ const Home = () => {
         if(width < 600 ) {
             setIsMobile(true)
         }
-        console.log(width)
     }, [])
 
     return (

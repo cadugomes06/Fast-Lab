@@ -73,7 +73,7 @@ const UserLogin = () => {
       <Header />
       
       <div className="w-full h-[calc(100vh-80px)]">
-        <section className="grid grid-cols-2 bg-gray-100/20 md:grid-cols-1">
+        <section className="grid grid-cols-2 bg-gray-100/30 md:grid-cols-1">
 
           <div className="h-[calc(100vh-80px)] md:hidden">
             <div
@@ -99,9 +99,9 @@ const UserLogin = () => {
             <div className="flex flex-col w-full h-[calc(100vh-200px md:justify-center md:items-center md:h-[calc(100vh-80px)] md:max-w-max"
             >
               <div className="h-20 flex justify-start items-center relative z-10 md:w-full sm:w-[300px]">
-                <h2 className="text-[2rem] text-gray-400/70 font-normal">
+                <h2 className="text-[2rem] sm:text-[1.5rem] text-gray-400/70 font-normal">
                   Realize seu
-                  <span className="textGradient text-[2.4rem]"> Login</span>
+                  <span className="textGradient text-[2.4rem] sm:text-[1.8rem]"> Login</span>
                   <div className="detailAnimation z-0"></div>
                 </h2>
               </div>

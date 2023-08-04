@@ -445,9 +445,9 @@ const Form = () => {
                   />
                 </div>
 
-                <div>
+                <div className="">
                   <label
-                    htmlFor="birth"
+                    htmlFor="cpf"
                     style={{ color: "var(--color-secondary)" }}
                     className="w-[350px] sm:w-[300px] pb-1"
                   >
@@ -456,7 +456,7 @@ const Form = () => {
                   <Input
                     type="text"
                     name=""
-                    id="birth"
+                    id="cpf"
                     placeholder="000.000.000-00"
                     height="42px"
                     width={isMobile? '150px' : '200px'}

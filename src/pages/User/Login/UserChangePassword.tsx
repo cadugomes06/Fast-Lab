@@ -56,8 +56,8 @@ const UserCrangePassword = () => {
         <>
         <Header />  
 
-         <div className="w-full h-[calc(100vh-80px)] sm:flex sm:justify-center">
-          <section className="grid grid-cols-2 bg-gray-100/20 md:grid-cols-1 ">
+         <div className="w-full h-[calc(100vh-80px)] bg-gray-100/30 sm:flex sm:justify-center">
+          <section className="grid grid-cols-2 md:grid-cols-1 ">
 
             <div className="h-[calc(100vh-80px)] md:hidden">
                 <div className="h-[calc(100vh-80px)] flex justify-center items-center relative border-r-[1px] border-teal-100"
@@ -79,11 +79,11 @@ const UserCrangePassword = () => {
                    </div>
 
                     <form onSubmit={handleChangePasssword}>
-                     <div className="h-96 max-h-max flex flex-col justify-start items-start md:items-center">
+                     <div className="h-96 max-h-max flex flex-col justify-start items-start md:items-center ">
 
-                     <h2 className="text-[2rem] text-gray-400/70 font-normal pb-8">
+                     <h2 className="text-[2rem] sm:text-[1.5rem] text-gray-400/70 font-normal pb-8 sm:w-[300px]">
                          Alterar sua 
-                         <span className="textGradient text-[2.4rem]"> Senha</span>
+                         <span className="textGradient text-[2.4rem] sm:text-[1.8rem]"> Senha</span>
                      </h2>
 
                        <label htmlFor="email"

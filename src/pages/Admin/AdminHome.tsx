@@ -78,7 +78,6 @@ const AdminHome = () => {
       })
       alert('Parabéns! Você finalizou o cadastramento desse paciente!')
       window.location.reload()
-      console.log(updateStatus)
     }
   }
 
@@ -109,14 +108,14 @@ const AdminHome = () => {
         <aside className="bg-gray-100/50 w-52 h-full max-h-max 
          overflow-y-auto shadow-md shadow-gray-400 flex flex-col relative"
         >
-           <div className="w-[12.9rem] fixed rounded-md">
-            <h1 className="text-center font-semibold pt-6 pb-6 shadow-md shadow-bray-200 bg-white textGradient text-lg"
+           <div className="w-[12.9rem] fixed rounded-md z-50 bg-white">
+            <h1 className="text-center font-semibold pt-6 pb-6 shadow-md shadow-bray-200 textGradient text-lg"
               >
             Agendamentos
             </h1>
            </div>
        
-          <div className="mt-[4.6rem]">
+          <div className="mt-[4.6rem] z-0">
           {forms?.map((form: any, index: number) => {
             return (
               <div key={index}

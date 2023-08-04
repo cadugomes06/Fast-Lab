@@ -36,7 +36,6 @@ const Header = () => {
 
   const { innerWidth: width } = window
   useEffect(() => {
-    console.log(width)
     if(width < 600 ) {
         setIsMobile(true)
     }
