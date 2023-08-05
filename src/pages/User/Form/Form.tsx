@@ -4,7 +4,7 @@ import Button from "../../../utils/Button";
 import Input from "../../../utils/Input";
 import { collection, addDoc } from "firebase/firestore";
 import { db, storage } from "../../../services/firebaseConfig";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes, uploadBytesResumable, UploadTask } from "firebase/storage";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
 import LoadingCup from "../../../components/LoadingCup";
@@ -33,6 +33,8 @@ const Form = () => {
   const [cardnumberError, setCardnumberError] = useState("");
   const [cpfError, setCpfError] = useState("");
   const [isMobile, setIsMobile] = useState(false);
+  const [typeNavigator, setTypeNavigator] = useState('');
+  const [progress, setProgress] = useState(0);
 
   const formsCollectionRef = collection(db, "formulario");
   
@@ -58,9 +60,22 @@ const Form = () => {
   useEffect(() => {
     let imgs: any = fileUrl;
     const urls: string[] = [];
-
+    
     const uploadPromises = imgs.map(async (file: any) => {
       const docRef = ref(storage, `documentos/${file?.name}`);
+
+      const uploadTask = uploadBytesResumable(docRef, file)
+      uploadTask.on(
+        'state_changed',
+        snapshot => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          setProgress(progress)
+        },
+        error => {
+          alert('error' + error)
+        }
+      )
+
       try {
         await uploadBytes(docRef, file);
         const url = await getDownloadURL(docRef);
@@ -249,6 +264,7 @@ const Form = () => {
     setSexo(event.target.value);
   };
 
+  //Verificar dispositivo mobile
   const {innerWidth: width} = window
   useEffect(() => {
     if(width < 600 ) {
@@ -256,6 +272,14 @@ const Form = () => {
     }
   }, [width])
   
+  //Identificar o navegador
+  useEffect(() => {
+    if (navigator.userAgent.indexOf('Chrome') > -1 && navigator.userAgent.indexOf('Safari') > -1) {
+      setTypeNavigator('chrome')
+    } else if (navigator.userAgent.indexOf('Safari') > -1) {
+      setTypeNavigator('safari')
+    }
+    }, [])
 
 
   return (
@@ -417,8 +441,9 @@ const Form = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </label>
-              <div className="h-20 w-[350px] sm:w-[300px] flex">
-                <div>
+
+              <div className={typeNavigator == 'safari'? 'flex flex-col'  : "h-20 w-[350px] sm:w-[300px] flex"}>
+                <div className={typeNavigator == 'safari'? 'flex flex-col' : ''}>
                   <label
                     htmlFor="birth"
                     style={{ color: "var(--color-secondary)" }}
@@ -445,7 +470,7 @@ const Form = () => {
                   />
                 </div>
 
-                <div className="">
+                <div className={typeNavigator == 'safari'? 'flex flex-col' : ''}>
                   <label
                     htmlFor="cpf"
                     style={{ color: "var(--color-secondary)" }}
@@ -563,7 +588,7 @@ const Form = () => {
                       type="radio"
                       name="sexo"
                       id="undefined"
-                      className="ml-1 cursor-pointer sm:ml-[27px]"
+                      className="ml-1 cursor-pointer sm:ml-[34px]"
                       value="indefinido"
                       onChange={handleSexoChange}
                     />
@@ -636,8 +661,8 @@ const Form = () => {
                 </div>
               </div>
 
-              <div className="h-20 w-[350px] flex sm:w-[300px] sm:gap-2">
-                <div className="pr-[10px] sm:pr-0">
+              <div className="h-24 w-[350px] flex sm:w-[300px] sm:gap-2">
+                <div className={typeNavigator == 'safari' ? 'flex flex-col' : "pr-[10px] sm:pr-0"}>
                   <label
                     htmlFor="num"
                     style={{ color: "var(--color-secondary)" }}
@@ -662,7 +687,7 @@ const Form = () => {
                   />
                 </div>
 
-                <div>
+                <div className={typeNavigator == 'safari' ? 'flex flex-col' : "" }>
                   <label
                     htmlFor="neighborhood"
                     style={{ color: "var(--color-secondary)" }}
@@ -682,8 +707,8 @@ const Form = () => {
                   />
                 </div>
               </div>
-
             </div>
+
             <div
               className="text-center font-medium py-2 mt-4 mb-8 sm:mt-8 sm:mb-2"
               style={{ color: "var(--color-main)" }}
@@ -731,6 +756,14 @@ const Form = () => {
                 multiple
               />
               </div>
+            </div>
+
+            <div className="max-h-max ml-14 sm:ml-4 text-sm text-gray-600 mb-6">
+              {fileUrl.map((img, index) => (
+                <div key={index}>
+                  <p className={progress == 100? 'text-green-500' : ''}>{img?.name} - {progress.toFixed(0)}%</p>
+                </div>
+              ))}
             </div>
 
             <div className="flex justify-center">

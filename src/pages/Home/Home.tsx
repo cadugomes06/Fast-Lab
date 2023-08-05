@@ -6,8 +6,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import Header from "../../components/Header"
-import banner1 from '../../assets/images/banner01.png'
-import banner2 from '../../assets/images/banner02.png'
+import banner1 from '../../assets/images/banner01.jpg'
+import banner2 from '../../assets/images/banner02.jpg'
 import banner3 from '../../assets/images/banner03.png'
 import mobileBanner from '../../assets/images/homeMobileBanner.png'
 import { useContext, useEffect, useState } from 'react';

@@ -60,6 +60,8 @@ const UserHome = () => {
     }
   }, [])
 
+  
+
   return (
     <>
       {isMobile? <MenuMobile />  : <Header />}
