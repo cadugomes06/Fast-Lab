@@ -40,10 +40,8 @@ const Form = () => {
     name: string;
   }
 
-  const formsCollectionRef = collection(db, "formulario");
-  
+  const formsCollectionRef = collection(db, "formulario");  
   const navigate = useNavigate()
-
   const { state } = useContext(UserContext)
 
   useEffect(() => {
@@ -64,6 +62,7 @@ const Form = () => {
   useEffect(() => {
     let imgs: any = fileUrl;
     const urls: string[] = [];
+    setImageURL({urls: []})
     
     const uploadPromises = imgs.map(async (file: any) => {
       const docRef = ref(storage, `documentos/${file?.name}`);
@@ -76,7 +75,7 @@ const Form = () => {
           setProgress(progress)
         },
         error => {
-          alert('error' + error)
+          alert('Error!' + error)
         }
       )
 
@@ -101,6 +100,12 @@ const Form = () => {
   const createRequest = async (e: any) => {
     e.preventDefault();
     const userID = window.localStorage.getItem('user')
+
+    if (fileUrl.length > 8) {
+      alert('Você ultrapassou o limite de pedidos!')
+      setImageURL({urls: []})
+      setFileUrl([])
+    }
 
     if (
       plan === "convenio" ||
@@ -289,7 +294,6 @@ const Form = () => {
   return (
     <>
     {loading && name.length > 0 ? <LoadingCup /> : ''}
-
     {isMobile? <MenuMobile /> : <Header />}
 
       <section
@@ -747,8 +751,8 @@ const Form = () => {
               <div className="w-[550px] flex items-center md:flex md:flex-col sm:w-full sm:justify-center sm:items-center">
               <label htmlFor="document"
                      style={{ color: "var(--color-secondary)" }}
-                     className="w-[350px] sm:w-[300px] flex justify-center items-center rounded-md py-[12px] sm:py-[8px] sm:text-sm bg-white shadow-md shadow-gray-300 cursor-pointer uppercase hover:bg-gray-600 transition duration-50 sm:pl-2" >
-                Pedido médico (máximo 5)
+                     className="w-[350px] sm:w-[300px] flex justify-center items-center rounded-md py-[12px] sm:py-[8px] sm:text-sm bg-white shadow-md shadow-gray-300 border border-dashed border-gray-400 cursor-pointer uppercase hover:bg-gray-600 transition duration-50 sm:pl-2" >
+                Pedido médico (máximo 8)
               </label>
               <Input
                 type="file"
