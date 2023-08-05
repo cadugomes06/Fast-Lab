@@ -4,7 +4,7 @@ import Button from "../../../utils/Button";
 import Input from "../../../utils/Input";
 import { collection, addDoc } from "firebase/firestore";
 import { db, storage } from "../../../services/firebaseConfig";
-import { getDownloadURL, ref, uploadBytes, uploadBytesResumable, UploadTask } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
 import LoadingCup from "../../../components/LoadingCup";
@@ -35,6 +35,10 @@ const Form = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [typeNavigator, setTypeNavigator] = useState('');
   const [progress, setProgress] = useState(0);
+
+  interface FileList {
+    name: string;
+  }
 
   const formsCollectionRef = collection(db, "formulario");
   
