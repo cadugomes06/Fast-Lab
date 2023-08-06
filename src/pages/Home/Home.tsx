@@ -9,7 +9,7 @@ import Header from "../../components/Header"
 import banner1 from '../../assets/images/banner01.jpg'
 import banner2 from '../../assets/images/banner02.jpg'
 import banner3 from '../../assets/images/banner03.png'
-import mobileBanner from '../../assets/images/homeMobileBanner.png'
+import homePageBanner from '../../assets/images/homepageBanner.png'
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context/UserContext';
 
@@ -59,9 +59,20 @@ const Home = () => {
                )}
              </Swiper>
              ) : (
-                <div className="sm:w-[20rem] max-w-max sm:h-[28rem] bg-gray-100 rounded-md shadow-md shadow-gray-400"
+                <div className="sm:w-[20rem] max-w-max sm:h-[32rem] sm:max-h-max bg-gray-100 rounded-md shadow-md shadow-gray-400 relative flex flex-col items-center"
                 >
-                    <img src={mobileBanner} alt="" className='h-[32rem] rounded-md' />
+                    <h3 className='text-teal-500 font-bold text-lg pt-8 uppercase'>
+                        Agilize o seu atendimento!
+                    </h3>
+                    <p className='text-teal-500 font-normal text-sm pt-4 px-2'>
+                        Com a modalide de pré cadastramento, agora você pode antecipar a sua visita no laboratório e agilizar o seu atendimento.
+                    </p>
+
+
+
+                    <img src={homePageBanner} alt="" className='h-[22rem] rounded-md' />
+                    <a href="https://storyset.com/teamwork" 
+                       className='text-[.6rem] text-white absolute bottom-0 underline'>Teamwork illustrations by Storyset</a>
                 </div>    
              )}
              
