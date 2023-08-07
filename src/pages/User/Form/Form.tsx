@@ -545,7 +545,7 @@ const Form = () => {
                </div>
               
 
-              <div className="w-full max-h-max flex justify-start pl-12 md:pl-0 md:justify-center sm:flex-col sm:pl-2">
+              <div className={`w-full max-h-max flex justify-start pl-12 md:pl-0 md:justify-center sm:flex-col sm:pl-2 ${typeNavigator == 'safari' ? 'sm:mb-4' : ''}`}>
                 <div className="flex items-center sm:mb-1">
                   <h2
                     style={{ color: "var(--color-main)" }}
@@ -606,7 +606,7 @@ const Form = () => {
             </div>
 
             <div
-              className="text-center font-medium py-2 mt-20 mb-8 md:mt-14 md:mb-4"
+              className="text-center font-medium py-2 mt-20 mb-8 md:mt-14 md:mb-4 sm:mt-8"
               style={{ color: "var(--color-main)" }}
             >
               <h4>Endereço do Paciente</h4>

@@ -178,6 +178,7 @@ input[type='file'] {
 @media (max-width: 600px) {
     .detailAnimation {
       left: 110px;
+      top: 52px;
     }
 }
 
@@ -233,16 +234,16 @@ input[type='file'] {
 
 @keyframes animateLoading {
   0% {
-    background-position: -100px 160px;
+    background-position: -300px 160px;
   }
   10% {
-    background-position: -300px 140px;
+    background-position: -500px 140px;
   } 
   40% {
-    background-position: -500px 100px;
+    background-position: -700px 100px;
   }
   80% {
-    background-position: -700px 60px;
+    background-position: -800px 60px;
   }
   100% {
     background-position: -900px 30px;

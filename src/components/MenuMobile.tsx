@@ -27,7 +27,7 @@ const MenuMobile = () => {
           window.localStorage.removeItem('UserAccount')
           state.toggleUserLog()
     
-            navigate('/')
+            navigate('/userlogin')
         }
         if(error) {
           alert('Erro inesperado!' + error)

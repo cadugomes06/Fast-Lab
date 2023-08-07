@@ -2,7 +2,7 @@
 const LoadingCup = () => {
 
     return (
-        <section className="w-full h-full absolute top-0 z-50 bg-black/80 flex justify-center items-center">
+        <section className="w-full h-full max-h-max absolute top-0 z-50 bg-black/80 flex justify-center items-center sm:h-[100vh]">
 
             <div className="cup"></div>
 
