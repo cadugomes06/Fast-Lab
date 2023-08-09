@@ -31,7 +31,7 @@ const FormConfirm = () => {
 
             <div className="flex justify-start w-full max-h-max px-8 mt-8 ssm:px-4">
               <p className="font-normal" 
-                 style={{color: 'var(--color-secondary)'}}>Seu agendamento já foi enviado para o nosso time de atendimento online. Estaremos enviando o quanto antes para seu e-mail o <strong>preparo dos seus exames e o status do seu processo de cadastramento.</strong></p>
+                 style={{color: 'var(--color-secondary)'}}>Sua solicitação já foi enviado para o nosso time de atendimento online. Estaremos enviando o quanto antes para seu e-mail o <strong>preparo dos seus exames e o status do seu processo de cadastramento.</strong></p>
             </div>
 
             <div className="flex flex-col justify-start w-full max-h-max px-8 mt-8 ssm:px-4">
@@ -42,7 +42,7 @@ const FormConfirm = () => {
               </h2>
 
               <p className="font-normal mb-2" 
-                 style={{color: 'var(--color-secondary)'}}> Após receber sua confirmação de pré agendamento,<strong> é indispensável para o atendimento presencial</strong>, cumprir esses requesitos.
+                 style={{color: 'var(--color-secondary)'}}> Após receber sua confirmação do seu pré cadastramento,<strong> é indispensável para o atendimento presencial</strong>, cumprir esses requesitos.
               </p>
 
               <ul className="flex flex-col ">
