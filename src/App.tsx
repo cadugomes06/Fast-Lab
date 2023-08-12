@@ -11,6 +11,7 @@ import Termos from './pages/User/Home/Termos';
 import FormConfirm from './pages/User/Form/FormConfirm';
 import UserRequest from './pages/User/Home/UserRequest';
 import AdminLogin from './pages/Admin/AdminLogin';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 const App = () => {
 
@@ -23,11 +24,13 @@ const App = () => {
         <Route path='/userlogin/register' element={ <UserRegister /> } />
         <Route path='/userlogin/changepassword' element={ <UserCrangePassword /> } />
 
+       <Route path='/' element={ <ProtectedRoute /> }>
         <Route path='/user/userhome' element={ <UserHome /> } />
         <Route path='user/solicitacao' element={ <Form /> } />
         <Route path='user/termos' element={ <Termos /> } />
         <Route path='user/feedback' element={ <FormConfirm /> } />
         <Route path='user/consulta' element={ <UserRequest /> } />
+      </Route>
 
         <Route path='admin/login' element={ <AdminLogin /> } />
         <Route path='admin/home' element={ <AdminHome /> } />

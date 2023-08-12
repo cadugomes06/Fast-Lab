@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
 import LoadingCup from "../../../components/LoadingCup";
 import MenuMobile from "../../../components/MenuMobile";
+import closeIcon from '../../../assets/icons/closeX.svg'
 
 const Form = () => {
   const [plan, setPlan] = useState("");
@@ -35,6 +36,8 @@ const Form = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [typeNavigator, setTypeNavigator] = useState('');
   const [progress, setProgress] = useState(0);
+  const [conditionTerms, setConditionTerms] = useState(false);
+  const [modalCondition, setModalCondition] = useState(false);
 
   interface FileList {
     name: string;
@@ -144,6 +147,8 @@ const Form = () => {
       alert("CPF incorreto!");
    } else if (imageURL.urls.length === 0) {
     alert("Selecione seu pedido médico primeiro!");
+  } else if (conditionTerms === false) {
+    alert("Leia os termos e confirme!");
   } else {
     await addDoc(formsCollectionRef, {
             plan: plan,
@@ -273,6 +278,16 @@ const Form = () => {
     setSexo(event.target.value);
   };
 
+  const handleCheckCondition = (e: any) => {
+    setConditionTerms(e)
+  }
+  const handleOpenModalCondition = () => {
+    setModalCondition(true)
+  }
+  const handleCloseModalCondition = () => {
+    setModalCondition(false)
+  }
+
   //Verificar dispositivo mobile
   const {innerWidth: width} = window
   useEffect(() => {
@@ -293,8 +308,38 @@ const Form = () => {
 
   return (
     <>
+    {modalCondition ? (
+              <>
+              <div className="w-full h-[220vh] bg-black/50 flex justify-center items-center absolute z-20 md:h-[300vh] ">
+
+                <div className="w-[38rem] h-[38rem] bg-gray-50 absolute bottom-6 rounded-md shadow-md shadow-gray-500 sm:w-[20rem]">
+                  
+                  <div className="w-[32px] h-[32px] sm:w-[24px] sm:h-[24px] absolute right-2 top-2 sm:right-1 sm:top-1 cursor-pointer"
+                       onClick={handleCloseModalCondition}>
+                    <img src={closeIcon} 
+                         alt="icone-de-x"
+                         className="sm:w-[24px] sm:h-[24px]" />
+                  </div>
+
+                  <div className="w-full bg-gray-100 py-8 text-xl text-center font-semibold rounded-md sm:text-lg sm:py-4" style={{color: 'var(--color-main)'}}>
+                    <h2>Condições para o seu pré cadastramento</h2>
+                  </div>
+
+                  <div className="px-6 pt-8 font-normal text-md sm:px-4 sm:pt-6 sm:text-sm" style={{color: 'var(--color-secondary)'}}>
+                    <p className="pb-4">Estou ciente que na modalidade de pré cadastramento, terei um atendimento mais rápido ao ter meu pedido autorizado pela equipe de atendimento online do laboratório. <strong>Mas terei que apresentar no dia da realização meu pedido médico e documento original com foto ou digital (CNH digital ou Identidade digital). 
+                    Não será aceito foto do documento. </strong></p>
+
+                    <p>Por se tratar de exames clínicos, os mesmo possuem preparos específicos que devem ser cumpridos para a realização.  <strong>O não cumprimento poderá adiar os exames, para um dia em que o paciente esteja devidamente preparado</strong>, conforme as orientações da equipe de atendimento online.</p>
+                  </div>
+
+                </div>
+              </div>  
+              </>
+      ): ''}
+
     {loading && name.length > 0 ? <LoadingCup /> : ''}
     {isMobile? <MenuMobile /> : <Header />}
+
 
       <section
         className="bg-white flex justify-center 
@@ -537,7 +582,6 @@ const Form = () => {
                       const newFormatValue =
                        targetValueNumber.replace(/(\d{2})(\d{5})(\d{4})/, "($1)$2-$3")
 
-                      console.log(newFormatValue)
                       setPhoneNumber(newFormatValue)
                     }}
                   />
@@ -774,6 +818,23 @@ const Form = () => {
               ))}
             </div>
 
+            <div className="w-full h-12 gap-2 flex items-center pl-12 md:justify-center md:pl-0">
+              <input type="checkbox" 
+                     name="" 
+                     id="condition" 
+                     className="w-4 h-4"
+                     onChange={(e) => handleCheckCondition(e.target.checked)} 
+                     />
+                <label htmlFor=""
+                       className="cursor-pointer text-md text-teal-500">
+                       Li e concordo com os {' '}
+                      <span className="underline font-semibold hover:text-teal-700"
+                            onClick={handleOpenModalCondition}>
+                        termos
+                      </span>
+                 </label>
+            </div>
+
             <div className="flex justify-center">
            {imageURL.urls.length > 0 ? (
               <Button
@@ -795,7 +856,6 @@ const Form = () => {
           />
            ) }        
           </div>
-
 
           </div>
         </form>

@@ -14,7 +14,7 @@ export const UserContext = React.createContext({
   state: INITIAL_STATE,
 });
 
-export const UserStorage = ({ children }: UserStorageType) => {  
+export const UserStorage = ({ children }: UserStorageType) => {    
 
   return (
     <UserContext.Provider
