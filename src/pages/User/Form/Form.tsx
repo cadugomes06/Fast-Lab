@@ -38,6 +38,7 @@ const Form = () => {
   const [progress, setProgress] = useState(0);
   const [conditionTerms, setConditionTerms] = useState(false);
   const [modalCondition, setModalCondition] = useState(false);
+  const [isYounger, setIsYounger] = useState(false);
 
   interface FileList {
     name: string;
@@ -274,10 +275,25 @@ const Form = () => {
     }
   }, [plan, cardNumber, CPF]);
 
+
+
+  useEffect(() => {
+    if (birth.length > 9 && birth.length < 11) {
+      const birthDate = Number(birth.slice(6,10))
+      const currentAge = 2023 - birthDate 
+
+      if (currentAge < 18) {
+        setIsYounger(true)
+      } else {
+        setIsYounger(false)
+      }
+    }
+  }, [birth])
+
+
   const handleSexoChange = (event: any) => {
     setSexo(event.target.value);
   };
-
   const handleCheckCondition = (e: any) => {
     setConditionTerms(e)
   }
@@ -395,7 +411,10 @@ const Form = () => {
                   <option value="sulamerica">Sul América</option>
                   <option value="amil">Amil</option>
                   <option value="assim">Assim</option>
-                  <option value="gama">Gama Saúde</option>
+                  <option value="gama">Gama Saúde </option>
+                  <option value="carbej">Caberj Saúde</option>
+                  <option value="integral">Integral Saúde</option>
+                  <option value="goldencross">Golden Cross</option>
                 </select>
               </div>
 
@@ -557,6 +576,7 @@ const Form = () => {
                 </div>
               </div>
 
+              
               <div className="max-h-max w-full md:w-[350px]">
                 <div className="flex flex-col pl-12 md:pl-0 sm:pl-2">
                   <label
@@ -586,8 +606,7 @@ const Form = () => {
                     }}
                   />
                 </div>
-               </div>
-              
+               </div>              
 
               <div className={`w-full max-h-max flex justify-start pl-12 md:pl-0 md:justify-center sm:flex-col sm:pl-2 ${typeNavigator == 'safari' ? 'sm:mb-4' : ''}`}>
                 <div className="flex items-center sm:mb-1">
@@ -649,10 +668,48 @@ const Form = () => {
               </div>
             </div>
 
+            {isYounger? (
+                <div className="mt-14 w-full max-h-max py-2 flex flex-col animeLeft" >
+                <div className="w-full text-center py-4 font-semibold" style={{color: 'var(--color-main)'}}>
+                  <h3>Dados do Responsável do beneficiário</h3>
+                </div>
+
+               <div className="flex flex-col pl-[50px]">
+                  <label htmlFor="responsible" style={{color: 'var(--color-secondary)'}}>
+                       Nome do responsável
+                  </label>  
+                  <Input 
+                     type="text"
+                     name=""
+                     id="responsible"
+                     placeholder="Juliana Pereira (mãe)"
+                     height="42px"
+                     width={isMobile? '160px' : '350px'}
+                      />
+               </div>
+
+               <div className="flex flex-col pl-[50px]">
+                  <label htmlFor="responsibleCPF" style={{color: 'var(--color-secondary)'}}>
+                     CPF do responsável
+                  </label>
+                  <Input 
+                    type="text"
+                    name=""
+                    id="responsibleCPF"
+                    placeholder="182.085.795.72"
+                    height="42px"
+                    width={isMobile? '160px' : '175px'}
+                    />
+               </div>
+            </div>
+              ) : ''}
+
+
+           <div className="w-full max-h-max">
             <div
-              className="text-center font-medium py-2 mt-20 mb-8 md:mt-14 md:mb-4 sm:mt-8"
+              className={`${isYounger? 'mt-[0rem]' : 'mt-[5rem]'} text-center font-medium py-4 mb-4 md:mt-14 md:mb-4 sm:mt-8`}
               style={{ color: "var(--color-main)" }}
-            >
+                  >
               <h4>Endereço do Paciente</h4>
               <hr></hr>
             </div>
@@ -759,6 +816,7 @@ const Form = () => {
                   />
                 </div>
               </div>
+             </div>
             </div>
 
             <div
