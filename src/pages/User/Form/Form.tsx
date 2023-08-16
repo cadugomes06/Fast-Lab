@@ -300,9 +300,20 @@ const Form = () => {
     setConditionTerms(e)
   }
   const handleOpenModalCondition = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+    document.documentElement.style.overflow = 'hidden'
     setModalCondition(true)
   }
+
   const handleCloseModalCondition = () => {
+    window.scrollTo({
+      top: 1500,
+      behavior: 'smooth'
+    })
+    document.documentElement.style.overflow = 'auto'
     setModalCondition(false)
   }
 
@@ -328,7 +339,7 @@ const Form = () => {
     <>
     {modalCondition ? (
               <>
-              <div className="w-full h-[220vh] bg-black/50 flex justify-center items-center absolute z-20 md:h-[305vh]">
+              <div className="w-full h-[100vh] bg-black/50 flex justify-center items-center absolute z-20 ">
 
                 <div className="w-[38rem] h-[38rem] bg-gray-50 absolute bottom-6 rounded-md shadow-md shadow-gray-500 sm:w-[20rem] sm:overflow-y-auto">
                   
@@ -352,9 +363,9 @@ const Form = () => {
 
                   {plan === 'amil' ? (
                       <div className="w-full px-6 sm:px-4 flex flex-col max-h-max">
-                        <h3 className="font-normal text-md flex items-center" style={{color: 'var(--color-main)'}}>Beneficiário <img src={iconAmil} alt="icone-convenio" className="w-[4rem] h-[4rem] pl-2" />
+                        <h3 className="font-normal text-lg flex items-center" style={{color: 'var(--color-main)'}}>Beneficiário <img src={iconAmil} alt="icone-convenio" className="w-[4rem] h-[4rem] pl-2 " />
                         </h3>
-                        <p className="text-sm" style={{color: "var(--color-secondary)"}}>Para a autorização dos seus exames no pré cadastramento, <strong>será necessário que o atendente faça contato por telefone com o mesmo para pegar o token</strong> gerado no portal do convênio e validar os seus exames!</p>
+                        <p className="text-md md:text-sm" style={{color: "var(--color-secondary)"}}>Para a autorização dos seus exames no pré cadastramento, <strong>será necessário que o atendente faça contato por telefone com o mesmo para pegar o token</strong> gerado no portal do convênio e validar os seus exames!</p>
                       </div>
                   ): ''}
 
@@ -362,7 +373,7 @@ const Form = () => {
                       <div className="w-full px-6 sm:px-4 flex flex-col max-h-max">
                         <h3 className="font-normal text-md flex items-center" style={{color: 'var(--color-main)'}}>Beneficiário <img src={iconUnimed} alt="icone-convenio" className="w-[5rem] h-[5rem] pl-2" />
                         </h3>
-                        <p className="text-sm pb-2" style={{color: "var(--color-secondary)"}}>
+                        <p className="text-md md:text-sm" style={{color: "var(--color-secondary)"}}>
                           <strong>O pedido médico deve estar na guia da unimed ou devidamente transcrito pelo convênio</strong>. Solicitação médica no formato incorreto (guia sem transcrição ou receituário) poderá ocasionar o cancelamento da solicitação de pré cadastramento.
                         </p>
                       </div>
@@ -454,6 +465,7 @@ const Form = () => {
                   height="42px"
                   placeholder={planRule}
                   value={cardNumber}
+                  maxLenght={23}
                   onChange={(e) => {
                     const targetValue = e.target.value
                     const formatValue = targetValue.replace(/\D/g, '')
@@ -551,6 +563,7 @@ const Form = () => {
                     height="42px"
                     width='130px'
                     value={birth}
+                    maxLenght={10}
                     onChange={(e) => {
                       const targetValue = e.target.value
                       const targetValueNumber = targetValue.replace(/\D/g, '')
@@ -578,6 +591,7 @@ const Form = () => {
                     height="42px"
                     width={isMobile? '150px' : '200px'}
                     value={CPF}
+                    maxLenght={14}
                     onChange={(e) => {
                       const input = e.target.value;
                       const formatInputValue = input.replace(/\D/g, "");
@@ -614,6 +628,7 @@ const Form = () => {
                     height="42px"
                     width={isMobile? '160px' : '180px'}
                     value={phoneNumber}
+                    maxLenght={14}
                     onChange={(e) => {
                       ///(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"
                       const targetValue = e.target.value
@@ -753,6 +768,7 @@ const Form = () => {
                     height="42px"
                     width='100px'
                     value={CEP}
+                    maxLenght={9}
                     onChange={(e) => {
                       const input = e.target.value;
                       const numericInput = input.replace(/\D/g, "");
@@ -807,6 +823,7 @@ const Form = () => {
                     height="42px"
                     width="100px"
                     value={number}
+                    maxLenght={5}
                     onChange={(e) => {
                       const targetValue = e.target.value
                       const numbetTargetValue = targetValue.replace(/\D/g, '')

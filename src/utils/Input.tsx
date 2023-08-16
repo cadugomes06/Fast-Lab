@@ -8,9 +8,10 @@ interface InputProps {
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
     value?: string
     multiple?: boolean
+    maxLenght?: number
   }
 
-const Input: React.FC<InputProps> = ({type, name, id, placeholder, width, height, onChange, value, multiple}) => {
+const Input: React.FC<InputProps> = ({type, name, id, placeholder, width, height, onChange, value, multiple, maxLenght}) => {
     const inputStyle: React.CSSProperties = {
         width,
         height,
@@ -26,6 +27,7 @@ const Input: React.FC<InputProps> = ({type, name, id, placeholder, width, height
        onChange={onChange}
        value={value}
        multiple={multiple}
+       maxLength={maxLenght}
        className="border-gray-500 outline-none rounded-lg pl-2 shadow-md shadow-gray-300 cursor-pointer focus:outline-teal-200 focus:shadow-teal-200 text-teal-800 mb-4"
         />
   )
