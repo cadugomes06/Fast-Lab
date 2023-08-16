@@ -155,7 +155,7 @@ const UserHome = () => {
             >
               <ul className="flex flex-col items-start">
                 <li className="border-b-[1px] w-[100%] border-gray-100/40">
-                  Unimed Intercambio
+                  Unimed
                 </li>
                 <li className="border-b-[1px] w-[100%] border-gray-100/40">
                   <p>Petrobras</p>

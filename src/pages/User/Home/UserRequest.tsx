@@ -51,14 +51,14 @@ const UserRequest = () => {
         <section className="grid grid-cols-8 animeLeft sm:grid-cols-12">
          <div></div>
 
-         <div className="col-span-6 md:col-span-10 bg-gray-50/50 h-[calc(100vh-100px)] shadow-md shadow-gray-300 rounded-md my-2">
+         <div className="col-span-6 md:col-span-10 bg-gray-50/50 h-[calc(100vh-100px)] shadow-md shadow-gray-300 rounded-md my-2 overflow-y-auto">
             <div className="w-full h-28  flex justify-center items-center">
               <h1 className="text-2xl font-bold textGradient" >
                 Minhas Solicitações
              </h1>
             </div>
 
-            <div className="h-[24rem] w-full max-h-max pt-12 px-6 sm:px-2">
+            <div className=" w-full max-h-max pt-12 px-6 sm:px-2 pb-4 overflow-y-auto ">
               {schedules[0] && !errorSchedule ?
                schedules.map((schedule, index) => (
                 <div 

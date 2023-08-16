@@ -10,6 +10,8 @@ import { UserContext } from "../../../context/UserContext";
 import LoadingCup from "../../../components/LoadingCup";
 import MenuMobile from "../../../components/MenuMobile";
 import closeIcon from '../../../assets/icons/closeX.svg'
+import iconAmil from '../../../assets/icons/amilSaude.svg'
+import iconUnimed from '../../../assets/icons/unimedSaude.svg'
 
 const Form = () => {
   const [plan, setPlan] = useState("");
@@ -128,7 +130,7 @@ const Form = () => {
       ) {
       alert("preencha todos os campos corretamente.");
     } else if (
-      (plan === "unimed-inter" || plan === "sulamerica") &&
+      (plan === "unimed" || plan === "sulamerica") &&
       cardNumber.length < 17
     ) {
       alert("Numeração do convênio incorreta!");
@@ -187,10 +189,10 @@ const Form = () => {
   }
 
   useEffect(() => {
-    if (plan === "unimed-inter") {
+    if (plan === "unimed") {
       setPlanRule("00371111112223334");
       if (
-        plan === "unimed-inter" &&
+        plan === "unimed" &&
         cardNumber.length != 17 &&
         cardNumber.length != 0
       ) {
@@ -326,9 +328,9 @@ const Form = () => {
     <>
     {modalCondition ? (
               <>
-              <div className="w-full h-[220vh] bg-black/50 flex justify-center items-center absolute z-20 md:h-[300vh] ">
+              <div className="w-full h-[220vh] bg-black/50 flex justify-center items-center absolute z-20 md:h-[305vh]">
 
-                <div className="w-[38rem] h-[38rem] bg-gray-50 absolute bottom-6 rounded-md shadow-md shadow-gray-500 sm:w-[20rem]">
+                <div className="w-[38rem] h-[38rem] bg-gray-50 absolute bottom-6 rounded-md shadow-md shadow-gray-500 sm:w-[20rem] sm:overflow-y-auto">
                   
                   <div className="w-[32px] h-[32px] sm:w-[24px] sm:h-[24px] absolute right-2 top-2 sm:right-1 sm:top-1 cursor-pointer"
                        onClick={handleCloseModalCondition}>
@@ -345,8 +347,26 @@ const Form = () => {
                     <p className="pb-4">Estou ciente que na modalidade de pré cadastramento, terei um atendimento mais rápido ao ter meu pedido autorizado pela equipe de atendimento online do laboratório. <strong>Mas terei que apresentar no dia da realização meu pedido médico e documento original com foto ou digital (CNH digital ou Identidade digital). 
                     Não será aceito foto do documento. </strong></p>
 
-                    <p>Por se tratar de exames clínicos, os mesmo possuem preparos específicos que devem ser cumpridos para a realização.  <strong>O não cumprimento poderá adiar os exames, para um dia em que o paciente esteja devidamente preparado</strong>, conforme as orientações da equipe de atendimento online.</p>
+                    <p>Por se tratar de exames clínicos, possuem preparos específicos que devem ser cumpridos para a realização. <strong>O não cumprimento, poderá ocasionar pendência do mesmo, o paciente poderá retornar outro dia devidamente preparado</strong> conforme as orientações da equipe de atendimento online.</p>
                   </div>
+
+                  {plan === 'amil' ? (
+                      <div className="w-full px-6 sm:px-4 flex flex-col max-h-max">
+                        <h3 className="font-normal text-md flex items-center" style={{color: 'var(--color-main)'}}>Beneficiário <img src={iconAmil} alt="icone-convenio" className="w-[4rem] h-[4rem] pl-2" />
+                        </h3>
+                        <p className="text-sm" style={{color: "var(--color-secondary)"}}>Para a autorização dos seus exames no pré cadastramento, <strong>será necessário que o atendente faça contato por telefone com o mesmo para pegar o token</strong> gerado no portal do convênio e validar os seus exames!</p>
+                      </div>
+                  ): ''}
+
+                 {plan === 'unimed' ? (
+                      <div className="w-full px-6 sm:px-4 flex flex-col max-h-max">
+                        <h3 className="font-normal text-md flex items-center" style={{color: 'var(--color-main)'}}>Beneficiário <img src={iconUnimed} alt="icone-convenio" className="w-[5rem] h-[5rem] pl-2" />
+                        </h3>
+                        <p className="text-sm pb-2" style={{color: "var(--color-secondary)"}}>
+                          <strong>O pedido médico deve estar na guia da unimed ou devidamente transcrito pelo convênio</strong>. Solicitação médica no formato incorreto (guia sem transcrição ou receituário) poderá ocasionar o cancelamento da solicitação de pré cadastramento.
+                        </p>
+                      </div>
+                  ): ''}
 
                 </div>
               </div>  
@@ -404,12 +424,12 @@ const Form = () => {
                   <option value="convenio" disabled>
                     Convênio
                   </option>
-                  <option value="unimed-inter">Unimed intercambio</option>
-                  <option value="mediservice">Mediservice</option>
+                  <option value="unimed">Unimed</option>
                   <option value="petrobras">Petrobras</option>
                   <option value="tlife">Petrobras (periódico)</option>
                   <option value="sulamerica">Sul América</option>
                   <option value="amil">Amil</option>
+                  <option value="mediservice">Mediservice</option>
                   <option value="assim">Assim</option>
                   <option value="gama">Gama Saúde </option>
                   <option value="carbej">Caberj Saúde</option>
@@ -669,12 +689,12 @@ const Form = () => {
             </div>
 
             {isYounger? (
-                <div className="mt-14 w-full max-h-max py-2 flex flex-col animeLeft" >
+                <div className="mt-14 sm:mt-4 w-full max-h-max py-2 flex flex-col animeLeft md:items-center " >
                 <div className="w-full text-center py-4 font-semibold" style={{color: 'var(--color-main)'}}>
-                  <h3>Dados do Responsável do beneficiário</h3>
+                  <h3>Dados do Responsável</h3>
                 </div>
 
-               <div className="flex flex-col pl-[50px]">
+               <div className="flex flex-col pl-[50px] md:pl-0 sm:pl-2 sm:w-full">
                   <label htmlFor="responsible" style={{color: 'var(--color-secondary)'}}>
                        Nome do responsável
                   </label>  
@@ -684,11 +704,11 @@ const Form = () => {
                      id="responsible"
                      placeholder="Juliana Pereira (mãe)"
                      height="42px"
-                     width={isMobile? '160px' : '350px'}
+                     width={isMobile? '300px' : '350px'}
                       />
                </div>
 
-               <div className="flex flex-col pl-[50px]">
+               <div className="flex flex-col pl-[50px] md:pl-[146px] md:w-full sm:pl-2">
                   <label htmlFor="responsibleCPF" style={{color: 'var(--color-secondary)'}}>
                      CPF do responsável
                   </label>
@@ -707,7 +727,7 @@ const Form = () => {
 
            <div className="w-full max-h-max">
             <div
-              className={`${isYounger? 'mt-[0rem]' : 'mt-[5rem]'} text-center font-medium py-4 mb-4 md:mt-14 md:mb-4 sm:mt-8`}
+              className={`${isYounger? 'mt-[0rem]' : 'mt-[5rem]'} text-center font-medium py-4 mb-4 md:mt-14 md:mb-4 sm:mt-6`}
               style={{ color: "var(--color-main)" }}
                   >
               <h4>Endereço do Paciente</h4>
