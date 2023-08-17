@@ -28,6 +28,8 @@ const Form = () => {
   const [number, setNumber] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
   const [unit, setUnit] = useState("");
+  const [responsibleName, setResponsibleName] = useState("");
+  const [responsibleCPF, setResponsibleCPF] = useState("");
 
   const [fileUrl, setFileUrl] = useState<FileList[]>([]);
   const [imageURL, setImageURL] = useState<{urls: string[]}>({urls: []});
@@ -170,7 +172,9 @@ const Form = () => {
             unit: unit,
             imageUrl: imageURL.urls,
             userID: userID,
-            status: 'solicitado'
+            status: 'solicitado',
+            responsibleName: responsibleName,
+            responsibleCPF: responsibleCPF
           }
           )
           window.scrollTo({
@@ -497,7 +501,7 @@ const Form = () => {
                 style={{ color: "var(--color-secondary)" }}
                 className="w-[350px] sm:w-[300px] pb-1 mr-8 md:mr-0"
               >
-                Nome civil
+                Nome completo
                 <Input
                   type="text"
                   name=""
@@ -720,6 +724,7 @@ const Form = () => {
                      placeholder="Juliana Pereira (mãe)"
                      height="42px"
                      width={isMobile? '300px' : '350px'}
+                     onChange={(e) => setResponsibleName(e.target.value)}
                       />
                </div>
 
@@ -733,7 +738,9 @@ const Form = () => {
                     id="responsibleCPF"
                     placeholder="182.085.795.72"
                     height="42px"
+                    maxLenght={14}
                     width={isMobile? '160px' : '175px'}
+                    onChange={(e) => setResponsibleCPF(e.target.value)}
                     />
                </div>
             </div>

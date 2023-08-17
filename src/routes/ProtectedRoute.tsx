@@ -2,8 +2,6 @@ import { useEffect, useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import { useNavigate, Outlet } from 'react-router-dom';
 
-
-
 export const ProtectedRoute = () => {
 
     const { state } = useContext(UserContext)

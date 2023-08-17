@@ -48,6 +48,8 @@ const AdminHome = () => {
     status: string;
     imageUrl: string[];
     id: string;
+    responsibleName: string;
+    responsibleCPF: string;
   }
 
   const formsCollectionRef = collection(db, "formulario");
@@ -96,6 +98,8 @@ const AdminHome = () => {
       console.log(updateStatus)
     }
   }
+
+  console.log(forms[indexPac])
 
 
 
@@ -181,7 +185,13 @@ const AdminHome = () => {
 
               <h3 className="textBase flex items-center">
                 <img src={usericon} alt="" className="w-6 h-6 mr-4" />
-                nome social?: <span className="dataText">{forms[indexPac]?.socialname}</span>
+                nome social: <span className="dataText">{forms[indexPac]?.socialname || '- - -'}</span>
+              </h3>
+
+              <h3 className="textBase flex items-center">
+                <img src={usericon} alt="" className="w-6 h-6 mr-4" />
+                Responsável: <span className="dataText">{forms[indexPac]?.responsibleName}</span>
+                CPF do Responsável: <span className="dataText">{forms[indexPac]?.responsibleCPF}</span>
               </h3>
 
               <h3 className="textBase flex items-center">
