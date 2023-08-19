@@ -11,6 +11,10 @@ import location from '../../assets/icons/location.svg'
 import build from '../../assets/icons/build.svg'
 import phone from '../../assets/icons/phone.svg'
 import planIcon from '../../assets/icons/plan.svg'
+import baloonIcon from '../../assets/icons/baloon-check.svg'
+import requestIcon from '../../assets/icons/request-icon.svg'
+import cancelsIcon from '../../assets/icons/cancels-icon.svg'
+
 import HeaderAdmin from "../../components/HeaderAdmin";
 import { useNavigate } from "react-router-dom";
 import Button from "../../utils/Button";
@@ -137,8 +141,8 @@ const AdminHome = () => {
                     </span>
                   </p>
                   {form.status == 'solicitado'? (
-                      <div className="rounded-[50%] w-2 h-2 bg-yellow-300"></div>
-                    ): <div className="rounded-[50%] w-2 h-2 bg-green-400"></div>}
+                      <div className="rounded-[50%] w-3 h-3 bg-yellow-300"></div>
+                    ): <div className="rounded-[50%] w-3 h-3 bg-green-400"></div>}
   
                 </div>                
               );
@@ -284,6 +288,29 @@ const AdminHome = () => {
             ""
           )}
         </section>
+
+        <div className="absolute w-[3rem] bg-gray-100/80 z-20 h-[calc(100vh-80px)] right-2 shadow-md shadow-gray-300 opacity-50 cursor-pointer animeAsideMenu flex flex-col">
+
+          <div className="py-8 text-center font-semibold text-md textGradient">
+            <h3>Menu</h3>            
+          </div>
+
+          <div className="flex flex-col w-full h-full justify-center items-center">
+            <ul className="h-full w-full mb-12 flex flex-col items-center justify-center gap-8">
+              <li className="">
+                <img src={baloonIcon} alt="" className="w-[3.5rem] h-[3.5rem] " />
+              </li>
+              <li>
+                <img src={requestIcon} alt="" className="w-[3.5rem] h-[3.5rem]"/>
+              </li>
+              <li>
+                <img src={cancelsIcon} alt="" className="w-[3.5rem] h-[3.5rem]"/>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
       </div>
     </div>
   );

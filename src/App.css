@@ -252,3 +252,17 @@ input[type='file'] {
     background-position: -900px 30px;
   } 
 }
+
+.animeAsideMenu:hover {
+  animation: openAsideMenu 1s forwards ease-out
+}
+
+@keyframes openAsideMenu {
+  from {
+    width: 3rem;
+  }
+  to {
+    width: 8rem;
+    opacity: 1;
+  }
+}
