@@ -19,6 +19,7 @@ import { doc, updateDoc } from "firebase/firestore";
 const AdminHome = () => {
   const [forms, setForms] = useState<TypeUser[]>([]);
   const [indexPac, setIndexPac] = useState(0);
+  const [statusRequest, setStatusRequest] = useState('solicitado');
 
   const navigate = useNavigate()
 
@@ -95,17 +96,13 @@ const AdminHome = () => {
       })
       alert('Pronto! O status foi alterado para "solicitado"!')
       window.location.reload()
-      console.log(updateStatus)
     }
   }
-
-  console.log(forms[indexPac])
-
 
 
   return (
     <div>
-      <HeaderAdmin />
+      <HeaderAdmin statusRequest={statusRequest} />
 
       <div className="h-[calc(100vh-80px)] overflow-hidden flex">
 
@@ -115,37 +112,43 @@ const AdminHome = () => {
            <div className="w-[12.9rem] fixed rounded-md z-50 bg-white">
             <h1 className="text-center font-semibold pt-6 pb-6 shadow-md shadow-bray-200 textGradient text-lg"
               >
-            Agendamentos
+            Solicitações
             </h1>
            </div>
        
           <div className="mt-[4.6rem] z-0">
           {forms?.map((form: any, index: number) => {
-            return (
-              <div key={index}
-                   onClick={() => handleShowPacient(index)}
-                   className='pl-2 py-2 border-b-[1px] cursor-pointer hover:bg-teal-100'
-                   style={index === indexPac? 
-                         {background: "var(--color-third)"} 
-                         : {} }>
-                <h3 className="text-gray-500 text-sm">pac: 
-                  <span className="pl-1 font-semibold text-md"
-                        style={{color: "var(--color-main)"}}>{form.name}</span>
-                </h3>
-                <p className="text-gray-500 text-sm flex items-center">
-                  convênio:
-                  <span className="font-medium pl-1"
-                        style={{color: "var(--color-secondary)"}}>
-                    {form.plan}
-                  </span>
-                </p>
-                {form.status == 'solicitado'? (
-                    <div className="rounded-[50%] w-2 h-2 bg-yellow-300"></div>
-                  ): <div className="rounded-[50%] w-2 h-2 bg-green-400"></div>}
-
-              </div>
-            );
+            console.log(statusRequest)
+            if (forms[index].status === statusRequest) {
+              return (
+                <div key={index}
+                     onClick={() => handleShowPacient(index)}
+                     className='pl-2 py-2 border-b-[1px] cursor-pointer hover:bg-teal-100'
+                     style={index === indexPac? 
+                           {background: "var(--color-third)"} 
+                           : {} }>
+                  <h3 className="text-gray-500 text-sm">pac: 
+                    <span className="pl-1 font-semibold text-md"
+                          style={{color: "var(--color-main)"}}>{form.name}</span>
+                  </h3>
+                  <p className="text-gray-500 text-sm flex items-center">
+                    convênio:
+                    <span className="font-medium pl-1"
+                          style={{color: "var(--color-secondary)"}}>
+                      {form.plan}
+                    </span>
+                  </p>
+                  {form.status == 'solicitado'? (
+                      <div className="rounded-[50%] w-2 h-2 bg-yellow-300"></div>
+                    ): <div className="rounded-[50%] w-2 h-2 bg-green-400"></div>}
+  
+                </div>                
+              );
+            }
+           
           })}
+        
+
           </div>
         </aside>
 
@@ -190,8 +193,12 @@ const AdminHome = () => {
 
               <h3 className="textBase flex items-center">
                 <img src={usericon} alt="" className="w-6 h-6 mr-4" />
-                Responsável: <span className="dataText">{forms[indexPac]?.responsibleName}</span>
-                CPF do Responsável: <span className="dataText">{forms[indexPac]?.responsibleCPF}</span>
+                Responsável: <span className="text-blue-500 font-semibold pl-2 text-lg">{forms[indexPac]?.responsibleName}</span>
+              </h3>
+
+              <h3 className="textBase flex items-center">  
+              <img src={cpf} alt="" className="w-6 h-6 mr-4" />              
+                CPF do Responsável: <span className="text-blue-500 font-semibold pl-2 text-lg"> {forms[indexPac]?.responsibleCPF}</span>
               </h3>
 
               <h3 className="textBase flex items-center">

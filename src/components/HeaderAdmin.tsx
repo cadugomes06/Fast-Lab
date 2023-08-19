@@ -8,11 +8,11 @@ import { auth } from '../services/firebaseConfig';
 
 const HeaderAdmin = () => {
     const [adminStatus, setAdminStatus] = useState(false)
-
     const [signOut, loading, error] = useSignOut(auth);
 
     const isAdminOn = window.localStorage.getItem('admin')
     const navigate = useNavigate()
+
 
     useEffect(() => {
         if(isAdminOn != 'on') {
@@ -36,7 +36,6 @@ const HeaderAdmin = () => {
 
     }
   
-
     return (
         <>
         <header className='h-20 w-full flex items-center justify-between px-6 md:px-2 border-b-[0.1rem] border-teal-100'
@@ -50,7 +49,9 @@ const HeaderAdmin = () => {
 
              {adminStatus? (
                 <ul className='flex items-center text-teal-600 gap-4 font-semibold text-sm uppercase'>
-                  <li aria-disabled>Cadastrados</li>  
+                  <li onClick={() => {}}>
+                    Cadastrados
+                  </li>  
                   <li className='hover:text-white hover:underline cursor-pointer transition duration-300'
                       onClick={handleClickLogout}>
                     Sair
@@ -65,5 +66,4 @@ const HeaderAdmin = () => {
         </>
     )
 }
-
-export default HeaderAdmin
+export default HeaderAdmin;

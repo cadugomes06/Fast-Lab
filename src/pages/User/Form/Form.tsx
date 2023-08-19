@@ -300,26 +300,28 @@ const Form = () => {
   const handleSexoChange = (event: any) => {
     setSexo(event.target.value);
   };
-  const handleCheckCondition = (e: any) => {
-    setConditionTerms(e)
+  const handleCheckCondition = (event: any) => {
+    if (event) {
+      setConditionTerms(true)
+    } else {
+      setConditionTerms(false)
+    }
   }
   const handleOpenModalCondition = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     })
-    document.documentElement.style.overflow = 'hidden'
     setModalCondition(true)
   }
-
   const handleCloseModalCondition = () => {
     window.scrollTo({
       top: 1500,
       behavior: 'smooth'
     })
-    document.documentElement.style.overflow = 'auto'
     setModalCondition(false)
   }
+
 
   //Verificar dispositivo mobile
   const {innerWidth: width} = window
@@ -345,13 +347,14 @@ const Form = () => {
               <>
               <div className="w-full h-[100vh] bg-black/50 flex justify-center items-center absolute z-20 ">
 
-                <div className="w-[38rem] h-[38rem] bg-gray-50 absolute bottom-6 rounded-md shadow-md shadow-gray-500 sm:w-[20rem] sm:overflow-y-auto">
-                  
+                <div className="w-[38rem] h-[38rem] bg-gray-50 absolute bottom-6 rounded-md shadow-md shadow-gray-500 sm:w-[20rem] sm:overflow-y-auto" id="modalTerms">                  
                   <div className="w-[32px] h-[32px] sm:w-[24px] sm:h-[24px] absolute right-2 top-2 sm:right-1 sm:top-1 cursor-pointer"
-                       onClick={handleCloseModalCondition}>
+                      onClick={handleCloseModalCondition}            
+                     >
                     <img src={closeIcon} 
                          alt="icone-de-x"
-                         className="sm:w-[24px] sm:h-[24px]" />
+                         className="sm:w-[24px] sm:h-[24px]"     
+                    />
                   </div>
 
                   <div className="w-full bg-gray-100 py-8 text-xl text-center font-semibold rounded-md sm:text-lg sm:py-4" style={{color: 'var(--color-main)'}}>
