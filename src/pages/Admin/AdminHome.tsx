@@ -19,7 +19,6 @@ import { doc, updateDoc } from "firebase/firestore";
 const AdminHome = () => {
   const [forms, setForms] = useState<TypeUser[]>([]);
   const [indexPac, setIndexPac] = useState(0);
-  const [statusRequest, setStatusRequest] = useState('solicitado');
 
   const navigate = useNavigate()
 
@@ -102,7 +101,7 @@ const AdminHome = () => {
 
   return (
     <div>
-      <HeaderAdmin statusRequest={statusRequest} />
+      <HeaderAdmin />
 
       <div className="h-[calc(100vh-80px)] overflow-hidden flex">
 
@@ -118,8 +117,7 @@ const AdminHome = () => {
        
           <div className="mt-[4.6rem] z-0">
           {forms?.map((form: any, index: number) => {
-            console.log(statusRequest)
-            if (forms[index].status === statusRequest) {
+            if (forms[index].status === 'solicitado') {
               return (
                 <div key={index}
                      onClick={() => handleShowPacient(index)}
