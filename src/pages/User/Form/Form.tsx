@@ -256,8 +256,8 @@ const Form = () => {
         setCardnumberError("");
       }
     } else if (plan === "gama") {
-      setPlanRule("0001112");
-      if (plan === "gama" && cardNumber.length != 7 && cardNumber.length != 0) {
+      setPlanRule("010000222333045");
+      if (plan === "gama" && cardNumber.length != 15 && cardNumber.length != 0) {
         setCardnumberError("formato incorreto.");
       } else {
         setCardnumberError("");
@@ -270,17 +270,38 @@ const Form = () => {
         cardNumber.length != 0
       ) {
         setCardnumberError("formato incorreto.");
-      } else {
+      }
+      } else if (plan === "caberj") {
+        setPlanRule("00001111222233445");
+        if (plan === "caberj" && 
+           cardNumber.length != 17 && cardNumber.length != 0 ) {
+          setCardnumberError("formato incorreto.");
+        } else {
         setCardnumberError("");
       }
+    } else if (plan === "integral") {
+      setPlanRule("00001111222233445");
+      if (plan === "integral" && 
+         cardNumber.length != 17 && cardNumber.length != 0 ) {
+        setCardnumberError("formato incorreto.");
+      } else {
+      setCardnumberError("");
     }
+  } else if (plan === "goldencross") {
+    setPlanRule("0001112223");
+    if (plan === "goldencross" && 
+       cardNumber.length != 10 && cardNumber.length != 0 ) {
+      setCardnumberError("formato incorreto.");
+    } else {
+    setCardnumberError("");
+  }
+ }
     if (CPF && CPF.length != 14) {
       setCpfError("CPF incorreto.");
     } else {
       setCpfError("");
     }
   }, [plan, cardNumber, CPF]);
-
 
 
   useEffect(() => {
@@ -450,7 +471,7 @@ const Form = () => {
                   <option value="mediservice">Mediservice</option>
                   <option value="assim">Assim</option>
                   <option value="gama">Gama Saúde </option>
-                  <option value="carbej">Caberj Saúde</option>
+                  <option value="caberj">Caberj Saúde</option>
                   <option value="integral">Integral Saúde</option>
                   <option value="goldencross">Golden Cross</option>
                 </select>

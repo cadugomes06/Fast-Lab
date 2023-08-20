@@ -23,6 +23,7 @@ import { doc, updateDoc } from "firebase/firestore";
 const AdminHome = () => {
   const [forms, setForms] = useState<TypeUser[]>([]);
   const [indexPac, setIndexPac] = useState(0);
+  const [currentStatus, setCurrentStatus] = useState('solicitado')
 
   const navigate = useNavigate()
 
@@ -91,13 +92,28 @@ const AdminHome = () => {
     const userId =  forms[indexPac].id
 
     if (forms[indexPac].status == 'solicitado') {
-      return alert('O já está em estado "solicitado"!')
+      return alert('O paciente já está em estado "solicitado"!')
     } else {
       const updateStatus = doc(db, 'formulario', userId)
       await updateDoc(updateStatus, {
         status: 'solicitado'
       })
       alert('Pronto! O status foi alterado para "solicitado"!')
+      window.location.reload()
+    }
+  }
+
+  const updateStatusCancel = async () => {
+    const userId =  forms[indexPac].id
+
+    if (forms[indexPac].status == 'cancelado') {
+      return alert('O paciente já está em estado "cancelado"!')
+    } else {
+      const updateStatus = doc(db, 'formulario', userId)
+      await updateDoc(updateStatus, {
+        status: 'cancelado'
+      })
+      alert('Pronto! O status foi alterado para "cancelado"!')
       window.location.reload()
     }
   }
@@ -110,7 +126,7 @@ const AdminHome = () => {
       <div className="h-[calc(100vh-80px)] overflow-hidden flex">
 
         <aside className="bg-gray-100/50 w-52 h-full max-h-max 
-         overflow-y-auto shadow-md shadow-gray-400 flex flex-col relative"
+         overflow-y-auto shadow-md shadow-gray-400 flex flex-col relative z-40"
         >
            <div className="w-[12.9rem] fixed rounded-md z-50 bg-white">
             <h1 className="text-center font-semibold pt-6 pb-6 shadow-md shadow-bray-200 textGradient text-lg"
@@ -119,9 +135,9 @@ const AdminHome = () => {
             </h1>
            </div>
        
-          <div className="mt-[4.6rem] z-0">
+          <div className="mt-[4.6rem] z-0 ">
           {forms?.map((form: any, index: number) => {
-            if (forms[index].status === 'solicitado') {
+            if (forms[index].status === currentStatus) {
               return (
                 <div key={index}
                      onClick={() => handleShowPacient(index)}
@@ -142,20 +158,33 @@ const AdminHome = () => {
                   </p>
                   {form.status == 'solicitado'? (
                       <div className="rounded-[50%] w-3 h-3 bg-yellow-300"></div>
-                    ): <div className="rounded-[50%] w-3 h-3 bg-green-400"></div>}
+                    ): ''}
+                      {form.status == 'pronto'? (
+                      <div className="rounded-[50%] w-3 h-3 bg-teal-500"></div>
+                    ): ''}
+                      {form.status == 'cancelado'? (
+                      <div className="rounded-[50%] w-3 h-3 bg-red-500"></div>
+                    ): ''}
   
                 </div>                
               );
             }
            
-          })}
-        
+          })}       
 
           </div>
         </aside>
 
 
-        <section className="w-[calc(100%-200px)] h-full max-h-max overflow-y-auto pb-6 ">
+        <section className="w-[calc(100%-200px)] h-full max-h-max overflow-y-auto pb-6 relative">
+
+             <div className={`absolute w-[6rem] h-8 
+                            ${currentStatus === 'solicitado' ? 'bg-yellow-300 shadow-yellow-700' : ''}
+                            ${currentStatus === 'pronto' ? 'bg-teal-500 shadow-teal-700' : ''}
+                            ${currentStatus === 'cancelado' ? 'bg-red-500 shadow-red-700' : ''}
+                             rounded-xl left-[-10px] top-5 flex justify-center items-center z-40 shadow-xl`}>
+              <p className="">{currentStatus}</p>
+             </div>
 
            <div className="w-full h-[4.6rem] bg-white flex items-center justify-center pt-16 pb-8">
              <h1 className="font-bold text-2xl textGradient"
@@ -170,7 +199,7 @@ const AdminHome = () => {
              </div>
            </div>
 
-          {forms ? (
+          {forms ? 
             <div className="pl-12 pt-4 flex flex-col justify-center gap-1 detail animeLeft">
               <h3 className="textBase flex items-center">
                <img src={planIcon} alt='icone-de-saude' className="w-6 h-6 mr-4" /> 
@@ -281,10 +310,20 @@ const AdminHome = () => {
                     background='#a0a0a0'
                     onClick={updateStatusSolicitation}
                      />
-                </div>
 
+                {currentStatus === 'pronto' || currentStatus === 'solicitado' ? (
+                  <Button
+                  text='Cancelar'
+                  height="42px"
+                  width="120px"
+                  background='rgb(239 68 68)'
+                  onClick={updateStatusCancel}
+                  />
+                  ) : null }
+
+                </div>
              </div>
-          ) : (
+           : (
             ""
           )}
         </section>
@@ -295,16 +334,22 @@ const AdminHome = () => {
             <h3>Menu</h3>            
           </div>
 
-          <div className="flex flex-col w-full h-full justify-center items-center">
-            <ul className="h-full w-full mb-12 flex flex-col items-center justify-center gap-8">
-              <li className="">
-                <img src={baloonIcon} alt="" className="w-[3.5rem] h-[3.5rem] " />
+          <div className="flex flex-col w-full h-full justify-center items-center relative">
+            <ul className="h-full w-full mb-12 flex flex-col items-center justify-center gap-12">
+              <li onClick={() => setCurrentStatus('solicitado')}
+                  className="relative hover:after:content-['Solicitados'] after:absolute after:bg-yellow-400 after:text-white hover:after:p-1 after:rounded-md 
+                  after:top-0 after:left-[-75px] after:text-sm">
+                <img src={requestIcon} alt="" className="w-[3rem] h-[3rem]"/>
               </li>
-              <li>
-                <img src={requestIcon} alt="" className="w-[3.5rem] h-[3.5rem]"/>
+              <li onClick={() => setCurrentStatus('pronto')}
+                  className="relative hover:after:content-['Prontos'] after:absolute after:bg-teal-700 after:text-teal-100 hover:after:p-1 after:rounded-md 
+                  after:top-0 after:left-[-60px] after:text-sm">
+                <img src={baloonIcon} alt="" className="w-[3rem] h-[3rem] " />
               </li>
-              <li>
-                <img src={cancelsIcon} alt="" className="w-[3.5rem] h-[3.5rem]"/>
+              <li onClick={() => setCurrentStatus('cancelado')}
+                  className="relative hover:after:content-['Cancelados'] after:absolute after:bg-red-500 after:text-white hover:after:p-1 after:rounded-md 
+                  after:top-0 after:left-[-80px] after:text-sm">
+                <img src={cancelsIcon} alt="" className="w-[3rem] h-[3rem]"/>
               </li>
             </ul>
           </div>

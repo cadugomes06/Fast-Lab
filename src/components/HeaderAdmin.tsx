@@ -49,15 +49,14 @@ const HeaderAdmin = () => {
 
              {adminStatus? (
                 <ul className='flex items-center text-teal-600 gap-4 font-semibold text-sm uppercase'>
-                  <li onClick={() => {}}>
-                    Cadastrados
-                  </li>  
                   <li className='hover:text-white hover:underline cursor-pointer transition duration-300'
                       onClick={handleClickLogout}>
                     Sair
                  </li>  
 
-                  <li><img src={userIcon} alt="ícone-de-usuário" className='w-[24px] h-[24px]' /></li>
+                  <li>
+                    <img src={userIcon} alt="ícone-de-usuário" className='w-[24px] h-[24px]' />
+                  </li>
                 </ul> 
              ): '' }
       
