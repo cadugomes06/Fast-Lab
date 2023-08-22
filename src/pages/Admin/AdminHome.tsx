@@ -119,6 +119,7 @@ const AdminHome = () => {
   }
 
 
+
   return (
     <div>
       <HeaderAdmin />
@@ -179,11 +180,11 @@ const AdminHome = () => {
         <section className="w-[calc(100%-200px)] h-full max-h-max overflow-y-auto pb-6 relative">
 
              <div className={`absolute w-[6rem] h-8 
-                            ${currentStatus === 'solicitado' ? 'bg-yellow-300 shadow-yellow-700' : ''}
-                            ${currentStatus === 'pronto' ? 'bg-teal-500 shadow-teal-700' : ''}
-                            ${currentStatus === 'cancelado' ? 'bg-red-500 shadow-red-700' : ''}
-                             rounded-xl left-[-10px] top-5 flex justify-center items-center z-40 shadow-xl`}>
-              <p className="">{currentStatus}</p>
+                            ${currentStatus === 'solicitado' ? 'bg-yellow-300 shadow-yellow-300/60' : ''}
+                            ${currentStatus === 'pronto' ? 'bg-teal-400/60 shadow-teal-300/80' : ''}
+                            ${currentStatus === 'cancelado' ? 'bg-red-500 shadow-red-300/80' : ''}
+                             rounded-xl left-[-10px] top-5 flex justify-center items-center z-40 shadow-lg`}>
+              <p className="font-normal text-white text-md">{currentStatus}</p>
              </div>
 
            <div className="w-full h-[4.6rem] bg-white flex items-center justify-center pt-16 pb-8">
@@ -192,11 +193,6 @@ const AdminHome = () => {
                 Dados do paciente
              </h1>
 
-             <div>
-              <ul>
-                <li></li>
-              </ul>
-             </div>
            </div>
 
           {forms ? 
@@ -224,12 +220,12 @@ const AdminHome = () => {
 
               <h3 className="textBase flex items-center">
                 <img src={usericon} alt="" className="w-6 h-6 mr-4" />
-                Responsável: <span className="text-blue-500 font-semibold pl-2 text-lg">{forms[indexPac]?.responsibleName}</span>
+                Responsável: <span className="text-blue-500 font-semibold pl-2 text-lg">{forms[indexPac]?.responsibleName || '- - -'}</span>
               </h3>
 
               <h3 className="textBase flex items-center">  
               <img src={cpf} alt="" className="w-6 h-6 mr-4" />              
-                CPF do Responsável: <span className="text-blue-500 font-semibold pl-2 text-lg"> {forms[indexPac]?.responsibleCPF}</span>
+                CPF do Responsável: <span className="text-blue-500 font-semibold pl-2 text-lg"> {forms[indexPac]?.responsibleCPF || '- - -'}</span>
               </h3>
 
               <h3 className="textBase flex items-center">
@@ -336,16 +332,19 @@ const AdminHome = () => {
 
           <div className="flex flex-col w-full h-full justify-center items-center relative">
             <ul className="h-full w-full mb-12 flex flex-col items-center justify-center gap-12">
+
               <li onClick={() => setCurrentStatus('solicitado')}
                   className="relative hover:after:content-['Solicitados'] after:absolute after:bg-yellow-400 after:text-white hover:after:p-1 after:rounded-md 
                   after:top-0 after:left-[-75px] after:text-sm">
-                <img src={requestIcon} alt="" className="w-[3rem] h-[3rem]"/>
+                <img src={requestIcon} alt="" className="w-[3rem] h-[3rem] "/>
               </li>
+
               <li onClick={() => setCurrentStatus('pronto')}
                   className="relative hover:after:content-['Prontos'] after:absolute after:bg-teal-700 after:text-teal-100 hover:after:p-1 after:rounded-md 
                   after:top-0 after:left-[-60px] after:text-sm">
                 <img src={baloonIcon} alt="" className="w-[3rem] h-[3rem] " />
               </li>
+
               <li onClick={() => setCurrentStatus('cancelado')}
                   className="relative hover:after:content-['Cancelados'] after:absolute after:bg-red-500 after:text-white hover:after:p-1 after:rounded-md 
                   after:top-0 after:left-[-80px] after:text-sm">

@@ -32,6 +32,7 @@ const UserRequest = () => {
     }, []);
 
     interface typeSchedule {
+        name: string;
         plan: string;
         unit: string;
         status: string
@@ -63,12 +64,16 @@ const UserRequest = () => {
                schedules.map((schedule, index) => (
                 <div 
                    key={index} 
-                   className={`${schedule.status === 'solicitado' ? `bg-yellow-400/60` : `bg-teal-400/50`} flex justify-between w-full rounded-lg h-12 mb-2 items-center px-4 shadow-md shadow-gray-300 font-normal text-sm`}
+                   className={`${schedule.status === 'solicitado' ? `bg-yellow-400/60` : '' } 
+                   ${schedule.status === 'pronto' ? `bg-teal-400/60` : '' } 
+                   ${schedule.status === 'cancelado' ? `bg-red-500/60` : '' } 
+                   flex justify-between w-full rounded-lg h-12 mb-2 items-center px-4 shadow-md shadow-gray-300 font-normal text-sm`}
                    style={{color: 'var(--color-main)'}}>
                     <img src={calendarIcon} alt="caléndario" className="w-[20px] h-[20px]" />
+                    <p className="sm:hidden" >{schedule?.name}</p> 
                     <p className="ssm:hidden">{schedule?.plan}</p> 
                     <p>{schedule?.unit}</p>
-                    <p>Status: {schedule?.status}</p>
+                    <p>{schedule?.status}</p>
                 </div>
                )) 
                : 

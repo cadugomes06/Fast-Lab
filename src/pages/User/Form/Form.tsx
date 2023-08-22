@@ -343,7 +343,6 @@ const Form = () => {
     setModalCondition(false)
   }
 
-
   //Verificar dispositivo mobile
   const {innerWidth: width} = window
   useEffect(() => {
@@ -362,6 +361,9 @@ const Form = () => {
     }, [])
 
 
+  useEffect(() => {
+    console.log(fileUrl)
+  }, [fileUrl])
   return (
     <>
     {modalCondition ? (
@@ -921,8 +923,9 @@ const Form = () => {
               <div className="w-[550px] flex items-center md:flex md:flex-col sm:w-full sm:justify-center sm:items-center">
               <label htmlFor="document"
                      style={{ color: "var(--color-secondary)" }}
-                     className="w-[350px] sm:w-[300px] flex justify-center items-center rounded-md py-[12px] sm:py-[8px] sm:text-sm bg-white shadow-md shadow-gray-300 border border-dashed border-gray-400 cursor-pointer uppercase hover:bg-gray-600 transition duration-50 sm:pl-2" >
+                     className="w-[350px] sm:w-[300px] flex justify-evenly items-center rounded-md py-[12px] sm:py-[8px] sm:text-sm bg-white shadow-md shadow-gray-300 border border-dashed border-teal-500 cursor-pointer uppercase hover:bg-gray-600 transition duration-50 sm:pl-2" >
                 Pedido médico (máximo 8)
+              <img width="28" height="28" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-upload-web-flaticons-lineal-color-flat-icons-5.png" alt="external-upload-web-flaticons-lineal-color-flat-icons-5"/>
               </label>
               <Input
                 type="file"
@@ -939,7 +942,8 @@ const Form = () => {
             <div className="max-h-max ml-14 sm:ml-4 text-sm text-gray-600 mb-6">
               {fileUrl.map((img, index) => (
                 <div key={index}>
-                  <p className={progress == 100? 'text-green-500' : ''}>{img?.name} - {progress.toFixed(0)}%</p>
+                  <p className={progress == 100? 'text-green-500' : ''}>{img?.name}</p>
+                  <div><input type="range" name="" min='0' max='100' value={progress.toFixed(0)}  id="" readOnly /></div>
                 </div>
               ))}
             </div>
