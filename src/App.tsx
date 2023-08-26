@@ -12,6 +12,7 @@ import FormConfirm from './pages/User/Form/FormConfirm';
 import UserRequest from './pages/User/Home/UserRequest';
 import AdminLogin from './pages/Admin/AdminLogin';
 import ProtectedRoute from './routes/ProtectedRoute';
+import AllCustumers from './pages/Admin/AllCustumers';
 
 const App = () => {
 
@@ -34,6 +35,7 @@ const App = () => {
 
         <Route path='admin/login' element={ <AdminLogin /> } />
         <Route path='admin/home' element={ <AdminHome /> } />
+        <Route path='admin/custumers' element={ <AllCustumers /> } />
 
       </Routes>    
     </BrowserRouter>

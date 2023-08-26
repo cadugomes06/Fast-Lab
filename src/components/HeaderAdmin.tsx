@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import logoHemo2 from '../assets/images/logoHemolabes1.png'
 import userIcon from '../assets/icons/usericon.svg'
 import { useEffect, useState } from 'react'
@@ -49,6 +49,18 @@ const HeaderAdmin = () => {
 
              {adminStatus? (
                 <ul className='flex items-center text-teal-600 gap-4 font-semibold text-sm uppercase'>
+
+                <Link to='../admin/home'>
+                 <li className='hover:text-white hover:underline cursor-pointer transition duration-300'>
+                    Home
+                 </li>  
+                 </Link>
+                 <Link to='../admin/custumers'>
+                 <li className='hover:text-white hover:underline cursor-pointer transition duration-300'>
+                    Configurações
+                 </li>  
+                 </Link>
+               
                   <li className='hover:text-white hover:underline cursor-pointer transition duration-300'
                       onClick={handleClickLogout}>
                     Sair
