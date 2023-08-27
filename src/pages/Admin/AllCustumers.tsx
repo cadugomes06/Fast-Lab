@@ -8,6 +8,8 @@ import editIcon from '../../assets/icons/edit.svg'
 
 const AllCustumers = () => {
     const [forms, setForms] = useState<TypeUser[]>([]);
+    const [filterCustumers, setFilterCustumers] = useState<TypeUser[]>([]);
+    const [currentStatus, setCurrentStatus] = useState<TypeStatus>({status: '', color: ''})
 
     interface TypeUser {
         plan: string;
@@ -21,6 +23,11 @@ const AllCustumers = () => {
         id: string;
       }
 
+      interface TypeStatus {
+        status: string;
+        color: string;
+      }
+
       const formsCollectionRef = collection(db, "formulario");
 
       useEffect(() => {
@@ -28,10 +35,19 @@ const AllCustumers = () => {
           const data = await getDocs(formsCollectionRef);
           const a: any = data.docs.map((doc) => ({...doc.data(), id: doc.id }));
           setForms(a);
-          console.log(a)
         };
         getForms();
       }, []);
+
+      useEffect(() => {
+        const filtedData: any = forms.filter((form) => form.status === currentStatus.status)
+        if (currentStatus.status != '') {
+            setFilterCustumers(filtedData)   
+        } else {
+            setFilterCustumers(forms)
+            console.log(forms)
+        }
+      }, [currentStatus])
       
 
     return (
@@ -48,20 +64,46 @@ const AllCustumers = () => {
                 </h1>
             </div>
             
-            <div className="w-full max-h-max py-6 mt-12 bg-gray-100/20 flex  justify-evenly font-regular text-sm">
-                <div><h3>Filtro 1</h3></div>
-                <div><h3>Filtro 2</h3></div>
-                <div><h3>Filtro 3</h3></div>
-                <div><h3>Filtro 4</h3></div>
-            </div>
+            <div className="w-full max-h-max mt-12 bg-gray-100/20 flex  justify-evenly items-center font-semibold text-sm text-teal-600">
+                <div>
+                    <button className="w-28 h-14 rounded-md hover:text-white hover:bg-gray-400/80 cursor-pointer focus:text-white focus:bg-gray-500/80 tracking-wider focus:shadow-md focus:shadow-gray-300 duration-300 transition"
+                      onClick={() => setCurrentStatus(
+                        {status:'', color: ''})}>
+                        Todos
+                    </button>
+                </div>
+                <div>
+                    <button className="w-28 h-14 rounded-md hover:text-white hover:bg-teal-400/80 cursor-pointer focus:text-white focus:bg-teal-500/80 tracking-wider focus:shadow-md focus:shadow-gray-300 duration-300 transition"
+                     onClick={() => setCurrentStatus(
+                        {status:'pronto', color: 'teal'})}>
+                        Prontos
+                    </button>
+                </div>
+                <div>
+                     <button className="w-28 h-14 rounded-md hover:text-white hover:bg-yellow-300/90 cursor-pointer focus:text-white focus:bg-yellow-500/80 tracking-wider focus:shadow-md focus:shadow-gray-300 duration-300 transition"
+                       onClick={() => setCurrentStatus(
+                        {status:'solicitado', color: 'yellow'})}>
+                        Solicitados
+                    </button>   
+                </div>
+                <div>
+                    <button className="w-28 h-14 rounded-md hover:text-white hover:bg-red-300 cursor-pointer focus:text-white focus:bg-red-500/80 tracking-wider focus:shadow-md focus:shadow-gray-300 duration-300 transition"
+                      onClick={() => setCurrentStatus(
+                        {status:'cancelado', color: 'red'})}>
+                        Cancelados
+                    </button>   
 
-            <div>
-                <div className="w-full h-14 flex items-center pl-4">
+                </div>
+                
+            </div>           
+
+            
+                <div className="w-full h-20 flex items-center pl-4">
                     <h5 className="text-md font-regular relative after:content-[''] after:w-[4.5rem] after:h-[2px] after:bg-teal-400 after:absolute after:bottom-0 after:left-0 after:rounded-md" style={{color: 'var(--color-secondary)'}}>
                         Usuários.
                     </h5>
                 </div>
-            </div>
+            
 
             <div className="w-full max-h-max bg-gray-100/30 py-4 px-2">
                <div className="w-full h-10 bg-white mb-1 rounded-md shadow-md shadow-gray-300 grid grid-cols-9 items-center px-2 font-semibold text-md" style={{color: 'var(--color-main)'}}>
@@ -74,8 +116,8 @@ const AllCustumers = () => {
                         <div className="grid justify-items-center"><p>Editar</p></div>
                         <div className="grid justify-items-center"><p>Excluir</p></div>
               </div>
-                {forms.map((form: any, index: number) => (
-                    <div key={index} className="w-full h-10 bg-white mb-1 rounded-md shadow-md shadow-gray-300 grid grid-cols-9 self-center items-center px-2 font-regular text-sm overflow-x-auto" style={{color: 'var(--color-secondary)'}}>
+                {filterCustumers.map((form: any, index: number) =>  (                 
+                    <div key={index} className="animeLeft w-full h-10 bg-white mb-1 rounded-md shadow-md shadow-gray-300 grid grid-cols-9 self-center items-center px-2 font-regular text-sm overflow-x-auto" style={{color: 'var(--color-secondary)'}}>
                         <div className="col-span-2"><p>
                             {form.name}
                         </p></div>
@@ -84,11 +126,11 @@ const AllCustumers = () => {
                         <div><p>{form.sexo}</p></div>
                         <div><p>{form.unit}</p></div>
                         <div><p>{form.status}</p></div>
-                        <div className="h-8 grid justify-items-center">
-                            <img src={editIcon} alt="icone-de-edição" className="w-8 h-8 cursor-pointer" />
+                        <div className="h-8 grid justify-items-center items-center">
+                            <img src={editIcon} alt="icone-de-edição" className="w-6 h-6 cursor-pointer" />
                         </div>
-                        <div className="h-8 grid justify-items-center">
-                            <img src={trashIcon} alt="icone-de-lixeira" className="w-8 h-8 cursor-pointer" />
+                        <div className="h-8 grid justify-items-center items-center">
+                            <img src={trashIcon} alt="icone-de-lixeira" className="w-6 h-6 cursor-pointer" />
                         </div>
                     </div>
                 ))}

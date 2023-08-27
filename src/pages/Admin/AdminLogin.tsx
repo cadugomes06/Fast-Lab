@@ -25,6 +25,13 @@ const AdminLogin = () => {
 
   const adminbCollectionRef = collection(db, "admins");
 
+  const loginStatusStorage = window.localStorage.getItem('admin')
+  useEffect(() => {
+    if(loginStatusStorage === 'on') {
+      navigate('../admin/home')
+    }
+  }, [])
+
   useEffect(() => {
     const getForms = async () => {
       const data = await getDocs(adminbCollectionRef);
