@@ -3,11 +3,9 @@
 <br />
 
 <h4>Guia rápido ⏩</h4>
-<h5>Link: </h5>
+<h5>Link: <a href='https://fast-lab-vercel.app'></a></h5>
 <h4>Login: <strong>testando@gmail.com</strong> </h4>
 <h4>Senha: <strong>12345678</strong> </h4>
-
- [fast-lab](http://fast-lab.vercel.app{:target="_blank"})
 
 <br />
 
