@@ -7,7 +7,7 @@
 <h4>Login: <strong>testando@gmail.com</strong> </h4>
 <h4>Senha: <strong>12345678</strong> </h4>
 
- [fast-lab](http://fast-lab.vercel.app){:target="_blank" rel="noopener"}
+ [fast-lab](http://fast-lab.vercel.app{:target="_blank"})
 
 <br />
 
