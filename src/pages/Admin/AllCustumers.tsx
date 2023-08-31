@@ -1,6 +1,6 @@
 import HeaderAdmin from "../../components/HeaderAdmin"
 import { useEffect, useState } from "react";
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig";
 
 import trashIcon from '../../assets/icons/trash.svg'
@@ -9,7 +9,7 @@ import editIcon from '../../assets/icons/edit.svg'
 const AllCustumers = () => {
     const [forms, setForms] = useState<TypeUser[]>([]);
     const [filterCustumers, setFilterCustumers] = useState<TypeUser[]>([]);
-    const [currentStatus, setCurrentStatus] = useState<TypeStatus>({status: '', color: ''})
+    const [currentStatus, setCurrentStatus] = useState<TypeStatus>({status: '0', color: '0'})
 
     interface TypeUser {
         plan: string;
@@ -45,9 +45,21 @@ const AllCustumers = () => {
             setFilterCustumers(filtedData)   
         } else {
             setFilterCustumers(forms)
-            console.log(forms)
         }
       }, [currentStatus])
+
+      const handleClickTrash = async (index: number) => {
+        try {
+            await deleteDoc(doc(db, 'formulario', filterCustumers[index]?.id))
+            filterCustumers.splice(index)
+            setCurrentStatus({status: '0', color: '0'})
+            location.reload()
+            window.confirm()
+        
+        } catch (error) {
+            window.alert('Erro inesperado' + error)
+        }
+      }
       
 
     return (
@@ -66,28 +78,28 @@ const AllCustumers = () => {
             
             <div className="w-full max-h-max mt-12 bg-gray-100/20 flex  justify-evenly items-center font-semibold text-sm text-teal-600">
                 <div>
-                    <button className="w-28 h-14 rounded-md hover:text-white hover:bg-gray-400/80 cursor-pointer focus:text-white focus:bg-gray-500/80 tracking-wider focus:shadow-md focus:shadow-gray-300 duration-300 transition"
+                    <button className={`w-28 h-14 rounded-md hover:text-white hover:bg-gray-400/80 cursor-pointer focus:text-white tracking-wider focus:shadow-md duration-300 transition ${currentStatus.status === '' ? 'bg-gray-500/80 text-white' : ''}`}
                       onClick={() => setCurrentStatus(
                         {status:'', color: ''})}>
                         Todos
                     </button>
                 </div>
                 <div>
-                    <button className="w-28 h-14 rounded-md hover:text-white hover:bg-teal-400/80 cursor-pointer focus:text-white focus:bg-teal-500/80 tracking-wider focus:shadow-md focus:shadow-gray-300 duration-300 transition"
+                    <button className={`w-28 h-14 rounded-md hover:text-white hover:bg-teal-400/80 cursor-pointer tracking-wider focus:shadow-md focus:shadow-gray-300 duration-300 transition ${currentStatus.status === 'pronto' ? 'bg-teal-500/80 text-white' : ''}`}
                      onClick={() => setCurrentStatus(
                         {status:'pronto', color: 'teal'})}>
                         Prontos
                     </button>
                 </div>
                 <div>
-                     <button className="w-28 h-14 rounded-md hover:text-white hover:bg-yellow-300/90 cursor-pointer focus:text-white focus:bg-yellow-500/80 tracking-wider focus:shadow-md focus:shadow-gray-300 duration-300 transition"
+                     <button className={`w-28 h-14 rounded-md hover:text-white hover:bg-yellow-300/90 cursor-pointer tracking-wider focus:shadow-md focus:shadow-gray-300 duration-300 transition ${currentStatus.status === 'solicitado' ? 'bg-yellow-500/80 text-white' : ''} `}
                        onClick={() => setCurrentStatus(
                         {status:'solicitado', color: 'yellow'})}>
                         Solicitados
                     </button>   
                 </div>
                 <div>
-                    <button className="w-28 h-14 rounded-md hover:text-white hover:bg-red-300 cursor-pointer focus:text-white focus:bg-red-500/80 tracking-wider focus:shadow-md focus:shadow-gray-300 duration-300 transition"
+                    <button className={`w-28 h-14 rounded-md hover:text-white hover:bg-red-300 cursor-pointer focus:text-white focus:bg-red-500/80 tracking-wider focus:shadow-md focus:shadow-gray-300 duration-300 transition ${currentStatus.status === 'cancelado' ? 'bg-red-500/80 text-white' : ''} `}
                       onClick={() => setCurrentStatus(
                         {status:'cancelado', color: 'red'})}>
                         Cancelados
@@ -105,7 +117,7 @@ const AllCustumers = () => {
                 </div>
             
 
-            <div className="w-full max-h-max bg-gray-100/30 py-4 px-2">
+            <div className="w-full max-h-max bg-gray-100/30 py-4 pb-2 px-2">
                <div className="w-full h-10 bg-white mb-1 rounded-md shadow-md shadow-gray-300 grid grid-cols-9 items-center px-2 font-semibold text-md" style={{color: 'var(--color-main)'}}>
                         <div className="grid col-span-2 justify-items-center"><p>Nome</p></div>
                         <div><p>Convênio</p></div>
@@ -130,7 +142,10 @@ const AllCustumers = () => {
                             <img src={editIcon} alt="icone-de-edição" className="w-6 h-6 cursor-pointer" />
                         </div>
                         <div className="h-8 grid justify-items-center items-center">
-                            <img src={trashIcon} alt="icone-de-lixeira" className="w-6 h-6 cursor-pointer" />
+                            <img src={trashIcon} 
+                                 alt="icone-de-lixeira" 
+                                 className="w-6 h-6 cursor-pointer" 
+                                 onClick={() => handleClickTrash(index)}/>
                         </div>
                     </div>
                 ))}

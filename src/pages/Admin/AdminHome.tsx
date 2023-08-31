@@ -331,24 +331,24 @@ const AdminHome = () => {
           </div>
 
           <div className="flex flex-col w-full h-full justify-center items-center relative">
-            <ul className="h-full w-full mb-12 flex flex-col items-center justify-center gap-12">
+            <ul className="h-full w-full mb-12 flex flex-col items-center justify-center gap-14">
 
               <li onClick={() => setCurrentStatus('solicitado')}
                   className="relative hover:after:content-['Solicitados'] after:absolute after:bg-yellow-400 after:text-white hover:after:p-1 after:rounded-md 
                   after:top-0 after:left-[-75px] after:text-sm">
-                <img src={requestIcon} alt="" className="w-[3rem] h-[3rem] "/>
+                <img src={requestIcon} alt="" className="w-[2.5rem] h-[2.5rem] "/>
               </li>
 
               <li onClick={() => setCurrentStatus('pronto')}
                   className="relative hover:after:content-['Prontos'] after:absolute after:bg-teal-700 after:text-teal-100 hover:after:p-1 after:rounded-md 
                   after:top-0 after:left-[-60px] after:text-sm">
-                <img src={baloonIcon} alt="" className="w-[3rem] h-[3rem] " />
+                <img src={baloonIcon} alt="" className="w-[2.5rem] h-[2.5rem] " />
               </li>
 
               <li onClick={() => setCurrentStatus('cancelado')}
                   className="relative hover:after:content-['Cancelados'] after:absolute after:bg-red-500 after:text-white hover:after:p-1 after:rounded-md 
                   after:top-0 after:left-[-80px] after:text-sm">
-                <img src={cancelsIcon} alt="" className="w-[3rem] h-[3rem]"/>
+                <img src={cancelsIcon} alt="" className="w-[2.5rem] h-[2.5rem]"/>
               </li>
             </ul>
           </div>
