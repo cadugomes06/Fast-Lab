@@ -229,7 +229,7 @@ input[type='file'] {
   height: 68px;
   z-index: 120;
   top: -44px;
-  left: -20px;
+  left: -10px;
   display: flex;
   justify-content: center;
   align-items: center;
