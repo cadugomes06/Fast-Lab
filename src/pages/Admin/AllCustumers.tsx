@@ -11,6 +11,7 @@ const AllCustumers = () => {
     const [forms, setForms] = useState<TypeUser[]>([]);
     const [filterCustumers, setFilterCustumers] = useState<TypeUser[]>([]);
     const [currentStatus, setCurrentStatus] = useState<TypeStatus>({status: '0', color: '0'})
+    const [deleteModal, setDeleteModal] = useState({state: false, index: -1})
 
     const formsCollectionRef = collection(db, "formulario");
 
@@ -48,58 +49,64 @@ const AllCustumers = () => {
         }
       }, [currentStatus])
 
-      const handleClickTrash = async (index: number) => {
-        // try {
-        //     await deleteDoc(doc(db, 'formulario', filterCustumers[index]?.id))
-        //     filterCustumers.splice(index)
-        //     setCurrentStatus({status: '0', color: '0'})
-        //     location.reload()
-        //     window.confirm()
-        
-        // } catch (error) {
-        //     window.alert('Erro inesperado' + error)
-        // }
+      const handleOpenModal = (index: number) => {
+        setDeleteModal({state: true, index: index})
+      }
+      const handleCloseModal = () => {
+        setDeleteModal({state: false, index: -1})
+      }
+      const handleDeleteUser = async () => {
+        try {
+          await deleteDoc(doc(db, 'formulario', filterCustumers[deleteModal.index]?.id))
+          filterCustumers.splice(deleteModal.index)
+          setCurrentStatus({status: '0', color: '0'})      
+     } catch (error) {
+          window.alert('Erro inesperado' + error)
+      }
       }
       
 
     return (
         <>
         
-        <div className="w-full h-[100vh] z-[100] bg-black/70 absolute flex 
-        justify-center items-center">
-           <div className="w-[38rem] h-[20rem] bg-white rounded-md">
-               <div className="w-full h-24 flex justify-center items-center">
-                 <h2 className="text-xl font-semibold textGradient">
-                    Excluir Usuário
-                 </h2>
-                 </div>
-
-                  <div className="py-8 px-4 text-md font-normal">
-                    <p style={{color: 'var(--color-secondary)'}}>Os dados de solicitação desse usuário serão <strong>permanentemente deletados</strong>, 
-                       deseja continuar com está ação ?
-                    </p>
-                 </div>
-
-                 <div className="w-full h-24 flex justify-center items-center gap-12">
-                    <Button 
-                      text="Confirmar"
-                      width="120px"
-                      height="38px"
-                      background='#AFACAF'
-                      borderColor='#9B979B'
-                      />
-
-                    <Button 
-                      text="Cancelar"
-                      width="120px"
-                      height="38px"
-                      background='#E0433E'
-                      borderColor='#D32822'
-                      />
-                 </div>
-               </div>                
-            
-        </div>
+        {deleteModal.state ? (
+          <div className="w-full h-[100vh] z-[100] bg-black/70 absolute flex 
+          justify-center items-center">
+             <div className="w-[38rem] h-[20rem] bg-white rounded-md">
+                 <div className="w-full h-24 flex justify-center items-center bg-gray-100">
+                   <h2 className="text-xl font-semibold textGradient">
+                      Excluir Usuário
+                   </h2>
+                   </div>
+  
+                    <div className="py-8 px-8 text-md font-normal">
+                      <p style={{color: 'var(--color-secondary)'}}>Os dados de solicitação desse usuário serão <strong>permanentemente deletados</strong>, 
+                         deseja continuar com está ação ?
+                      </p>
+                   </div>
+  
+                   <div className="w-full h-24 flex justify-center items-center gap-12">
+                      <Button 
+                        text="Confirmar"
+                        width="120px"
+                        height="38px"
+                        background='#AFACAF'
+                        borderColor='#9B979B'
+                        onClick={() => handleDeleteUser()}
+                        />
+  
+                      <Button 
+                        text="Cancelar"
+                        width="120px"
+                        height="38px"
+                        background='#E0433E'
+                        borderColor='#D32822'
+                        onClick={() => handleCloseModal()}
+                        />
+                   </div>
+                </div>                  
+          </div>
+        ) : ''}
 
         <HeaderAdmin />
 
@@ -182,7 +189,7 @@ const AllCustumers = () => {
                             <img src={trashIcon} 
                                  alt="icone-de-lixeira" 
                                  className="w-6 h-6 cursor-pointer" 
-                                 onClick={() => handleClickTrash(index)}/>
+                                 onClick={() => handleOpenModal(index)}/>
                         </div>
                     </div>
                 ))}

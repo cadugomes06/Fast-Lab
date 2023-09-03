@@ -67,7 +67,7 @@ const Header = () => {
               </Link>
 
               <Link to='../user/solicitacao'>
-              <li className='cursor-pointer text-sm font-semibold sm:text-sm hover:text-white hover:underline ease-linear duration-200 uppercase text-teal-500'
+              <li className='cursor-pointer text-sm font-semibold sm:text-sm hover:text-white hover:underline ease-linear duration-200 uppercase text-teal-500 focus:text-black'
               >
                 Solicitar
               </li>
