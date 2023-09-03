@@ -68,7 +68,7 @@ const UserLogin = () => {
 
   return (
     <>
-      {loading ? <LoadingCup /> : <LoadingCup /> }
+      {loading ? <LoadingCup /> : null }
 
       <Header />
       
