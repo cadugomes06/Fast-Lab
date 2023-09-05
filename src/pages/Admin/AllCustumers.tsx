@@ -49,6 +49,8 @@ const AllCustumers = () => {
         }
       }, [currentStatus])
 
+      
+
       const handleOpenModal = (index: number) => {
         setDeleteModal({state: true, index: index})
       }
@@ -59,7 +61,9 @@ const AllCustumers = () => {
         try {
           await deleteDoc(doc(db, 'formulario', filterCustumers[deleteModal.index]?.id))
           filterCustumers.splice(deleteModal.index)
-          setCurrentStatus({status: '0', color: '0'})      
+          setCurrentStatus({status: '0', color: '0'})
+          setDeleteModal({state: false, index: -1})
+          window.location.reload()      
      } catch (error) {
           window.alert('Erro inesperado' + error)
       }
