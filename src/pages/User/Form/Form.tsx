@@ -42,6 +42,7 @@ const Form = () => {
   const [progress, setProgress] = useState(0);
   const [conditionTerms, setConditionTerms] = useState(false);
   const [modalCondition, setModalCondition] = useState(false);
+  const [modalInvalidPlan, setModalInvalidPlan] = useState(false);
   const [isYounger, setIsYounger] = useState(false);
 
   interface FileList {
@@ -328,18 +329,11 @@ const Form = () => {
       setConditionTerms(false)
     }
   }
+
   const handleOpenModalCondition = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    })
     setModalCondition(true)
   }
   const handleCloseModalCondition = () => {
-    window.scrollTo({
-      top: 1500,
-      behavior: 'smooth'
-    })
     setModalCondition(false)
   }
 
@@ -360,15 +354,25 @@ const Form = () => {
     }
     }, [])
 
+    useEffect(() => {
+      if (plan === 'unimed' && cardNumber.length > 3) {
+      const unimedDivision = cardNumber.slice(0, 4)
+       if (unimedDivision === '0180') {
+        setModalInvalidPlan(true)
+       }
+      }
+    }, [plan, cardNumber])
 
-  useEffect(() => {
-    console.log(fileUrl)
-  }, [fileUrl])
+    const closeModalInvalidPlan = () => {
+      setModalInvalidPlan(false)
+      setCardNumber('')
+    }
+
   return (
     <>
     {modalCondition ? (
               <>
-              <div className="w-full h-[100vh] bg-black/50 flex justify-center items-center absolute z-20 ">
+              <div className="w-full h-[100vh] bg-black/50 flex justify-center items-center fixed z-20 ">
 
                 <div className="w-[38rem] h-[38rem] bg-gray-50 absolute bottom-6 rounded-md shadow-md shadow-gray-500 sm:w-[20rem] sm:overflow-y-auto" id="modalTerms">                  
                   <div className="w-[32px] h-[32px] sm:w-[24px] sm:h-[24px] absolute right-2 top-2 sm:right-1 sm:top-1 cursor-pointer"
@@ -404,7 +408,7 @@ const Form = () => {
                         <h3 className="font-normal text-md flex items-center" style={{color: 'var(--color-main)'}}>Beneficiário <img src={iconUnimed} alt="icone-convenio" className="w-[5rem] h-[5rem] pl-2" />
                         </h3>
                         <p className="text-md md:text-sm" style={{color: "var(--color-secondary)"}}>
-                          <strong>O pedido médico deve estar na guia da unimed ou devidamente transcrito pelo convênio</strong>. Solicitação médica no formato incorreto (guia sem transcrição ou receituário) poderá ocasionar o cancelamento da solicitação de pré cadastramento.
+                          O pedido médico original é indipensável para o seu atendimento.
                         </p>
                       </div>
                   ): ''}
@@ -413,6 +417,32 @@ const Form = () => {
               </div>  
               </>
       ): ''}
+
+      {modalInvalidPlan ? (
+        <div className="w-full h-[100vh] bg-black/50 flex justify-center items-center fixed z-20">
+          <div className="w-[38rem] h-[18rem] relative bg-white rounded-md flex flex-col md:w-[32rem] sm:w-[20rem]">
+            <div className="w-full h-20 bg-gray-100/40 flex justify-center items-center rounded-md">
+              <h1 className="text-lg font-regular sm:text-md sm:pl-4 sm:py-2" style={{color: 'var(--color-main)'}}>
+                <strong>Atenção!</strong> Paciente da <strong>Unimed costa do sol.</strong>
+              </h1>
+            </div>
+
+            <div className="w-full max-h-max py-8 px-6 sm:px-4 sm:py-4">
+              <p className="font-regular text-md text-teal-600 sm:text-sm">No momento seu convênio não está disponível para a modalidade de pré cadastramento. Será necessário comparecer a uma unidade Hemolabes para autorizar seus exames por meio de carteirinha ou token gerado no aplicativo Unimed client.
+              Agradecemos a compreensão!</p>
+            </div>
+
+             <div className="w-[32px] h-[32px] sm:w-[24px] sm:h-[24px] absolute right-2 top-2 sm:right-1 sm:top-1 cursor-pointer"
+                      onClick={closeModalInvalidPlan}            
+                     >
+                    <img src={closeIcon} 
+                         alt="icone-de-x"
+                         className="sm:w-[24px] sm:h-[24px]"     
+                    />
+             </div>
+          </div>
+        </div>
+      ) : null}
 
     {loading && name.length > 0 ? <LoadingCup /> : ''}
     {isMobile? <MenuMobile /> : <Header />}
@@ -433,7 +463,7 @@ const Form = () => {
             style={{ color: "var(--color-secondary)" }}
           >
             Preencha todos os dados corretamente. <br />
-            Seu pré cadastramento estará <strong>disponível em até 48 horas úteis.</strong><br />
+            Seu pré cadastramento estará <strong>disponível em até 24 horas.</strong><br />
             Verificar <strong className=" hover:text-teal-600 underline"><Link to="/user/termos"> convênios disponíveis.</Link></strong>
           </p>
         </div>

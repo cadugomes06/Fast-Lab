@@ -44,7 +44,7 @@ const Termos = () => {
               </div>
 
               <div className="h-[5rem] w-full flex items-center px-4 md:mb-2 max-h-max ssm:mb-8">
-                <p className="text-md sm:text-sm font-normal" style={{color: 'var(--color-secondary)'}}>Após o envio da sua solicitação. Nossa equipe de atendimento online irá realizar todo <strong>seu cadastramento e autorização</strong> com o respectivo convênio em <strong>até 48 horas úteis</strong>. 
+                <p className="text-md sm:text-sm font-normal" style={{color: 'var(--color-secondary)'}}>Após o envio da sua solicitação. Nossa equipe de atendimento online irá realizar todo <strong>seu cadastramento e autorização</strong> com o respectivo convênio em <strong>até 24 horas</strong>. 
                 Ao finalizar a etapa de cadastramento, <strong>será enviado um e-mail para o paciente informando o status do seu processo e preparação para o exame</strong>.
                 </p>
               </div>
