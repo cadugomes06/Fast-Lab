@@ -485,7 +485,7 @@ const Form = () => {
                     <option value="convenio" disabled>
                       Convênio
                     </option>
-                    <option value="unimed">Unimed</option>
+                    <option value="unimed">Unimed Intercâmbio</option>
                     <option value="petrobras">Petrobras</option>
                     {/* <option value="tlife">Petrobras (periódico)</option> */}
                     <option value="sulamerica">Sul América</option>
