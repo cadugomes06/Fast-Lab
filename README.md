@@ -11,7 +11,7 @@
 
 <h2>Por que foi criado o Fast-lab?</h2>
 <p>
-  Ao observar o atendimento nas undiades do laboratório, percebi que o tempo de espera dos paciente chegavam até 2 horas em horários de grande fluxo. <br /> 
+  Observando o atendimento nas undiades dos laboratórios, percebi que o tempo de espera dos paciente chegavam até 2 horas em horários de grande fluxo. <br /> 
   Ao identificar esse problema, comecei a pensar em possíveis soluções que pudesse beneficiar a ambos, pacientes e laboratório.
 </p>
 
