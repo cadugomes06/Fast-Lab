@@ -496,6 +496,8 @@ const Form = () => {
                     <option value="caberj">Caberj Saúde</option>
                     <option value="integral">Integral Saúde</option>
                     <option value="goldencross">Golden Cross</option>
+                    <option value="intermedica">Intermédica</option>
+                    <option value="notredame">Notredame</option>
                   </select>
                 </div>
 
