@@ -22,6 +22,7 @@ body {
   border: 3px solid #eee;
   z-index: 10;
 }
+
 h1, h2, h3, h4, h5 {
   font-family: Poppins, sans-serif, Arial, Helvetica, sans-serif;
 }
@@ -264,5 +265,19 @@ input[type='file'] {
   to {
     width: 6rem;
     opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .cup {
+    width: 40px;
+    height: 160px;
+  }
+  .cup::after {
+    width: 70px;
+    height: 70px;
+  }
+  .cup::before {
+    left: -14px;
   }
 }

@@ -74,10 +74,10 @@ const AllCustumers = () => {
         <>
         
         {deleteModal.state ? (
-          <div className="w-full h-[100vh] z-[100] bg-black/70 absolute flex 
+          <div className="w-full h-[100vh] z-[100] bg-black/70 fixed flex 
           justify-center items-center">
              <div className="w-[38rem] h-[20rem] bg-white rounded-md">
-                 <div className="w-full h-24 flex justify-center items-center bg-gray-100">
+                 <div className="w-full h-24 flex justify-center items-center bg-gray-100 rounded-md">
                    <h2 className="text-xl font-semibold textGradient">
                       Excluir Usuário
                    </h2>
@@ -114,7 +114,7 @@ const AllCustumers = () => {
 
         <HeaderAdmin />
 
-        <section className="w-full h-[calc(100vh-80px)] grid grid-cols-12">
+        <section className="w-full h-[calc(100vh-80px)] grid grid-cols-12 relative">
            <div className="bg-gray-100/50 "></div> 
 
            <div className="col-span-10 shadow-md shadow-gray-200 rounded-md flex flex-col animeLeft">

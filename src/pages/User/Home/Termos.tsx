@@ -57,7 +57,6 @@ const Termos = () => {
 
                 <ul className="w-full max-h-max py-2 pl-4 gap-4 font-semibold sm:text-sm sm:pb-6 ssm:pb-8" style={{color: 'var(--color-secondary)'}}>
                    <li>Petrobras</li> 
-                   <li>Periódico (Petrobras)</li> 
                    <li>Sul América</li> 
                    <li>Unimed Intercâmbio</li> 
                    <li>Amil Saúde</li> 
