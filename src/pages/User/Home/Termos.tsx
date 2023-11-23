@@ -66,6 +66,11 @@ const Termos = () => {
                    <li>Integral Saúde</li> 
                    <li>Caberj Saúde</li> 
                    <li>Cedae Saúde</li> 
+                   <li>Particular</li> 
+                   <li>Braseg</li> 
+                   <li>Cartão de todos</li> 
+                   <li>Ambep</li> 
+                   <li>Boa viagem</li> 
                 </ul>
 
                 <div className="h-[5rem] w-full flex items-center px-4 md:mb-4 sm:mb-14">

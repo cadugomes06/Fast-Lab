@@ -116,7 +116,6 @@ const Form = () => {
 
         if (
           plan === "" ||
-          cardNumber === "" ||
           name === "" ||
           email === "" ||
           birth === "" ||
@@ -130,7 +129,15 @@ const Form = () => {
           phoneNumber === ''
           ) {
           alert("preencha todos os campos corretamente.");
-        } else if (
+       } else if (
+            plan == 'unimed' || plan == 'sulamerica' || plan == 'mediservice' || plan == 'amil'
+         || plan == 'assim'  || plan == 'petrobras'  || plan == 'gama'        || plan == 'caberj' 
+         || plan == 'goldencross'                    || plan == 'integral'    || plan == 'notredame' 
+         || plan == 'intermedica' && cardNumber == '' 
+        )  {
+          alert('Preencha a Carteirinha corretamente')
+       }      
+        else if (
           (plan === "unimed" || plan === "sulamerica") &&
           cardNumber.length < 17
         ) {
@@ -403,6 +410,16 @@ const Form = () => {
                   </div>
                 ) : ''}
 
+                {plan == 'particular' || plan == 'univita' || plan == 'braseg' || plan == 'boaviagem' || plan == 'ambep' ? 
+                  <div className="w-full mt-5 px-6 sm:px-4 flex flex-col max-h-max">
+                  <h3 className="font-normal text-md flex items-center" style={{ color: 'var(--color-main)' }}>Ao escolher o convênio <strong className="pl-2">{plan.toUpperCase()}</strong>
+                  </h3>
+                  <p className="text-md md:text-sm" style={{ color: "var(--color-secondary)" }}>
+                    Você concorda em realizar o pagamento no atendimento presencial.
+                  </p>
+                </div>
+                 : ''}
+
               </div>
             </div>
           </>
@@ -497,9 +514,15 @@ const Form = () => {
                     <option value="goldencross">Golden Cross</option>
                     <option value="intermedica">Intermédica</option>
                     <option value="notredame">Notredame</option>
+                    <option value="particular">Particular</option>
+                    <option value="braseg">Braseg</option>
+                    <option value="univita">Cartão de Todos</option>
+                    <option value="ambep">Ambep</option>
+                    <option value="boaviagem">Boa Viagem</option>
                   </select>
                 </div>
 
+                
                 <div className="md:flex md:flex-col">
                   <label
                     htmlFor="cardnumber"
@@ -515,6 +538,10 @@ const Form = () => {
                     width={isMobile ? '300px' : '350px'}
                     height="42px"
                     placeholder={planRule}
+                    disabled={
+                      plan == 'particular' || plan == 'univita' || plan == 'braseg' 
+                    || plan == 'boaviagem' || plan == 'ambep' ? true : false
+                    }
                     value={cardNumber}
                     maxLenght={23}
                     onChange={(e) => {

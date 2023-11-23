@@ -149,7 +149,7 @@ const UserHome = () => {
             <div
               className={
                 cardSelect === 2
-                  ? `mt-4 flex text-cente justify-between h-[16rem] w-full text-sm text-gray-200 gap-2 px-6 sm:h-[6rem] sm:pt-0 sm:mt-4 sm:gap-0 sm:text-[0.7rem] sm:overflow-auto sm:mb-6`
+                  ? `mt-4 flex text-cente justify-between h-[16rem] w-full text-sm text-gray-200 gap-2 px-6 sm:h-[6rem] sm:pt-0 sm:mt-4 sm:gap-1 sm:text-[0.7rem] overflow-auto sm:mb-6`
                   : "flex text-cente justify-between h-[10rem] w-full text-sm overflow-hidden text-gray-200 gap-2 px-4 sm:h-[1.5rem] sm:pt-0 sm:mt-2 sm:gap-0 sm:text-[0.7rem] sm:overflow-hidden"
               }
             >
@@ -184,9 +184,24 @@ const UserHome = () => {
                 <li className="border-b-[1px] w-[100%] border-gray-100/40">
                   Cedae Saúde
                 </li>
+                <li className="border-b-[1px] w-[100%] border-gray-100/40">
+                  Particular
+                </li>
+                <li className="border-b-[1px] w-[100%] border-gray-100/40">
+                  Braseg
+                </li>
+                <li className="border-b-[1px] w-[100%] border-gray-100/40">
+                  Boa viagem
+                </li>
+                <li className="border-b-[1px] w-[100%] border-gray-100/40">
+                  Ambep
+                </li>
+                <li className="border-b-[1px] w-[100%] border-gray-100/40">
+                  Cartão de todos
+                </li>
               </ul>
 
-              <div className="flex flex-col justify-center sm:justify-start sm:gap-1 h-[13.2rem]">
+              <div className="flex flex-col justify-center gap-1 pt-1 sm:justify-start sm:gap-1 h-[16rem]">
                 <div className="w-[20px] h-[20px] sm:w-[18px] sm:h-[18px]">
                   <img
                     src={cardSelect === 2 ? checkIcon : checkGrayIcon}
@@ -247,6 +262,37 @@ const UserHome = () => {
                     alt=""
                   />
                 </div>
+                <div className="w-[20px] h-[20px] sm:w-[18px] sm:h-[18px]">
+                  <img
+                    src={cardSelect === 2 ? checkIcon : checkGrayIcon}
+                    alt=""
+                  />
+                </div>
+                <div className="w-[20px] h-[20px] sm:w-[18px] sm:h-[18px]">
+                  <img
+                    src={cardSelect === 2 ? checkIcon : checkGrayIcon}
+                    alt=""
+                  />
+                </div>
+                <div className="w-[20px] h-[20px] sm:w-[18px] sm:h-[18px]">
+                  <img
+                    src={cardSelect === 2 ? checkIcon : checkGrayIcon}
+                    alt=""
+                  />
+                </div>
+                <div className="w-[20px] h-[20px] sm:w-[18px] sm:h-[18px]">
+                  <img
+                    src={cardSelect === 2 ? checkIcon : checkGrayIcon}
+                    alt=""
+                  />
+                </div>
+                <div className="w-[20px] h-[20px] sm:w-[18px] sm:h-[18px] sm:hidden">
+                  <img
+                    src={cardSelect === 2 ? checkIcon : checkGrayIcon}
+                    alt=""
+                  />
+                </div>
+
               </div>
             </div>
 

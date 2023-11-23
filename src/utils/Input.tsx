@@ -9,9 +9,10 @@ interface InputProps {
     value?: string
     multiple?: boolean
     maxLenght?: number
+    disabled?: boolean
   }
 
-const Input: React.FC<InputProps> = ({type, name, id, placeholder, width, height, onChange, value, multiple, maxLenght}) => {
+const Input: React.FC<InputProps> = ({type, name, id, placeholder, width, height, onChange, value, multiple, maxLenght, disabled}) => {
     const inputStyle: React.CSSProperties = {
         width,
         height,
@@ -25,10 +26,11 @@ const Input: React.FC<InputProps> = ({type, name, id, placeholder, width, height
        placeholder={placeholder}
        style={inputStyle}
        onChange={onChange}
+       disabled={disabled}
        value={value}
        multiple={multiple}
        maxLength={maxLenght}
-       className="border-gray-500 outline-none rounded-lg pl-2 shadow-md shadow-gray-300 cursor-pointer focus:outline-teal-200 focus:shadow-teal-200 text-teal-800 mb-4"
+       className="border-gray-500 outline-none rounded-lg pl-2 shadow-md shadow-gray-300 cursor-pointer focus:outline-teal-200 focus:shadow-teal-200 text-teal-800 mb-4 disabled:opacity-75"
         />
   )
 }
