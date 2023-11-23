@@ -72,7 +72,7 @@ const UserLogin = () => {
 
       <Header />
       
-      <div className="w-full h-[calc(100vh-80px)]">
+      <div className="w-full h-[calc(100vh-80px)] relative">
         <section className="grid grid-cols-2 bg-gray-100/30 md:grid-cols-1">
 
           <div className="h-[calc(100vh-80px)] md:hidden">
