@@ -69,11 +69,11 @@ const UserLogin = () => {
   return (
     <>
 
+      {loading ? <LoadingCup /> : null  }
       <Header />
 
       <div className="w-full h-[calc(100vh-80px)] relative">      
-      {loading ? <LoadingCup /> : null  }
-      
+
         <section className="grid grid-cols-2 bg-gray-100/30 md:grid-cols-1">
 
           <div className="h-[calc(100vh-80px)] md:hidden">
