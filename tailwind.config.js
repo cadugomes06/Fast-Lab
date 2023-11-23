@@ -5,6 +5,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    supports: {
+      flex: 'display: flex'
+    },
     extend: {},
     screens: {
       '2xl': {'max': '1600px'},

@@ -11,9 +11,9 @@ const LoadingCup = () => {
               setTypeNavigator('safari')
             }
         }, [])
-
+//bg-black/80
     return (
-        <section className={`flex ${typeNavigator == 'safari' ? 'absolute' : 'fixed'} sm:h-[100vh] top-0 w-full h-full max-h-max z-50 bg-black/80 justify-center items-center `}>
+        <section className={` @supports flex supports-flex:flex  ${typeNavigator == 'safari' ? 'absolute' : 'fixed'} sm:h-[100vh] top-0 w-full h-full max-h-max z-50 bg-blue-600/20  justify-center items-center`}>
 
             <div className="cup"></div>
 
