@@ -1,6 +1,5 @@
 import logoHemo2 from '../assets/images/logoHemolabes1.png'
 import userIcon from '../assets/icons/usericon.svg';
-import LoadingCup from '../components/LoadingCup'
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import { useContext, useEffect, useState } from 'react';
@@ -11,7 +10,7 @@ const Header = () => {
   const [userStatus, setUserStatus ] = useState(false)
   const [isMobile, setIsMobile ] = useState(false)
 
-  const [signOut, loading, error] = useSignOut(auth);
+  const [signOut, error] = useSignOut(auth);
 
   const { state } = useContext(UserContext)
   const navigate = useNavigate()
