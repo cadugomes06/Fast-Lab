@@ -411,8 +411,8 @@ const Form = () => {
                 ) : ''}
 
                 {plan == 'particular' || plan == 'univita' || plan == 'braseg' || plan == 'boaviagem' || plan == 'ambep' ? 
-                  <div className="w-full mt-5 px-6 sm:px-4 flex flex-col max-h-max">
-                  <h3 className="font-normal text-md flex items-center" style={{ color: 'var(--color-main)' }}>Ao escolher o convênio <strong className="pl-2">{plan.toUpperCase()}</strong>
+                  <div className="w-full mt-5 px-6 sm:px-3 flex flex-col max-h-max">
+                  <h3 className="font-normal text-md flex items-center" style={{ color: 'var(--color-main)' }}>Ao escolher o convênio<strong className="pl-1">{plan.toUpperCase()}</strong>
                   </h3>
                   <p className="text-md md:text-sm" style={{ color: "var(--color-secondary)" }}>
                     Você concorda em realizar o pagamento no atendimento presencial.
@@ -537,12 +537,14 @@ const Form = () => {
                     id="cardnumber"
                     width={isMobile ? '300px' : '350px'}
                     height="42px"
-                    placeholder={planRule}
+                    placeholder={plan == 'particular' || plan == 'univita' || plan == 'braseg' 
+                              || plan == 'boaviagem'  || plan == 'ambep' ? ''  : planRule}
                     disabled={
                       plan == 'particular' || plan == 'univita' || plan == 'braseg' 
                     || plan == 'boaviagem' || plan == 'ambep' ? true : false
                     }
-                    value={cardNumber}
+                    value={plan == 'particular' || plan == 'univita' || plan == 'braseg' 
+                        || plan == 'boaviagem'  || plan == 'ambep' ? '' : cardNumber}
                     maxLenght={23}
                     onChange={(e) => {
                       const targetValue = e.target.value
