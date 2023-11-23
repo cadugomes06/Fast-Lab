@@ -11,10 +11,9 @@ const LoadingCup = () => {
               setTypeNavigator('safari')
             }
         }, [])
-        console.log(typeNavigator)
 
     return (
-        <section className={`flex ${typeNavigator == 'safari' ? 'absolute' : 'fixed'} sm:h-[100vh] w-full h-full max-h-max top-0 z-50 bg-black/80 justify-center items-center `}>
+        <section className={`flex ${typeNavigator == 'safari' ? 'absolute' : 'fixed'} sm:h-[100vh] top-0 w-full h-full max-h-max z-50 bg-black/80 justify-center items-center `}>
 
             <div className="cup"></div>
 

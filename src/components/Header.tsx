@@ -44,9 +44,9 @@ const Header = () => {
 
     return (
         <>
-        {loading ? <LoadingCup /> : null}
+        {/* {loading ? <LoadingCup /> : null} */}
 
-        <header className='h-20 w-full flex items-center justify-between px-6 md:px-2 sm:px-4 border-b-[0.1rem] border-teal-100'
+        <header className='h-20 w-full flex items-center justify-between px-6 md:px-2 sm:px-4 border-b-[0.1rem] border-teal-100 relative'
                 style={isMobile ? {background: 'white'} : {background: 'var(--background-gradient-main)'}}
                 >
              <div className='block h-32- w-48 sm:w-28 '>
