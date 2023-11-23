@@ -531,6 +531,7 @@ const Form = () => {
                   >
                     Carteirinha
                   </label>
+
                   <Input
                     type="text"
                     name=""
@@ -553,6 +554,7 @@ const Form = () => {
                       setCardNumber(formatValue)
                     }}
                   />
+
                   {cardnumberError ? (
                     <p className="absolute mt-[-14px] pl-2 text-red-500 sm:pl-0 sm:mt-[4.5rem]">
                       {cardnumberError}
@@ -723,7 +725,7 @@ const Form = () => {
                   </div>
                 </div>
 
-                <div className={`w-full max-h-max flex justify-start pl-12 md:pl-0 md:justify-center sm:flex-col sm:pl-2 ${typeNavigator == 'safari' ? 'sm:mb-4' : ''}`}>
+                <div className={`w-full max-h-max supports-flex:flex justify-start pl-12 md:pl-0 md:justify-center sm:flex-col sm:pl-2 ${typeNavigator == 'safari' ? 'sm:mb-8' : ''} `}>
                   <div className="flex items-center sm:mb-1">
                     <h2
                       style={{ color: "var(--color-main)" }}

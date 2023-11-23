@@ -6,7 +6,7 @@ export default {
   ],
   theme: {
     supports: {
-      flex: 'display: flex'
+      flex: 'display: flex',
     },
     extend: {},
     screens: {

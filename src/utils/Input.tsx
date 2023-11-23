@@ -30,7 +30,7 @@ const Input: React.FC<InputProps> = ({type, name, id, placeholder, width, height
        value={value}
        multiple={multiple}
        maxLength={maxLenght}
-       className="border-gray-500 outline-none rounded-lg pl-2 shadow-md shadow-gray-300 cursor-pointer focus:outline-teal-200 focus:shadow-teal-200 text-teal-800 mb-4 disabled:opacity-75"
+       className="border-gray-500 outline-none rounded-lg pl-2 shadow-md shadow-gray-300 cursor-pointer focus:outline-teal-200 focus:shadow-teal-200 text-teal-800 mb-4 @supports disabled:opacity-50"
         />
   )
 }
