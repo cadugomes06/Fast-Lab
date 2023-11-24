@@ -204,7 +204,7 @@ const Form = () => {
         setPlanRule("00371111112223334");
         if (
           plan === "unimed" &&
-          cardNumber.length != 17 &&
+          cardNumber.length < 17 &&
           cardNumber.length != 0
         ) {
           setCardnumberError("formato incorreto.");
@@ -215,7 +215,7 @@ const Form = () => {
         setPlanRule("774000000000");
         if (
           plan === "mediservice" &&
-          cardNumber.length != 15 &&
+          cardNumber.length < 15 &&
           cardNumber.length != 0
         ) {
           setCardnumberError("formato incorreto.");
@@ -226,7 +226,7 @@ const Form = () => {
         setPlanRule("01020000000");
         if (
           plan === "petrobras" &&
-          cardNumber.length != 11 &&
+          cardNumber.length < 11 &&
           cardNumber.length != 0
         ) {
           setCardnumberError("formato incorreto.");
@@ -237,7 +237,7 @@ const Form = () => {
         setPlanRule("8888804350000000");
         if (
           plan === "sulamerica" &&
-          cardNumber.length != 17 &&
+          cardNumber.length < 17 &&
           cardNumber.length != 0
         ) {
           setCardnumberError("formato incorreto.");
@@ -246,7 +246,7 @@ const Form = () => {
         }
       } else if (plan === "amil") {
         setPlanRule("111222333");
-        if (plan === "amil" && cardNumber.length != 9 && cardNumber.length != 0) {
+        if (plan === "amil" && cardNumber.length < 9 && cardNumber.length != 0) {
           setCardnumberError("formato incorreto.");
         } else {
           setCardnumberError("");
@@ -255,7 +255,7 @@ const Form = () => {
         setPlanRule("000011112222333344");
         if (
           plan === "assim" &&
-          cardNumber.length != 18 &&
+          cardNumber.length < 18 &&
           cardNumber.length != 0
         ) {
           setCardnumberError("formato incorreto.");
@@ -264,7 +264,7 @@ const Form = () => {
         }
       } else if (plan === "gama") {
         setPlanRule("010000222333045");
-        if (plan === "gama" && cardNumber.length != 15 && cardNumber.length != 0) {
+        if (plan === "gama" && cardNumber.length < 15 && cardNumber.length != 0) {
           setCardnumberError("formato incorreto.");
         } else {
           setCardnumberError("");
@@ -272,7 +272,7 @@ const Form = () => {
       } else if (plan === "caberj") {
         setPlanRule("00001111222233445");
         if (plan === "caberj" &&
-          cardNumber.length != 17 && cardNumber.length != 0) {
+          cardNumber.length < 17 && cardNumber.length != 0) {
           setCardnumberError("formato incorreto.");
         } else {
           setCardnumberError("");
@@ -280,7 +280,7 @@ const Form = () => {
       } else if (plan === "integral") {
         setPlanRule("00001111222233445");
         if (plan === "integral" &&
-          cardNumber.length != 17 && cardNumber.length != 0) {
+          cardNumber.length < 17 && cardNumber.length != 0) {
           setCardnumberError("formato incorreto.");
         } else {
           setCardnumberError("");
@@ -288,7 +288,7 @@ const Form = () => {
       } else if (plan === "goldencross") {
         setPlanRule("0001112223");
         if (plan === "goldencross" &&
-          cardNumber.length != 10 && cardNumber.length != 0) {
+          cardNumber.length < 10 && cardNumber.length != 0) {
           setCardnumberError("formato incorreto.");
         } else {
           setCardnumberError("");
@@ -377,7 +377,7 @@ const Form = () => {
                 >
                   <img src={closeIcon}
                     alt="icone-de-x"
-                    className="sm:w-[24px] sm:h-[24px] fixed"
+                    className="sm:w-[24px] sm:h-[24px] absolute"
                   />
                 </div>
 
