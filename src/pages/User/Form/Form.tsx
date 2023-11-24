@@ -371,7 +371,7 @@ const Form = () => {
           <>
             <div className="w-full h-[100vh] bg-black/50 flex justify-center items-center fixed z-20 ">
 
-              <div className="w-[38rem] h-[38rem] bg-gray-50 absolute bottom-6 rounded-md shadow-md shadow-gray-500 sm:h-[32rem] sm:w-[20rem] sm:overflow-y-auto" id="modalTerms">
+              <div className="w-[38rem] h-[38rem] bg-gray-50 absolute bottom-6 rounded-md shadow-md shadow-gray-500 sm:h-[32rem] ssm:h-[26rem] sm:w-[20rem] sm:overflow-y-auto" id="modalTerms">
                 <div className="w-[32px] h-[32px] sm:w-[24px] sm:h-[24px] absolute right-4 top-4 sm:right-1 sm:top-1 cursor-pointer"
                   onClick={handleCloseModalCondition}
                 >
@@ -401,7 +401,7 @@ const Form = () => {
                 ) : ''}
 
                 {plan === 'unimed' ? (
-                  <div className="w-full px-6 sm:px-4 flex flex-col max-h-max">
+                  <div className="w-full px-6 sm:px-4 flex flex-col max-h-max pb-4">
                     <h3 className="font-normal text-md flex items-center" style={{ color: 'var(--color-main)' }}>Beneficiário <img src={iconUnimed} alt="icone-convenio" className="w-[5rem] h-[5rem] pl-2" />
                     </h3>
                     <p className="text-md md:text-sm" style={{ color: "var(--color-secondary)" }}>
@@ -411,7 +411,7 @@ const Form = () => {
                 ) : ''}
 
                 {plan == 'particular' || plan == 'univita' || plan == 'braseg' || plan == 'boaviagem' || plan == 'ambep' ? 
-                  <div className="w-full mt-5 px-6 sm:px-3 flex flex-col max-h-max">
+                  <div className="w-full mt-5 px-6 sm:px-3 flex flex-col max-h-max pb-4">
                   <h3 className="font-normal text-md flex items-center" style={{ color: 'var(--color-main)' }}>Ao escolher o convênio<strong className="pl-1">{plan.toUpperCase()}</strong>
                   </h3>
                   <p className="text-md md:text-sm" style={{ color: "var(--color-secondary)" }}>
@@ -825,7 +825,7 @@ const Form = () => {
 
 
               <div className={`w-full max-h-max ${typeNavigator == 'safari' ?
-              '@supports mt-4 pt-4' : ''} `}>
+              '@supports mt-6 pt-6' : ''} `}>
                 <div
                   className={`${isYounger ? 'mt-[0rem]' : 'mt-[5rem]'} text-center font-medium py-4 mb-4 md:mt-14 md:mb-4 sm:mt-6`}
                   style={{ color: "var(--color-main)" }}
