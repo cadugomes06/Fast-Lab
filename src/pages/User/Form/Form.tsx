@@ -573,7 +573,7 @@ const Form = () => {
                 <hr></hr>
               </div>
 
-              <div className="flex w-full h-60 flex-wrap items-center justify-center md:h-[34rem]">
+              <div className={`flex w-full h-60 flex-wrap items-center justify-center md:h-[34rem] ${typeNavigator == 'safari ? ' ? 'mb-4 pb-2' : '' } `}>
                 <label
                   htmlFor="name"
                   style={{ color: "var(--color-secondary)" }}
