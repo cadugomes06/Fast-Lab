@@ -371,13 +371,13 @@ const Form = () => {
           <>
             <div className="w-full h-[100vh] bg-black/50 flex justify-center items-center fixed z-20 ">
 
-              <div className="w-[38rem] h-[38rem] bg-gray-50 absolute bottom-6 rounded-md shadow-md shadow-gray-500 sm:w-[20rem] sm:overflow-y-auto" id="modalTerms">
-                <div className="w-[32px] h-[32px] sm:w-[24px] sm:h-[24px] absolute right-2 top-2 sm:right-1 sm:top-1 cursor-pointer"
+              <div className="w-[38rem] h-[38rem] bg-gray-50 absolute bottom-6 rounded-md shadow-md shadow-gray-500 sm:h-[32rem] sm:w-[20rem] sm:overflow-y-auto" id="modalTerms">
+                <div className="w-[32px] h-[32px] sm:w-[24px] sm:h-[24px] absolute right-4 top-4 sm:right-1 sm:top-1 cursor-pointer"
                   onClick={handleCloseModalCondition}
                 >
                   <img src={closeIcon}
                     alt="icone-de-x"
-                    className="sm:w-[24px] sm:h-[24px]"
+                    className="sm:w-[24px] sm:h-[24px] fixed"
                   />
                 </div>
 
@@ -393,7 +393,7 @@ const Form = () => {
                 </div>
 
                 {plan === 'amil' ? (
-                  <div className="w-full px-6 sm:px-4 flex flex-col max-h-max">
+                  <div className="w-full px-6 sm:px-4 flex flex-col max-h-max pb-4">
                     <h3 className="font-normal text-lg flex items-center" style={{ color: 'var(--color-main)' }}>Beneficiário <img src={iconAmil} alt="icone-convenio" className="w-[4rem] h-[4rem] pl-2 " />
                     </h3>
                     <p className="text-md md:text-sm" style={{ color: "var(--color-secondary)" }}>Para a autorização dos seus exames no pré cadastramento, <strong>será necessário que o atendente faça contato por telefone com o mesmo para pegar o token</strong> gerado no portal do convênio e validar os seus exames!</p>
@@ -712,7 +712,6 @@ const Form = () => {
                       value={phoneNumber}
                       maxLenght={14}
                       onChange={(e) => {
-                        ///(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"
                         const targetValue = e.target.value
                         const targetValueNumber = targetValue.replace(/\D/g, '')
 
@@ -825,7 +824,8 @@ const Form = () => {
               ) : ''}
 
 
-              <div className="w-full max-h-max">
+              <div className={`w-full max-h-max ${typeNavigator == 'safari' ?
+              '@supports mt-4 pt-4' : ''} `}>
                 <div
                   className={`${isYounger ? 'mt-[0rem]' : 'mt-[5rem]'} text-center font-medium py-4 mb-4 md:mt-14 md:mb-4 sm:mt-6`}
                   style={{ color: "var(--color-main)" }}
