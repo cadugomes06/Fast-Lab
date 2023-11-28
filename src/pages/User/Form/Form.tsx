@@ -9,9 +9,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
 import LoadingCup from "../../../components/LoadingCup";
 import MenuMobile from "../../../components/MenuMobile";
-import closeIcon from '../../../assets/icons/closeX.svg'
-import iconAmil from '../../../assets/icons/amilSaude.svg'
-import iconUnimed from '../../../assets/icons/unimedSaude.svg'
+import closeIcon from '../../../assets/icons/closeX.svg';
+import iconAmil from '../../../assets/icons/amilSaude.svg';
+import iconUnimed from '../../../assets/icons/unimedSaude.svg';
 
 const Form = () => {
   const [plan, setPlan] = useState("");
@@ -114,6 +114,9 @@ const Form = () => {
         setFileUrl([])
       }
 
+      const date = new Date()
+      const currentDate = date.toLocaleDateString()
+
         if (
           plan === "" ||
           name === "" ||
@@ -129,12 +132,7 @@ const Form = () => {
           phoneNumber === ''
           ) {
           alert("preencha todos os campos corretamente.");
-       } else if (
-            plan == 'unimed' || plan == 'sulamerica' || plan == 'mediservice' || plan == 'amil'
-         || plan == 'assim'  || plan == 'petrobras'  || plan == 'gama'        || plan == 'caberj' 
-         || plan == 'goldencross'                    || plan == 'integral'    || plan == 'notredame' 
-         || plan == 'intermedica' && cardNumber == '' 
-        )  {
+       } else if (plan  && cardNumber === '')   {
           alert('Preencha a Carteirinha corretamente')
        }      
         else if (
@@ -162,7 +160,8 @@ const Form = () => {
         alert("Leia os termos e confirme!");
       } else {
 
-      console.log("dentro da funcao do botao ", imageURL.urls)
+      
+      
       await addDoc(formsCollectionRef, {
             plan: plan,
             cardnumber: cardNumber,
@@ -182,7 +181,8 @@ const Form = () => {
             userID: userID,
             status: 'solicitado',
             responsibleName: responsibleName,
-            responsibleCPF: responsibleCPF
+            responsibleCPF: responsibleCPF,
+            currentDate: currentDate
           }) 
           window.scrollTo({
             top: 0,
@@ -364,6 +364,7 @@ const Form = () => {
       setModalInvalidPlan(false)
       setCardNumber('')
     }
+    
 
     return (
       <>

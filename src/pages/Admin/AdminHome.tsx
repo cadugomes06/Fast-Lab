@@ -55,6 +55,7 @@ const AdminHome = () => {
     id: string;
     responsibleName: string;
     responsibleCPF: string;
+    currentDate: string;
   }
 
   const formsCollectionRef = collection(db, "formulario");
@@ -158,14 +159,27 @@ const AdminHome = () => {
                     </span>
                   </p>
                   {form.status == 'solicitado'? (
-                      <div className="rounded-[50%] w-3 h-3 bg-yellow-300"></div>
+                    <div className="flex justify-between items-center w-24">
+                      <div className="rounded-[50%] w-3 h-3 bg-yellow-300">
+                      </div>
+                        <p className="text-sm" style={{color: 'var(--color-secondary)'}}>{form?.currentDate}</p>
+                    </div>
                     ): ''}
                       {form.status == 'pronto'? (
-                      <div className="rounded-[50%] w-3 h-3 bg-teal-500"></div>
+                      <div className="flex justify-between items-center w-24">
+                          <div className="rounded-[50%] w-3 h-3 bg-teal-500">
+                          </div>
+                        <p className="text-sm" style={{color: 'var(--color-secondary)'}}>{form?.currentDate}</p>
+                    </div>
                     ): ''}
                       {form.status == 'cancelado'? (
-                      <div className="rounded-[50%] w-3 h-3 bg-red-500"></div>
+                      <div className="flex justify-between items-center w-24">
+                      <div className="rounded-[50%] w-3 h-3 bg-red-500">
+                      </div>
+                    <p className="text-sm" style={{color: 'var(--color-secondary)'}}>{form?.currentDate}</p>
+                </div>
                     ): ''}
+                    
   
                 </div>                
               );
