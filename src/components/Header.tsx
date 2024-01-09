@@ -79,6 +79,13 @@ const Header = () => {
               </li>
               </Link>
 
+              <Link to='../user/contato'>
+              <li className='cursor-pointer text-sm font-semibold sm:text-sm hover:text-white hover:underline ease-linear duration-200 uppercase text-teal-500'
+              >
+                Contato
+              </li>
+              </Link>
+
               <li className={`cursor-pointer text-sm font-semibold sm:text-sm text-teal-500 hover:text-white hover:underline ease-linear duration-200 uppercase`}
               
                   onClick={handleClickLogout}>

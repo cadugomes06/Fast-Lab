@@ -13,6 +13,7 @@ import UserRequest from './pages/User/Home/UserRequest';
 import AdminLogin from './pages/Admin/AdminLogin';
 import ProtectedRoute from './routes/ProtectedRoute';
 import AllCustumers from './pages/Admin/AllCustumers';
+import Contact from './pages/User/Home/Contact';
 
 const App = () => {
 
@@ -31,6 +32,7 @@ const App = () => {
         <Route path='user/termos' element={ <Termos /> } />
         <Route path='user/feedback' element={ <FormConfirm /> } />
         <Route path='user/consulta' element={ <UserRequest /> } />
+        <Route path='user/contato' element={ <Contact /> } />
       </Route>
 
         <Route path='admin/login' element={ <AdminLogin /> } />
