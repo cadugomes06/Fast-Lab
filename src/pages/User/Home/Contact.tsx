@@ -1,13 +1,16 @@
 import emailjs from '@emailjs/browser'
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Input from "../../../utils/Input";
 import Button from "../../../utils/Button";
 import Header from "../../../components/Header";
+import MenuMobile from '../../../components/MenuMobile';
+import ModalFeedback from '../../../components/ModalFeedback';
 
 const Contact = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
+  const [isMobile, setIsMobile] = useState(false)
   const form: any = useRef()
 
   const sendForm = (event: React.FormEvent<HTMLFormElement>) => {
@@ -20,18 +23,31 @@ const Contact = () => {
     emailjs.sendForm('gmailMessage', 'template_qciiihp', form.current, '0V_vLrWglpX2kkb4P')
       .then(() => {
         alert('Feedback enviado com sucesso!')
+        return <ModalFeedback />
       }, (error: any) => {
         alert('Error ao enviar formulário!' + error.text);
       });
-      
+
       setName('')
       setEmail('')
-      setMessage('')
+      setMessage('')      
   }
 
+  const {innerWidth: width} = window
+  useEffect(() => {
+    if(width < 600 ) {
+      setIsMobile(true)
+    }
+  }, [width])
+
+
   return (
+    <>
     <div>
-      <Header />
+      {/* <ModalFeedback /> */}
+
+      {isMobile? <MenuMobile /> : <Header />}
+
 
       <div className="mt-8 pl-8 w-full animeLeft sm:pl-4 sm:mt-6 sm:pr-16">
         <h1 className="text-[1.8rem] font-bold textGradient sm:text-[1.5rem] sm:mb-2">
@@ -49,7 +65,7 @@ const Contact = () => {
         <div className="w-[30rem] h-[36rem] animeLeft pb-12 mb-4 max-h-max bg-gray-200 rounded-md shadow-md shadow-gray-400 md:w-[40rem] sm:w-[20rem]">
 
           <form ref={form} onSubmit={sendForm}>
-            <div className="flex flex-col items-center mt-8">
+            <div className="flex flex-col items-center mt-12">
               <label htmlFor="name" 
                      className="w-[300px] pl-1"
                      style={{color: 'var(--color-secondary)'}}>Nome</label>
@@ -60,6 +76,7 @@ const Contact = () => {
                 placeholder="Seu nome..."
                 width="300px"
                 height="42px"
+                value={name}
                 onChange={({target}) => setName(target.value)}
               />
             </div>
@@ -72,6 +89,7 @@ const Contact = () => {
                 type="email"
                 name="email"
                 id="email"
+                value={email}
                 placeholder="exemplo@gmail.com"
                 width="300px"
                 height="42px"
@@ -84,6 +102,7 @@ const Contact = () => {
                      style={{color: 'var(--color-secondary)'}}>Mensagem</label>
               <textarea name="message" 
                         id="message" 
+                        value={message}
                         cols={20} 
                         rows={10}
                         maxLength={150}
@@ -112,6 +131,7 @@ const Contact = () => {
       </section>
 
     </div>
+    </>
   );
 };
 

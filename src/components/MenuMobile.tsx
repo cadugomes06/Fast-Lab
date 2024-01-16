@@ -60,7 +60,7 @@ const MenuMobile = () => {
             </div>
 
             {toggleMenu? (
-                 <nav className='absolute z-10 w-[8rem] h-[18rem] bg-gray-200 top-0 right-0 pt-[70px] flex flex-col items-center justify-center rounded-md shadow-md shadow-gray-400 animeLeft'
+                 <nav className='absolute z-10 w-[8rem] h-[20.5rem] bg-gray-200 top-0 right-0 pt-[70px] flex flex-col items-center justify-center rounded-md shadow-md shadow-gray-400 animeLeft'
                  >
                  <ul className='text-md text-teal-600 font-semibold w-full'>
                   <Link to='../user/userhome'>
@@ -74,7 +74,10 @@ const MenuMobile = () => {
                  </Link>
                   <Link to='../user/termos'>
                     <li  className='w-[100%] py-2 border border-gray-100 text-center hover:bg-teal-500 hover:text-white transition duration-200'>Termos</li>
-                 </Link>                  
+                 </Link>     
+                 <Link to='../user/contato'>
+                    <li  className='w-[100%] py-2 border border-gray-100 text-center hover:bg-teal-500 hover:text-white transition duration-200'>Contato</li>
+                 </Link>                               
                     <li  className='w-[100%] py-2 border border-gray-100 cursor-pointer text-center hover:bg-teal-500 hover:text-white transition duration-200'
                         onClick={handleClickLogout}>
                             Sair
