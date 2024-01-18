@@ -14,6 +14,7 @@ import AdminLogin from './pages/Admin/AdminLogin';
 import ProtectedRoute from './routes/ProtectedRoute';
 import AllCustumers from './pages/Admin/AllCustumers';
 import Contact from './pages/User/Home/Contact';
+import TestPage from './pages/TestPage';
 
 const App = () => {
 
@@ -21,6 +22,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={ <Home /> } />
+        <Route path='/teste' element={ <TestPage /> } />
 
         <Route path='/userlogin' element={ <UserLogin /> } />
         <Route path='/userlogin/register' element={ <UserRegister /> } />

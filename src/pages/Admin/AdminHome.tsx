@@ -19,6 +19,7 @@ import HeaderAdmin from "../../components/HeaderAdmin";
 import { useNavigate } from "react-router-dom";
 import Button from "../../utils/Button";
 import { doc, updateDoc } from "firebase/firestore";
+// import { DocumentSnapshot } from "firebase/firestore/lite";
 
 const AdminHome = () => {
   const [forms, setForms] = useState<TypeUser[]>([]);
@@ -63,8 +64,9 @@ const AdminHome = () => {
   useEffect(() => {
     const getForms = async () => {
       const data = await getDocs(formsCollectionRef);
-      const a: any = data.docs.map((doc) => ({...doc.data(), id: doc.id }));
-      setForms(a);
+      const docs: any = data.docs.map((doc) => ({...doc.data(), id: doc.id }));
+      setForms(docs);
+      console.log(docs)
     };
     getForms();
   }, []);

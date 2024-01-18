@@ -566,224 +566,216 @@ const Form = () => {
                 </div>
               </div>
 
-              <div
-                className="text-center font-medium py-2 mt-8 mb-8 md:mt-6 md:mb-2"
-                style={{ color: "var(--color-main)" }}
-              >
-                <h4>Dados do Paciente</h4>
-                <hr></hr>
-              </div>
 
-              <div className={`flex w-full h-60 flex-wrap items-center justify-center md:h-[34rem] ${typeNavigator == 'safari ? ' ? 'mb-4 pb-2' : '' } `}>
-                <label
-                  htmlFor="name"
-                  style={{ color: "var(--color-secondary)" }}
-                  className="w-[350px] sm:w-[300px] pb-1 mr-8 md:mr-0"
+              {plan != '' ? (
+                <>
+                <div
+                  className="text-center font-medium py-2 mt-8 mb-8 md:mt-6 md:mb-2"
+                  style={{ color: "var(--color-main)" }}
                 >
-                  Nome completo
-                  <Input
-                    type="text"
-                    name=""
-                    id="name"
-                    placeholder="João Batista"
-                    width={isMobile ? '300px' : '350px'}
-                    height="42px"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </label>
-
-                <label
-                  htmlFor="socialname"
-                  style={{ color: "var(--color-secondary)" }}
-                  className="w-[350px] sm:w-[300px] pb-1"
-                >
-                  Nome social
-                  <Input
-                    type="text"
-                    name=""
-                    id="socialname"
-                    placeholder="(opcional)"
-                    width={isMobile ? '300px' : '350px'}
-                    height="42px"
-                    value={socialName}
-                    onChange={(e) => setSocialName(e.target.value)}
-                  />
-                </label>
-
-                <label
-                  htmlFor="email"
-                  style={{ color: "var(--color-secondary)" }}
-                  className="w-[350px] sm:w-[300px] pb-1 mr-8 md:mr-0"
-                >
-                  E-mail
-                  <Input
-                    type="email"
-                    name=""
-                    id="email"
-                    placeholder="exemplo@gmail.com"
-                    width={isMobile ? '300px' : '350px'}
-                    height="42px"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </label>
-
-                <div className={typeNavigator == 'safari' ? 'flex flex-col' : "h-20 w-[350px] sm:w-[300px] flex"}>
-                  <div className={typeNavigator == 'safari' ? 'flex flex-col' : ''}>
+                  <h4>Dados do Paciente</h4>
+                  <hr></hr>
+                </div>
+                <div className={`flex w-full h-60 flex-wrap items-center justify-center md:h-[34rem] animeLeft ${typeNavigator == 'safari ? ' ? 'mb-4 pb-2' : ''} `}>
                     <label
-                      htmlFor="birth"
+                      htmlFor="name"
+                      style={{ color: "var(--color-secondary)" }}
+                      className="w-[350px] sm:w-[300px] pb-1 mr-8 md:mr-0"
+                    >
+                      Nome completo
+                      <Input
+                        type="text"
+                        name=""
+                        id="name"
+                        placeholder="João Batista"
+                        width={isMobile ? '300px' : '350px'}
+                        height="42px"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)} />
+                    </label>
+
+                    <label
+                      htmlFor="socialname"
                       style={{ color: "var(--color-secondary)" }}
                       className="w-[350px] sm:w-[300px] pb-1"
                     >
-                      Dt Nascimento
+                      Nome social
+                      <Input
+                        type="text"
+                        name=""
+                        id="socialname"
+                        placeholder="(opcional)"
+                        width={isMobile ? '300px' : '350px'}
+                        height="42px"
+                        value={socialName}
+                        onChange={(e) => setSocialName(e.target.value)} />
                     </label>
-                    <Input
-                      type="text"
-                      name=""
-                      id="birth"
-                      placeholder="00/00/0000"
-                      height="42px"
-                      width='130px'
-                      value={birth}
-                      maxLenght={10}
-                      onChange={(e) => {
-                        const targetValue = e.target.value
-                        const targetValueNumber = targetValue.replace(/\D/g, '')
 
-                        const newFormatValue =
-                          targetValueNumber.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3")
-                        setBirth(newFormatValue)
-                      }}
-                    />
-                  </div>
-
-                  <div className={typeNavigator == 'safari' ? 'flex flex-col' : ''}>
                     <label
-                      htmlFor="cpf"
+                      htmlFor="email"
                       style={{ color: "var(--color-secondary)" }}
-                      className="w-[350px] sm:w-[300px] pb-1"
+                      className="w-[350px] sm:w-[300px] pb-1 mr-8 md:mr-0"
                     >
-                      CPF
+                      E-mail
+                      <Input
+                        type="email"
+                        name=""
+                        id="email"
+                        placeholder="exemplo@gmail.com"
+                        width={isMobile ? '300px' : '350px'}
+                        height="42px"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)} />
                     </label>
-                    <Input
-                      type="text"
-                      name=""
-                      id="cpf"
-                      placeholder="000.000.000-00"
-                      height="42px"
-                      width={isMobile ? '150px' : '200px'}
-                      value={CPF}
-                      maxLenght={14}
-                      onChange={(e) => {
-                        const input = e.target.value;
-                        const formatInputValue = input.replace(/\D/g, "");
 
-                        const finalFormat = formatInputValue.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")
-                        setCPF(finalFormat);
-                      }}
-                    />
-                    {CPF ? (
-                      <p className="absolute text-red-500 mt-[-14px]">
-                        {cpfError}
-                      </p>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div>
+                    <div className={typeNavigator == 'safari' ? 'flex flex-col' : "h-20 w-[350px] sm:w-[300px] flex"}>
+                      <div className={typeNavigator == 'safari' ? 'flex flex-col' : ''}>
+                        <label
+                          htmlFor="birth"
+                          style={{ color: "var(--color-secondary)" }}
+                          className="w-[350px] sm:w-[300px] pb-1"
+                        >
+                          Dt Nascimento
+                        </label>
+                        <Input
+                          type="text"
+                          name=""
+                          id="birth"
+                          placeholder="00/00/0000"
+                          height="42px"
+                          width='130px'
+                          value={birth}
+                          maxLenght={10}
+                          onChange={(e) => {
+                            const targetValue = e.target.value;
+                            const targetValueNumber = targetValue.replace(/\D/g, '');
+
+                            const newFormatValue = targetValueNumber.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3");
+                            setBirth(newFormatValue);
+                          } } />
+                      </div>
+
+                      <div className={typeNavigator == 'safari' ? 'flex flex-col' : ''}>
+                        <label
+                          htmlFor="cpf"
+                          style={{ color: "var(--color-secondary)" }}
+                          className="w-[350px] sm:w-[300px] pb-1"
+                        >
+                          CPF
+                        </label>
+                        <Input
+                          type="text"
+                          name=""
+                          id="cpf"
+                          placeholder="000.000.000-00"
+                          height="42px"
+                          width={isMobile ? '150px' : '200px'}
+                          value={CPF}
+                          maxLenght={14}
+                          onChange={(e) => {
+                            const input = e.target.value;
+                            const formatInputValue = input.replace(/\D/g, "");
+
+                            const finalFormat = formatInputValue.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+                            setCPF(finalFormat);
+                          } } />
+                        {CPF ? (
+                          <p className="absolute text-red-500 mt-[-14px]">
+                            {cpfError}
+                          </p>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    </div>
 
 
-                <div className="max-h-max w-full md:w-[350px]">
-                  <div className="flex flex-col pl-12 md:pl-0 sm:pl-2">
-                    <label
-                      htmlFor="phonenumber"
-                      style={{ color: "var(--color-secondary)" }}
-                      className="w-[350px] sm:w-[300px] pb-1"
-                    >
-                      Contato
-                    </label>
-                    <Input
-                      type="text"
-                      name=""
-                      id="phonenumber"
-                      placeholder="(22)00000-0000"
-                      height="42px"
-                      width={isMobile ? '160px' : '180px'}
-                      value={phoneNumber}
-                      maxLenght={14}
-                      onChange={(e) => {
-                        const targetValue = e.target.value
-                        const targetValueNumber = targetValue.replace(/\D/g, '')
+                    <div className="max-h-max w-full md:w-[350px]">
+                      <div className="flex flex-col pl-12 md:pl-0 sm:pl-2">
+                        <label
+                          htmlFor="phonenumber"
+                          style={{ color: "var(--color-secondary)" }}
+                          className="w-[350px] sm:w-[300px] pb-1"
+                        >
+                          Contato
+                        </label>
+                        <Input
+                          type="text"
+                          name=""
+                          id="phonenumber"
+                          placeholder="(22)00000-0000"
+                          height="42px"
+                          width={isMobile ? '160px' : '180px'}
+                          value={phoneNumber}
+                          maxLenght={14}
+                          onChange={(e) => {
+                            const targetValue = e.target.value;
+                            const targetValueNumber = targetValue.replace(/\D/g, '');
 
-                        const newFormatValue =
-                          targetValueNumber.replace(/(\d{2})(\d{5})(\d{4})/, "($1)$2-$3")
+                            const newFormatValue = targetValueNumber.replace(/(\d{2})(\d{5})(\d{4})/, "($1)$2-$3");
 
-                        setPhoneNumber(newFormatValue)
-                      }}
-                    />
-                  </div>
-                </div>
+                            setPhoneNumber(newFormatValue);
+                          } } />
+                      </div>
+                    </div>
 
-                <div className={`w-full max-h-max supports-flex:flex justify-start pl-12 md:pl-0 md:justify-center sm:flex-col sm:pl-2 ${typeNavigator == 'safari' ? 'mb-8 pb-8' : ''} `}>
-                  <div className="flex items-center sm:mb-1">
-                    <h2
-                      style={{ color: "var(--color-main)" }}
-                      className="font-semibold"
-                    >
-                      Sexo:
-                    </h2>
-                  </div>
+                    <div className={`w-full max-h-max supports-flex:flex justify-start pl-12 md:pl-0 md:justify-center sm:flex-col sm:pl-2 ${typeNavigator == 'safari' ? 'mb-8 pb-8' : ''} `}>
+                      <div className="flex items-center sm:mb-1">
+                        <h2
+                          style={{ color: "var(--color-main)" }}
+                          className="font-semibold"
+                        >
+                          Sexo:
+                        </h2>
+                      </div>
 
-                  <div className="flex w-[300px] items-center justify-evenly sm:flex-col sm:items-start sm:gap-1">
-                    <label
-                      htmlFor="man"
-                      className="text-sm cursor-pointer"
-                      style={{ color: "var(--color-main)" }}
-                    >
-                      Masculino
-                      <input
-                        type="radio"
-                        name="sexo"
-                        id="man"
-                        className="ml-1 cursor-pointer"
-                        value="masculino"
-                        onChange={handleSexoChange}
-                      />
-                    </label>
-                    <label
-                      htmlFor="woman"
-                      className="text-sm cursor-pointer"
-                      style={{ color: "var(--color-main)" }}
-                    >
-                      Feminino
-                      <input
-                        type="radio"
-                        name="sexo"
-                        id="woman"
-                        className="ml-1 cursor-pointer sm:ml-[11px]"
-                        value="feminino"
-                        onChange={handleSexoChange}
-                      />
-                    </label>
-                    <label
-                      htmlFor="undefined"
-                      className="text-sm cursor-pointer"
-                      style={{ color: "var(--color-main)" }}
-                    >
-                      Outro
-                      <input
-                        type="radio"
-                        name="sexo"
-                        id="undefined"
-                        className="ml-1 cursor-pointer sm:ml-[34px]"
-                        value="indefinido"
-                        onChange={handleSexoChange}
-                      />
-                    </label>
-                  </div>
-                </div>
-              </div>
+                      <div className="flex w-[300px] items-center justify-evenly sm:flex-col sm:items-start sm:gap-1">
+                        <label
+                          htmlFor="man"
+                          className="text-sm cursor-pointer"
+                          style={{ color: "var(--color-main)" }}
+                        >
+                          Masculino
+                          <input
+                            type="radio"
+                            name="sexo"
+                            id="man"
+                            className="ml-1 cursor-pointer"
+                            value="masculino"
+                            onChange={handleSexoChange} />
+                        </label>
+                        <label
+                          htmlFor="woman"
+                          className="text-sm cursor-pointer"
+                          style={{ color: "var(--color-main)" }}
+                        >
+                          Feminino
+                          <input
+                            type="radio"
+                            name="sexo"
+                            id="woman"
+                            className="ml-1 cursor-pointer sm:ml-[11px]"
+                            value="feminino"
+                            onChange={handleSexoChange} />
+                        </label>
+                        <label
+                          htmlFor="undefined"
+                          className="text-sm cursor-pointer"
+                          style={{ color: "var(--color-main)" }}
+                        >
+                          Outro
+                          <input
+                            type="radio"
+                            name="sexo"
+                            id="undefined"
+                            className="ml-1 cursor-pointer sm:ml-[34px]"
+                            value="indefinido"
+                            onChange={handleSexoChange} />
+                        </label>
+                      </div>
+                    </div>
+                  </div></>
+              ) : ''}
 
               {isYounger ? (
                 <div className="mt-14 sm:mt-4 w-full max-h-max py-2 flex flex-col animeLeft md:items-center " >
@@ -824,125 +816,129 @@ const Form = () => {
                 </div>
               ) : ''}
 
+              {name != '' && CPF != '' && email != '' &&  birth != '' && phoneNumber != '' ?
+               (
+                <div className={`w-full max-h-max ${typeNavigator == 'safari' ?
+                '@supports mt-6 pt-6' : ''} `}>
+                  <div
+                    className={`${isYounger ? 'mt-[0rem]' : 'mt-[5rem]'} text-center font-medium py-4 mb-4 md:mt-14 md:mb-4 sm:mt-6 animeLeft`}
+                    style={{ color: "var(--color-main)" }}
+                  >
+                    <h4>Endereço do Paciente</h4>
+                    <hr></hr>
+                  </div>
+  
+                  <div className="flex flex-wrap gap-8 pl-12 mb-8 md:pl-0 md:justify-center md:gap-4">
+  
+                    <div className="h-24 w-[350px] flex mb-2 md:mb-0 sm:gap-2 sm:justify-center">
+                      <div className="sm:flex sm:flex-col">
+                        <label
+                          htmlFor="cep"
+                          style={{ color: "var(--color-secondary)" }}
+                          className="w-[350px] sm:w-[100px] pb-1"
+                        >
+                          CEP
+                        </label>
+                        <Input
+                          type="text"
+                          name=""
+                          id="cep"
+                          placeholder="22333-444"
+                          height="42px"
+                          width='100px'
+                          value={CEP}
+                          maxLenght={9}
+                          onChange={(e) => {
+                            const input = e.target.value;
+                            const numericInput = input.replace(/\D/g, "");
+  
+                            let formattedInput = numericInput;
+                            if (numericInput.length > 5) {
+                              formattedInput = numericInput.replace(
+                                /^(\d{5})(\d)/,
+                                "$1-$2"
+                              );
+                            }
+                            setCEP(formattedInput);
+                          }}
+                        />
+                      </div>
+  
+                      <div className="sm:flex sm:flex-col">
+                        <label
+                          htmlFor="street"
+                          style={{ color: "var(--color-secondary)" }}
+                          className="w-[350px] sm:w-[190px] pb-1"
+                        >
+                          Rua
+                        </label>
+                        <Input
+                          type="text"
+                          name=""
+                          id="street"
+                          placeholder="Recanto da Alvorada"
+                          height="42px"
+                          width={isMobile ? '180px' : '240px'}
+                          value={street}
+                          onChange={(e) => setStreet(e.target.value)}
+                        />
+                      </div>
+                    </div>
+  
+                    <div className="h-24 w-[350px] flex sm:w-[300px] sm:gap-2">
+                      <div className={typeNavigator == 'safari' ? 'flex flex-col' : "pr-[10px] sm:pr-0"}>
+                        <label
+                          htmlFor="num"
+                          style={{ color: "var(--color-secondary)" }}
+                          className="w-[350px] sm:w-[100px] pb-1"
+                        >
+                          N°
+                        </label>
+                        <Input
+                          type="text"
+                          name=""
+                          id="num"
+                          placeholder="000"
+                          height="42px"
+                          width="100px"
+                          value={number}
+                          maxLenght={5}
+                          onChange={(e) => {
+                            const targetValue = e.target.value
+                            const numbetTargetValue = targetValue.replace(/\D/g, '')
+  
+                            setNumber(numbetTargetValue)
+                          }}
+                        />
+                      </div>
+  
+                      <div className={typeNavigator == 'safari' ? 'flex flex-col' : ""}>
+                        <label
+                          htmlFor="neighborhood"
+                          style={{ color: "var(--color-secondary)" }}
+                          className="w-[350px] sm:w-[190px] pb-1"
+                        >
+                          Bairro
+                        </label>
+                        <Input
+                          type="text"
+                          name=""
+                          id="neighborhood"
+                          placeholder="Centro"
+                          height="42px"
+                          width={isMobile ? '180px' : '240px'}
+                          value={neighborhood}
+                          onChange={(e) => setNeighborhood(e.target.value)}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ): ''}
 
-              <div className={`w-full max-h-max ${typeNavigator == 'safari' ?
-              '@supports mt-6 pt-6' : ''} `}>
+              {CEP != '' && street != '' && number != '' ? (
+                <>
                 <div
-                  className={`${isYounger ? 'mt-[0rem]' : 'mt-[5rem]'} text-center font-medium py-4 mb-4 md:mt-14 md:mb-4 sm:mt-6`}
-                  style={{ color: "var(--color-main)" }}
-                >
-                  <h4>Endereço do Paciente</h4>
-                  <hr></hr>
-                </div>
-
-                <div className="flex flex-wrap gap-8 pl-12 mb-8 md:pl-0 md:justify-center md:gap-4">
-
-                  <div className="h-24 w-[350px] flex mb-2 md:mb-0 sm:gap-2 sm:justify-center">
-                    <div className="sm:flex sm:flex-col">
-                      <label
-                        htmlFor="cep"
-                        style={{ color: "var(--color-secondary)" }}
-                        className="w-[350px] sm:w-[100px] pb-1"
-                      >
-                        CEP
-                      </label>
-                      <Input
-                        type="text"
-                        name=""
-                        id="cep"
-                        placeholder="22333-444"
-                        height="42px"
-                        width='100px'
-                        value={CEP}
-                        maxLenght={9}
-                        onChange={(e) => {
-                          const input = e.target.value;
-                          const numericInput = input.replace(/\D/g, "");
-
-                          let formattedInput = numericInput;
-                          if (numericInput.length > 5) {
-                            formattedInput = numericInput.replace(
-                              /^(\d{5})(\d)/,
-                              "$1-$2"
-                            );
-                          }
-                          setCEP(formattedInput);
-                        }}
-                      />
-                    </div>
-
-                    <div className="sm:flex sm:flex-col">
-                      <label
-                        htmlFor="street"
-                        style={{ color: "var(--color-secondary)" }}
-                        className="w-[350px] sm:w-[190px] pb-1"
-                      >
-                        Rua
-                      </label>
-                      <Input
-                        type="text"
-                        name=""
-                        id="street"
-                        placeholder="Recanto da Alvorada"
-                        height="42px"
-                        width={isMobile ? '180px' : '240px'}
-                        value={street}
-                        onChange={(e) => setStreet(e.target.value)}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="h-24 w-[350px] flex sm:w-[300px] sm:gap-2">
-                    <div className={typeNavigator == 'safari' ? 'flex flex-col' : "pr-[10px] sm:pr-0"}>
-                      <label
-                        htmlFor="num"
-                        style={{ color: "var(--color-secondary)" }}
-                        className="w-[350px] sm:w-[100px] pb-1"
-                      >
-                        N°
-                      </label>
-                      <Input
-                        type="text"
-                        name=""
-                        id="num"
-                        placeholder="000"
-                        height="42px"
-                        width="100px"
-                        value={number}
-                        maxLenght={5}
-                        onChange={(e) => {
-                          const targetValue = e.target.value
-                          const numbetTargetValue = targetValue.replace(/\D/g, '')
-
-                          setNumber(numbetTargetValue)
-                        }}
-                      />
-                    </div>
-
-                    <div className={typeNavigator == 'safari' ? 'flex flex-col' : ""}>
-                      <label
-                        htmlFor="neighborhood"
-                        style={{ color: "var(--color-secondary)" }}
-                        className="w-[350px] sm:w-[190px] pb-1"
-                      >
-                        Bairro
-                      </label>
-                      <Input
-                        type="text"
-                        name=""
-                        id="neighborhood"
-                        placeholder="Centro"
-                        height="42px"
-                        width={isMobile ? '180px' : '240px'}
-                        value={neighborhood}
-                        onChange={(e) => setNeighborhood(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div
                 className="text-center font-medium py-2 mt-4 mb-8 sm:mt-8 sm:mb-2"
                 style={{ color: "var(--color-main)" }}
               >
@@ -1000,45 +996,46 @@ const Form = () => {
                   </div>
                 ))}
               </div>
+              </>
+              ) : ''}           
 
-              <div className="w-full h-12 gap-2 flex items-center pl-12 md:justify-center md:pl-0">
-                <input type="checkbox"
-                  name=""
-                  id="condition"
-                  className="w-4 h-4"
-                  onChange={(e) => handleCheckCondition(e.target.checked)}
-                />
-                <label htmlFor=""
-                  className="cursor-pointer text-md text-teal-500">
-                  Li e concordo com os {' '}
-                  <span className="underline font-semibold hover:text-teal-700"
-                    onClick={handleOpenModalCondition}>
-                    termos
-                  </span>
-                </label>
-              </div>
-
-              <div className="flex justify-center">
-                {imageURL.urls.length > 0 ? (
-                  <Button
-                    text="Enviar"
-                    width={isMobile ? '250px' : '350px'}
-                    height="42px"
-                    marginTop="1rem"
-                    marginBottom=""
-                    onClick={createRequest}
-                  />
-                ) : (
-                  <Button
-                    text="Aguardando arquivo..."
-                    width={isMobile ? '250px' : '350px'}
-                    height="42px"
-                    marginTop="1rem"
-                    marginBottom=""
-                    disabled
-                  />
-                )}
-              </div>
+            {unit != '' ? (
+              <><div className="w-full h-12 gap-2 flex items-center pl-12 md:justify-center md:pl-0">
+                  <input type="checkbox"
+                    name=""
+                    id="condition"
+                    className="w-4 h-4"
+                    onChange={(e) => handleCheckCondition(e.target.checked)} />
+                  <label htmlFor=""
+                    className="cursor-pointer text-md text-teal-500">
+                    Li e concordo com os {' '}
+                    <span className="underline font-semibold hover:text-teal-700"
+                      onClick={handleOpenModalCondition}>
+                      termos
+                    </span>
+                  </label>
+                </div><div className="flex justify-center">
+                    {imageURL.urls.length > 0 ? (
+                      <Button
+                        text="Enviar"
+                        width={isMobile ? '250px' : '350px'}
+                        height="42px"
+                        marginTop="1rem"
+                        marginBottom=""
+                        onClick={createRequest} />
+                    ) : (
+                      <Button
+                        text="Aguardando arquivo..."
+                        width={isMobile ? '250px' : '350px'}
+                        height="42px"
+                        marginTop="1rem"
+                        marginBottom=""
+                        disabled />
+                    )}
+                  </div>
+                  </>
+            ) : ''}
+              
 
             </div>
           </form>
