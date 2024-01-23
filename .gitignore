@@ -13,6 +13,8 @@ dist-ssr
 *.local
 .env
 env
+TestPage.tsx
+src/pages/TestPage
 
 
 # Editor directories and files

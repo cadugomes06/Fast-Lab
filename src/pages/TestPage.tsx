@@ -12,6 +12,7 @@ const testPage = () => {
       const data = await getDocs(formsCollectionRef);
       const docs: any = data.docs.map((doc) => ({...doc.data(), id: doc.id }));
       setForms(docs);
+      console.log(forms)
     };
     getForms();
   }, []);
