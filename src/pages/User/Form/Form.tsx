@@ -50,6 +50,7 @@ const Form = () => {
   }
 
   const formsCollectionRef = collection(db, "formulario");
+  // const usersCollectionRef = collection(db, "users");
   const navigate = useNavigate()
   const { state } = useContext(UserContext)
 
@@ -107,11 +108,16 @@ const Form = () => {
     const createRequest = async (e: any) => {
       e.preventDefault();
       const userID = window.localStorage.getItem('user')
+
   
       if (fileUrl.length > 8) {
         alert('Você ultrapassou o limite de pedidos!')
         setImageURL({ urls: [] })
         setFileUrl([])
+      }
+
+      if (imageURL.urls.length > 0) {
+        alert('Anexe um pedido médico')
       }
 
       const date = new Date()
@@ -132,10 +138,7 @@ const Form = () => {
           phoneNumber === ''
           ) {
           alert("preencha todos os campos corretamente.");
-       } else if (plan  && cardNumber === '')   {
-          alert('Preencha a Carteirinha corretamente')
-       }      
-        else if (
+       } else if (
           (plan === "unimed" || plan === "sulamerica") &&
           cardNumber.length < 17
         ) {
@@ -158,9 +161,7 @@ const Form = () => {
         alert("Selecione seu pedido médico primeiro!");
       } else if (conditionTerms === false) {
         alert("Leia os termos e confirme!");
-      } else {
-
-      
+      } else {     
       
       await addDoc(formsCollectionRef, {
             plan: plan,
@@ -184,6 +185,23 @@ const Form = () => {
             responsibleCPF: responsibleCPF,
             currentDate: currentDate
           }) 
+
+          // await addDoc(usersCollectionRef, {
+          //   name: name,
+          //   socialname: socialName,
+          //   email: email,
+          //   sexo: sexo,
+          //   birth: birth,
+          //   phone: phoneNumber,
+          //   cpf: CPF,
+          //   cep: CEP,
+          //   street: street,
+          //   num: number,
+          //   neighborhood: neighborhood,
+          //   responsibleName: responsibleName,
+          //   responsibleCPF: responsibleCPF,
+          // })
+
           window.scrollTo({
             top: 0,
             behavior: 'smooth'
@@ -1014,8 +1032,10 @@ const Form = () => {
                       termos
                     </span>
                   </label>
-                </div><div className="flex justify-center">
-                    {imageURL.urls.length > 0 ? (
+                </div>
+                
+                <div className="flex justify-center">
+
                       <Button
                         text="Enviar"
                         width={isMobile ? '250px' : '350px'}
@@ -1023,15 +1043,7 @@ const Form = () => {
                         marginTop="1rem"
                         marginBottom=""
                         onClick={createRequest} />
-                    ) : (
-                      <Button
-                        text="Aguardando arquivo..."
-                        width={isMobile ? '250px' : '350px'}
-                        height="42px"
-                        marginTop="1rem"
-                        marginBottom=""
-                        disabled />
-                    )}
+                  
                   </div>
                   </>
             ) : ''}
