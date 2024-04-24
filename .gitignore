@@ -15,7 +15,9 @@ dist-ssr
 env
 TestPage.tsx
 src/pages/TestPage
-
+src/services/firebaseConfig.tsx
+services/firebaseConfig
+firebaseConfig.tsx
 
 # Editor directories and files
 .vscode/*

@@ -186,22 +186,7 @@ const Form = () => {
             currentDate: currentDate
           }) 
 
-          // await addDoc(usersCollectionRef, {
-          //   name: name,
-          //   socialname: socialName,
-          //   email: email,
-          //   sexo: sexo,
-          //   birth: birth,
-          //   phone: phoneNumber,
-          //   cpf: CPF,
-          //   cep: CEP,
-          //   street: street,
-          //   num: number,
-          //   neighborhood: neighborhood,
-          //   responsibleName: responsibleName,
-          //   responsibleCPF: responsibleCPF,
-          // })
-
+        
           window.scrollTo({
             top: 0,
             behavior: 'smooth'
@@ -307,6 +292,14 @@ const Form = () => {
         setPlanRule("0001112223");
         if (plan === "goldencross" &&
           cardNumber.length < 10 && cardNumber.length != 0) {
+          setCardnumberError("formato incorreto.");
+        } else {
+          setCardnumberError("");
+        }
+      } else if (plan === "portoSeguro") {
+        setPlanRule("0001112223");
+        if (plan === "portoSeguro" &&
+          cardNumber.length < 13 && cardNumber.length != 0) {
           setCardnumberError("formato incorreto.");
         } else {
           setCardnumberError("");
@@ -429,7 +422,7 @@ const Form = () => {
                   </div>
                 ) : ''}
 
-                {plan == 'particular' || plan == 'univita' || plan == 'braseg' || plan == 'boaviagem' || plan == 'ambep' ? 
+                {plan == 'particular' ? 
                   <div className="w-full mt-5 px-6 sm:px-3 flex flex-col max-h-max pb-4">
                   <h3 className="font-normal text-md flex items-center" style={{ color: 'var(--color-main)' }}>Ao escolher o convênio<strong className="pl-1">{plan.toUpperCase()}</strong>
                   </h3>
@@ -534,10 +527,11 @@ const Form = () => {
                     <option value="intermedica">Intermédica</option>
                     <option value="notredame">Notredame</option>
                     <option value="particular">Particular</option>
-                    <option value="braseg">Braseg</option>
+                    <option value="portoSeguro">Porto Seguro</option>
+                    {/*<option value="braseg">Braseg</option>
                     <option value="univita">Cartão de Todos</option>
                     <option value="ambep">Ambep</option>
-                    <option value="boaviagem">Boa Viagem</option>
+                    <option value="boaviagem">Boa Viagem</option> */}
                   </select>
                 </div>
 
@@ -557,14 +551,9 @@ const Form = () => {
                     id="cardnumber"
                     width={isMobile ? '300px' : '350px'}
                     height="42px"
-                    placeholder={plan == 'particular' || plan == 'univita' || plan == 'braseg' 
-                              || plan == 'boaviagem'  || plan == 'ambep' ? ''  : planRule}
-                    disabled={
-                      plan == 'particular' || plan == 'univita' || plan == 'braseg' 
-                    || plan == 'boaviagem' || plan == 'ambep' ? true : false
-                    }
-                    value={plan == 'particular' || plan == 'univita' || plan == 'braseg' 
-                        || plan == 'boaviagem'  || plan == 'ambep' ? '' : cardNumber}
+                    placeholder={planRule}
+                    disabled={false}
+                    value={cardNumber}
                     maxLenght={23}
                     onChange={(e) => {
                       const targetValue = e.target.value

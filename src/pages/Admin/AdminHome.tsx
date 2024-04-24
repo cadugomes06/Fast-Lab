@@ -19,10 +19,11 @@ import HeaderAdmin from "../../components/HeaderAdmin";
 import { useNavigate } from "react-router-dom";
 import Button from "../../utils/Button";
 import { doc, updateDoc } from "firebase/firestore";
-// import { DocumentSnapshot } from "firebase/firestore/lite";
+
 
 const AdminHome = () => {
   const [forms, setForms] = useState<TypeUser[]>([]);
+  const [filteredForms, setFilteredForms] = useState<TypeUser[]>([]);
   const [indexPac, setIndexPac] = useState(0);
   const [currentStatus, setCurrentStatus] = useState('solicitado')
 
@@ -65,11 +66,12 @@ const AdminHome = () => {
     const getForms = async () => {
       const data = await getDocs(formsCollectionRef);
       const docs: any = data.docs.map((doc) => ({...doc.data(), id: doc.id }));
-      setForms(docs);
-      console.log(docs)
+      setForms(docs);      
+      //console.log(docs)
     };
     getForms();
   }, []);
+  
   
   
   const handleShowPacient = async (index: number) => {
@@ -122,6 +124,22 @@ const AdminHome = () => {
   }
 
 
+  useEffect(() => {
+    if (currentStatus == "solicitado") {
+      const solicitateForm = forms.filter((doc: any) => doc.status == "solicitado")
+      setFilteredForms(solicitateForm)
+
+    } else if (currentStatus == "pronto") {
+      const solicitateForm = forms.filter((doc: any) => doc.status == "pronto")
+      setFilteredForms(solicitateForm)
+
+    } else if (currentStatus == "cancelado") {
+      const solicitateForm = forms.filter((doc: any) => doc.status == "cancelado")
+      setFilteredForms(solicitateForm)
+    }
+  }, [forms, currentStatus])
+
+
 
   return (
     <div>
@@ -140,8 +158,8 @@ const AdminHome = () => {
            </div>
        
           <div className="mt-[4.6rem] z-0 ">
-          {forms?.map((form: any, index: number) => {
-            if (forms[index].status === currentStatus) {
+          {filteredForms?.map((form: any, index: number) => {
+            if (filteredForms[index].status === currentStatus) {
               return (
                 <div key={index}
                      onClick={() => handleShowPacient(index)}
@@ -211,90 +229,90 @@ const AdminHome = () => {
 
            </div>
 
-          {forms ? 
+          {filteredForms ? 
             <div className="pl-12 pt-4 flex flex-col justify-center gap-1 detail animeLeft">
               <h3 className="textBase flex items-center">
                <img src={planIcon} alt='icone-de-saude' className="w-6 h-6 mr-4" /> 
-               Convênio: <span className="dataText pl-6">{forms[indexPac]?.plan.toUpperCase()}</span> 
+               Convênio: <span className="dataText pl-6">{filteredForms[indexPac]?.plan.toUpperCase()}</span> 
 
               </h3>
 
               <h3 className="textBase flex items-center">
                 <img src={cardnumber} alt="" className="w-6 h-6 mr-4" />
-                carteirinha: <span className="dataText tracking-widest	">{forms[indexPac]?.cardnumber}</span>
+                carteirinha: <span className="dataText tracking-widest	">{filteredForms[indexPac]?.cardnumber}</span>
               </h3>
 
               <h3 className="textBase flex items-center">
                 <img src={usericon} alt="" className="w-6 h-6 mr-4" />
-                nome: <span className="dataText">{forms[indexPac]?.name}</span>
+                nome: <span className="dataText">{filteredForms[indexPac]?.name}</span>
               </h3>
 
               <h3 className="textBase flex items-center">
                 <img src={usericon} alt="" className="w-6 h-6 mr-4" />
-                nome social: <span className="dataText">{forms[indexPac]?.socialname || '- - -'}</span>
+                nome social: <span className="dataText">{filteredForms[indexPac]?.socialname || '- - -'}</span>
               </h3>
 
               <h3 className="textBase flex items-center">
                 <img src={usericon} alt="" className="w-6 h-6 mr-4" />
-                Responsável: <span className="text-blue-500 font-semibold pl-2 text-lg">{forms[indexPac]?.responsibleName || '- - -'}</span>
+                Responsável: <span className="text-blue-500 font-semibold pl-2 text-lg">{filteredForms[indexPac]?.responsibleName || '- - -'}</span>
               </h3>
 
               <h3 className="textBase flex items-center">  
               <img src={cpf} alt="" className="w-6 h-6 mr-4" />              
-                CPF do Responsável: <span className="text-blue-500 font-semibold pl-2 text-lg"> {forms[indexPac]?.responsibleCPF || '- - -'}</span>
+                CPF do Responsável: <span className="text-blue-500 font-semibold pl-2 text-lg"> {filteredForms[indexPac]?.responsibleCPF || '- - -'}</span>
               </h3>
 
               <h3 className="textBase flex items-center">
                 <img src={email} alt="" className="w-5 h-5 mr-4" />
-                email: <span className="dataText">{forms[indexPac]?.email}</span>
+                email: <span className="dataText">{filteredForms[indexPac]?.email}</span>
               </h3>
 
               <h3 className="textBase flex items-center">
                 <img src={birth} alt="" className="w-5 h-5 mr-4" />
-                Dt nascimento: <span className="dataText">{forms[indexPac]?.birth}</span>
+                Dt nascimento: <span className="dataText">{filteredForms[indexPac]?.birth}</span>
               </h3>
               <h3 className="textBase flex items-center">
                 <img src={sexo} alt="" className="w-6 h-6 mr-4" />
-                sexo: <span className="dataText">{forms[indexPac]?.sexo}</span>
+                sexo: <span className="dataText">{filteredForms[indexPac]?.sexo}</span>
               </h3>
 
 
               <h3 className="textBase flex items-center">
                 <img src={cpf} alt="" className="w-6 h-6 mr-4" />
-                CPF: <span className="dataText">{forms[indexPac]?.cpf}</span>
+                CPF: <span className="dataText">{filteredForms[indexPac]?.cpf}</span>
               </h3>
               
               <h3 className="textBase flex items-center">
                 <img src={phone} alt="" className="w-5 h-5 mr-4" />
-                Telefone: <span className="dataText tracking-wide	">{forms[indexPac]?.phone}</span>
+                Telefone: <span className="dataText tracking-wide	">{filteredForms[indexPac]?.phone}</span>
               </h3>
 
               <h3 className="textBase flex items-center">
                 <img src={location} alt="" className="w-6 h-6 mr-4" />
-                cep: <span className="dataText">{forms[indexPac]?.cep}</span>
+                cep: <span className="dataText">{filteredForms[indexPac]?.cep}</span>
               </h3>
 
               <h3 className="textBase flex items-center">
                 <img src={location} alt="" className="w-6 h-6 mr-4" />
-                Rua: <span className="dataText">{forms[indexPac]?.street}</span>
+                Rua: <span className="dataText">{filteredForms[indexPac]?.street}</span>
               </h3>
 
               <h3 className="textBase flex items-center">
                 <img src={location} alt="" className="w-6 h-6 mr-4" />
-                número: <span className="dataText">{forms[indexPac]?.num}</span>
+                número: <span className="dataText">{filteredForms[indexPac]?.num}</span>
               </h3>
 
               <h3 className="textBase flex items-center">
                 <img src={location} alt="" className="w-6 h-6 mr-4" />
-                Bairro: <span className="dataText">{forms[indexPac]?.neighborhood}</span>
+                Bairro: <span className="dataText">{filteredForms[indexPac]?.neighborhood}</span>
               </h3>
 
               <h3 className="textBase flex items-center mb-2">
                 <img src={build} alt="" className="w-6 h-6 mr-4" />
-                unidade: <span className="dataText">{forms[indexPac]?.unit}</span>
+                unidade: <span className="dataText">{filteredForms[indexPac]?.unit}</span>
               </h3>
 
-                {forms[indexPac]?.imageUrl?.map((url, index) => {
+                {filteredForms[indexPac]?.imageUrl?.map((url, index) => {
                   return (
                     <div key={index} className="documentLink">
                       <a href={url}

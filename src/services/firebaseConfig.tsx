@@ -4,7 +4,7 @@
  import { getAuth } from 'firebase/auth'
 
 const firebaseApp = {
-  apiKey: import.meta.env.VITE_SERVICE_ACCESS_API_KEY,  
+  apiKey: "AIzaSyDQ40S9LEJ59fB7GpUar_Ejh9mWS6lvwK0",  
   authDomain: "lab-agendamento.firebaseapp.com",   projectId: "lab-agendamento",
   storageBucket: "lab-agendamento.appspot.com",
   messagingSenderId: "477253349616",
