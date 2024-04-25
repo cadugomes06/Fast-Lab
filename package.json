@@ -39,6 +39,9 @@
     "typescript": "^5.0.2",
     "vite": "^4.5.3"
   },
+    "engines": {
+      "node": "v20.11.1"
+    },
   "resolutions": {
     "react-error-overlay": "6.0.9"
   }
