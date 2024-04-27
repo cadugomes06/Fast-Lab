@@ -13,13 +13,12 @@ dist
 dist-ssr
 *.local
 .env
-env
 TestPage.tsx
 src/pages/TestPage
 src/services/firebaseConfig.tsx
 services/firebaseConfig
 firebaseConfig.tsx
-../src/services/firebaseConfig
+src
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

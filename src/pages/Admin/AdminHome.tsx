@@ -35,7 +35,6 @@ const AdminHome = () => {
       navigate("../admin/login")
     }
   }, [])
-  
 
   interface TypeUser {
     plan: string;
@@ -79,9 +78,9 @@ const AdminHome = () => {
   };
   
   const updateConfirmStatus = async () => {
-    const userId =  forms[indexPac].id
+    const userId =  filteredForms[indexPac].id
 
-    if (forms[indexPac].status == 'pronto') {
+    if (filteredForms[indexPac].status == 'pronto') {
       return alert('Essa solicitação já está pronta!')
     } else {
       const updateStatus = doc(db, 'formulario', userId)
@@ -94,9 +93,9 @@ const AdminHome = () => {
   }
 
   const updateStatusSolicitation = async () => {
-    const userId =  forms[indexPac].id
+    const userId =  filteredForms[indexPac].id
 
-    if (forms[indexPac].status == 'solicitado') {
+    if (filteredForms[indexPac].status == 'solicitado') {
       return alert('O paciente já está em estado "solicitado"!')
     } else {
       const updateStatus = doc(db, 'formulario', userId)
@@ -109,9 +108,9 @@ const AdminHome = () => {
   }
 
   const updateStatusCancel = async () => {
-    const userId =  forms[indexPac].id
+    const userId =  filteredForms[indexPac].id
 
-    if (forms[indexPac].status == 'cancelado') {
+    if (filteredForms[indexPac].status == 'cancelado') {
       return alert('O paciente já está em estado "cancelado"!')
     } else {
       const updateStatus = doc(db, 'formulario', userId)
@@ -179,10 +178,10 @@ const AdminHome = () => {
                     </span>
                   </p>
                   {form.status == 'solicitado'? (
-                    <div className="flex justify-between items-center w-24">
+                    <div className="flex justify-between items-center w-[9rem]">
                       <div className="rounded-[50%] w-3 h-3 bg-yellow-300">
                       </div>
-                        <p className="text-sm" style={{color: 'var(--color-secondary)'}}>{form?.currentDate}</p>
+                        <p className="text-[12px]" style={{color: 'var(--color-secondary)'}}>{form?.currentDate}</p>
                     </div>
                     ): ''}
                       {form.status == 'pronto'? (

@@ -120,8 +120,9 @@ const Form = () => {
         alert('Anexe um pedido médico')
       }
 
-      const date = new Date()
-      const currentDate = date.toLocaleDateString()
+      const date = new Date();
+      const currentTime = date.toLocaleTimeString();
+      const currentDate = date.toLocaleDateString();
 
         if (
           plan === "" ||
@@ -183,7 +184,7 @@ const Form = () => {
             status: 'solicitado',
             responsibleName: responsibleName,
             responsibleCPF: responsibleCPF,
-            currentDate: currentDate
+            currentDate: currentDate + ' - ' + currentTime
           }) 
 
         
