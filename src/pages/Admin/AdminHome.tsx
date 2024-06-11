@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig";
-import usericon from '../../assets/icons/usericon.svg'
-import cardnumber from '../../assets/icons/cardnumber.svg'
-import email from '../../assets/icons/email.svg'
-import cpf from '../../assets/icons/cpf.svg'
-import sexo from '../../assets/icons/sexo.svg'
-import birth from '../../assets/icons/birth.svg'
-import location from '../../assets/icons/location.svg'
-import build from '../../assets/icons/build.svg'
-import phone from '../../assets/icons/phone.svg'
-import planIcon from '../../assets/icons/plan.svg'
-import baloonIcon from '../../assets/icons/baloon-check.svg'
-import requestIcon from '../../assets/icons/request-icon.svg'
-import cancelsIcon from '../../assets/icons/cancels-icon.svg'
-
+import usericon from '../../assets/icons/usericon.svg';
+import cardnumber from '../../assets/icons/cardnumber.svg';
+import email from '../../assets/icons/email.svg';
+import cpf from '../../assets/icons/cpf.svg';
+import sexo from '../../assets/icons/sexo.svg';
+import birth from '../../assets/icons/birth.svg';
+import location from '../../assets/icons/location.svg';
+import build from '../../assets/icons/build.svg';
+import phone from '../../assets/icons/phone.svg';
+import planIcon from '../../assets/icons/plan.svg';
+import baloonIcon from '../../assets/icons/baloon-check.svg';
+import requestIcon from '../../assets/icons/request-icon.svg';
+import cancelsIcon from '../../assets/icons/cancels-icon.svg';
 import HeaderAdmin from "../../components/HeaderAdmin";
 import { useNavigate } from "react-router-dom";
 import Button from "../../utils/Button";
@@ -185,17 +184,16 @@ const AdminHome = () => {
                     </div>
                     ): ''}
                       {form.status == 'pronto'? (
-                      <div className="flex justify-between items-center w-24">
-                          <div className="rounded-[50%] w-3 h-3 bg-teal-500">
-                          </div>
-                        <p className="text-sm" style={{color: 'var(--color-secondary)'}}>{form?.currentDate}</p>
+                      <div className="flex w-[100%] items-center gap-1 h-auto">
+                          <div className="rounded-[50%] w-3 h-3 bg-teal-500" />
+                        <p className="text-sm flex" style={{color: 'var(--color-secondary)'}}>{form?.currentDate}</p>
                     </div>
                     ): ''}
                       {form.status == 'cancelado'? (
-                      <div className="flex justify-between items-center w-24">
+                      <div className="flex w-[100%] items-center gap-1 h-auto">
                       <div className="rounded-[50%] w-3 h-3 bg-red-500">
                       </div>
-                    <p className="text-sm" style={{color: 'var(--color-secondary)'}}>{form?.currentDate}</p>
+                    <p className="text-sm flex" style={{color: 'var(--color-secondary)'}}>{form?.currentDate}</p>
                 </div>
                     ): ''}
                     

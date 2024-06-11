@@ -96,6 +96,7 @@ const AllCustumers = () => {
                         height="38px"
                         background='#AFACAF'
                         borderColor='#9B979B'
+                        disabled={true}
                         onClick={() => handleDeleteUser()}
                         />
   
