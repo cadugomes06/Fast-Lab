@@ -68,14 +68,14 @@ const AdminHome = () => {
       //console.log(docs)
     };
     getForms();
-  }, []);
-  
+  }, []);  
   
   
   const handleShowPacient = async (index: number) => {
     setIndexPac(index)
   };
   
+  //Atualizando para status PRONTO
   const updateConfirmStatus = async () => {
     const userId =  filteredForms[indexPac].id
 
@@ -91,6 +91,7 @@ const AdminHome = () => {
     }
   }
 
+  //Atualizando para status SOLICITADO
   const updateStatusSolicitation = async () => {
     const userId =  filteredForms[indexPac].id
 
@@ -106,6 +107,7 @@ const AdminHome = () => {
     }
   }
 
+  //Atualizando para status CANCELADO
   const updateStatusCancel = async () => {
     const userId =  filteredForms[indexPac].id
 
@@ -121,11 +123,12 @@ const AdminHome = () => {
     }
   }
 
-
+  //Filtrando por Status
   useEffect(() => {
     if (currentStatus == "solicitado") {
       const solicitateForm = forms.filter((doc: any) => doc.status == "solicitado")
       setFilteredForms(solicitateForm)
+      console.log(filteredForms.length)
 
     } else if (currentStatus == "pronto") {
       const solicitateForm = forms.filter((doc: any) => doc.status == "pronto")
@@ -155,6 +158,7 @@ const AdminHome = () => {
             </h1>
            </div>
        
+           {/*MOSTRANDO SIDEBARMENU ESQUERDO */}
           <div className="mt-[4.6rem] z-0 ">
           {filteredForms?.map((form: any, index: number) => {
             if (filteredForms[index].status === currentStatus) {
@@ -176,13 +180,15 @@ const AdminHome = () => {
                       {form.plan}
                     </span>
                   </p>
+
                   {form.status == 'solicitado'? (
                     <div className="flex justify-between items-center w-[9rem]">
                       <div className="rounded-[50%] w-3 h-3 bg-yellow-300">
                       </div>
                         <p className="text-[12px]" style={{color: 'var(--color-secondary)'}}>{form?.currentDate}</p>
                     </div>
-                    ): ''}
+                    ) : '' }
+
                       {form.status == 'pronto'? (
                       <div className="flex w-[100%] items-center gap-1 h-auto">
                           <div className="rounded-[50%] w-3 h-3 bg-teal-500" />
@@ -200,9 +206,15 @@ const AdminHome = () => {
   
                 </div>                
               );
-            }
-           
-          })}       
+              }
+              
+              })}       
+
+                {filteredForms.length <= 0 ? (
+                    <div className="flex justify-center items-center w-full bg-[#eee] h-20 text-center">
+                       <p className="font-semibold" style={{color: 'var(--color-secondary)'}}>Não há solicitações no momento.</p>
+                    </div>  
+                ) : '' }
 
           </div>
         </aside>
