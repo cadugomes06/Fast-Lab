@@ -1,5 +1,5 @@
 import HeaderAdmin from "../../components/HeaderAdmin"
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig";
 
@@ -7,11 +7,14 @@ import trashIcon from '../../assets/icons/trash.svg'
 import editIcon from '../../assets/icons/edit.svg'
 import Button from "../../utils/Button";
 
+
+
 const AllCustumers = () => {
     const [forms, setForms] = useState<TypeUser[]>([]);
     const [filterCustumers, setFilterCustumers] = useState<TypeUser[]>([]);
-    const [currentStatus, setCurrentStatus] = useState<TypeStatus>({status: '0', color: '0'})
+    const [currentStatus, setCurrentStatus] = useState<TypeStatus>({status: '', color: ''})
     const [deleteModal, setDeleteModal] = useState({state: false, index: -1})
+    const [inputSearch, setInputSearch] = useState('')
 
     const formsCollectionRef = collection(db, "formulario");
 
@@ -43,8 +46,11 @@ const AllCustumers = () => {
       useEffect(() =>  {
         const filtedData: any = forms.filter((form) => form.status === currentStatus.status)
         if (currentStatus.status != '') {
+          console.log(inputSearch)
+            setInputSearch("");
             setFilterCustumers(filtedData)   
         } else {
+            setInputSearch("");
             setFilterCustumers(forms)
         }
       }, [currentStatus])
@@ -68,6 +74,25 @@ const AllCustumers = () => {
           window.alert('Erro inesperado' + error)
       }
       }
+
+
+      //Pesquisando Paciêntes
+      const filterListUsers = (event: FormEvent<HTMLInputElement>) => {
+        const inputValue = event.currentTarget.value;
+        setInputSearch(event.currentTarget.value);
+        currentStatus.status = "";
+        currentStatus.color = "";
+
+        if (currentStatus.status != "") {
+          const filteredUser = filterCustumers.filter((f) => f.name.toUpperCase().includes(inputValue.toUpperCase()));
+         setFilterCustumers(() => [...filteredUser])
+        } else {
+          const filteredUser = forms.filter((f) => f.name.toUpperCase().includes(inputValue.toUpperCase()));
+        setFilterCustumers(() => [...filteredUser])
+        }
+      }
+
+
       
 
     return (
@@ -163,6 +188,22 @@ const AllCustumers = () => {
                     <h5 className="text-md font-regular relative after:content-[''] after:w-[4.5rem] after:h-[2px] after:bg-teal-400 after:absolute after:bottom-0 after:left-0 after:rounded-md" style={{color: 'var(--color-secondary)'}}>
                         Usuários.
                     </h5>
+                </div>
+
+                 {/*Filtrando Usuários*/}         
+                <div className="mb-4 ml-2 w-[20rem] relative block">
+                  <div className="absolute w-6 h-full flex justify-end items-center">
+                    <i className="fa-solid fa-magnifying-glass text-slate-400 "></i>
+                  </div>
+                  <input 
+                      type="text"
+                      maxLength={40}
+                      className="placeholder:italic placeholder:text-slate-400 lowercase text-gray-500 block bg-[#eee] w-full border border-slate-200 rounded-md py-2 pl-9 pr-3 shadow-md focus:outline-none focus:border-teal-100 focus:ring-teal-200 focus:ring-1 sm:text-sm" 
+                      placeholder="Encontre um paciente..."                       
+                      name="search"
+                      value={inputSearch}
+                      onChange={(event) => filterListUsers(event)}
+                         />
                 </div>
             
 
