@@ -46,7 +46,6 @@ const AllCustumers = () => {
       useEffect(() =>  {
         const filtedData: any = forms.filter((form) => form.status === currentStatus.status)
         if (currentStatus.status != '') {
-          console.log(inputSearch)
             setInputSearch("");
             setFilterCustumers(filtedData)   
         } else {

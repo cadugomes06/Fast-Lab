@@ -65,13 +65,12 @@ const AdminHome = () => {
       const data = await getDocs(formsCollectionRef);
       const docs: any = data.docs.map((doc) => ({...doc.data(), id: doc.id }));
       setForms(docs);      
-      //console.log(docs)
     };
     getForms();
   }, []);  
   
   
-  const handleShowPacient = async (index: number) => {
+  const handleShowPacient = (index: number) => {
     setIndexPac(index)
   };
   
@@ -126,17 +125,18 @@ const AdminHome = () => {
   //Filtrando por Status
   useEffect(() => {
     if (currentStatus == "solicitado") {
-      const solicitateForm = forms.filter((doc: any) => doc.status == "solicitado")
+      const solicitateForm = forms.filter((doc: TypeUser) => doc.status == "solicitado")
       setFilteredForms(solicitateForm)
-      console.log(filteredForms.length)
 
     } else if (currentStatus == "pronto") {
-      const solicitateForm = forms.filter((doc: any) => doc.status == "pronto")
-      setFilteredForms(solicitateForm)
+      const solicitateForm = forms.filter((doc: TypeUser) => doc.status == "pronto")
+      const firstTemSolicitateForm = solicitateForm.slice(0, 10);
+      setFilteredForms(firstTemSolicitateForm)
 
     } else if (currentStatus == "cancelado") {
-      const solicitateForm = forms.filter((doc: any) => doc.status == "cancelado")
-      setFilteredForms(solicitateForm)
+      const solicitateForm = forms.filter((doc: TypeUser) => doc.status == "cancelado")
+      const firstTemSolicitateForm = solicitateForm.slice(0, 10);
+      setFilteredForms(firstTemSolicitateForm)
     }
   }, [forms, currentStatus])
 
@@ -157,6 +157,7 @@ const AdminHome = () => {
             Solicitações
             </h1>
            </div>
+
        
            {/*MOSTRANDO SIDEBARMENU ESQUERDO */}
           <div className="mt-[4.6rem] z-0 ">
